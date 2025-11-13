@@ -1,0 +1,10 @@
+[
+  {
+    "id": "1",
+    "usuario": "admin",
+    "contrasena": "000000",
+    "nombre": "Administrador del Sistema",
+    "rol": "Administrador",
+    "email": "admin@licorera.com"
+  }
+]
