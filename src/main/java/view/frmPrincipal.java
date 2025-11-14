@@ -39,7 +39,7 @@ public class frmPrincipal {
 
         // Aplicar clases CSS a los botones
         btnNuevoCliente.getStyleClass().add("nav-button");
-        btnNuevaVenta.getStyleClass().add("nav-button");
+        btnNuevaVenta.getStyleClass().add("nav-button-highlight"); // Botón destacado
         btnAdministrarUsuarios.getStyleClass().add("nav-button");
         btnSalir.getStyleClass().add("nav-button-exit");
 

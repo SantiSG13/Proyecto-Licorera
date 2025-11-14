@@ -1,12 +1,14 @@
 package view;
 
 import javafx.geometry.Insets;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.stage.Modality;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle; // Para quitar botones de gestión de ventana
 
@@ -49,8 +51,19 @@ public class frmAdmin extends Stage {
         root.setCenter(buildTabla());
         root.setBottom(buildBotones());
 
-        // Crear la escena
-        Scene scene = new Scene(root, 1000, 1000);
+        // Obtener dimensiones de la pantalla
+        Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
+        double screenWidth = screenBounds.getWidth();
+        double screenHeight = screenBounds.getHeight();
+
+        // Altura de la barra de navegación (aproximadamente 50px según el CSS)
+        double navBarHeight = 50;
+
+        // Calcular altura de la ventana (altura total menos la barra de navegación)
+        double windowHeight = screenHeight - navBarHeight;
+
+        // Crear la escena con el ancho completo y altura ajustada
+        Scene scene = new Scene(root, screenWidth, windowHeight);
 
         // Cargar el CSS
         try {
@@ -62,6 +75,10 @@ public class frmAdmin extends Stage {
 
         setScene(scene);
         setResizable(false); // Opcional: evitar redimensionar
+
+        // Posicionar la ventana justo debajo de la barra de navegación
+        setX(screenBounds.getMinX());
+        setY(screenBounds.getMinY() + navBarHeight);
     }
 
     // Construye el formulario de entrada en la parte superior
