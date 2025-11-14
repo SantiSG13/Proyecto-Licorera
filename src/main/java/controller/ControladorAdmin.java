@@ -3,11 +3,18 @@ package controller;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import view.frmAdmin;
+import model.ModeloAdmin;
+import files.ManejoJson;
+
+import java.lang.reflect.Type;
+import java.util.List;
+import java.util.UUID;
 
 // Controlador de la vista de usuarios.
 // Responsabilidad: gestionar las acciones de los botones y coordinar la lógica de negocio con la vista.
 public class ControladorAdmin {
     private final frmAdmin vista; // Referencia a la vista que se controla
+    private static final String RUTA_JSON = "src/main/java/model/tbAdmin.json"; // Ruta del archivo de usuarios
 
     // Constructor: recibe la vista y configura los eventos de los botones
     public ControladorAdmin(frmAdmin vista) {
@@ -38,22 +45,29 @@ public class ControladorAdmin {
         });
     }
 
-    // Carga los datos iniciales desde el archivo JSON o base de datos
+    // Carga los datos iniciales desde el archivo JSON
     private void cargarDatos() {
         try {
-            // Implementar la carga de datos desde ManejoJson o ManejoArchivos
-            // Por ahora, dejamos la tabla vacía
             vista.getTabla().getItems().clear();
 
-            // Ejemplo de cómo se cargarían los datos:
-            // List<ModeloUsuario> usuarios = ManejoJson.cargarUsuarios();
-            // for (ModeloUsuario usuario : usuarios) {
-            //     String[] fila = {usuario.getId(), usuario.getNombre(), usuario.getApellido(),
-            //                      usuario.getUsuario(), usuario.getEmail(), usuario.getRol()};
-            //     vista.getTabla().getItems().add(fila);
-            // }
+            // Leer usuarios desde el archivo JSON
+            Type tipoLista = ManejoJson.obtenerTipoLista(ModeloAdmin.class);
+            List<ModeloAdmin> usuarios = ManejoJson.leerJson(RUTA_JSON, tipoLista);
+
+            // Agregar cada usuario a la tabla
+            for (ModeloAdmin usuario : usuarios) {
+                String[] fila = {
+                    usuario.getId(),
+                    usuario.getNombre(),
+                    usuario.getUsuario(),
+                    usuario.getEmail(),
+                    usuario.getRol()
+                };
+                vista.getTabla().getItems().add(fila);
+            }
         } catch (Exception e) {
             mostrarError("Error al cargar datos", "No se pudieron cargar los usuarios: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 
@@ -65,27 +79,42 @@ public class ControladorAdmin {
         }
 
         try {
-            // Implementar el guardado usando ManejoJson o ManejoArchivos
-            // Por ahora, solo agregamos a la tabla
-            String[] nuevoUsuario = {
-                generarId(),
-                vista.getTxtNombre().getText().trim(),
-                vista.getTxtApellido().getText().trim(),
-                vista.getTxtUsuario().getText().trim(),
-                vista.getTxtEmail().getText().trim(),
-                vista.getCboRol().getValue()
-            };
+            // Leer usuarios existentes
+            Type tipoLista = ManejoJson.obtenerTipoLista(ModeloAdmin.class);
+            List<ModeloAdmin> usuarios = ManejoJson.leerJson(RUTA_JSON, tipoLista);
 
-            vista.getTabla().getItems().add(nuevoUsuario);
+            // Verificar si el nombre de usuario ya existe
+            String nuevoUsuario = vista.getTxtUsuario().getText().trim();
+            boolean usuarioExiste = usuarios.stream()
+                    .anyMatch(u -> u.getUsuario().equalsIgnoreCase(nuevoUsuario));
+
+            if (usuarioExiste) {
+                mostrarAdvertencia("Usuario existente", "El nombre de usuario ya está en uso. Elija otro.");
+                return;
+            }
+
+            // Crear nuevo usuario
+            ModeloAdmin usuario = new ModeloAdmin(
+                    UUID.randomUUID().toString(), // ID único
+                    vista.getTxtUsuario().getText().trim(),
+                    vista.getTxtPassword().getText(),
+                    vista.getTxtNombre().getText().trim(),
+                    vista.getCboRol().getValue(),
+                    vista.getTxtEmail().getText().trim()
+            );
+
+            // Agregar a la lista y guardar en JSON
+            usuarios.add(usuario);
+            ManejoJson.escribirJson(RUTA_JSON, usuarios);
+
+            // Recargar la tabla
+            cargarDatos();
             vista.limpiarFormulario();
             mostrarExito("Usuario guardado correctamente");
 
-            // Ejemplo de cómo se guardaría:
-            // ModeloUsuario usuario = new ModeloUsuario(datos...);
-            // ManejoJson.guardarUsuario(usuario);
-
         } catch (Exception e) {
             mostrarError("Error al guardar", "No se pudo guardar el usuario: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 
@@ -103,22 +132,38 @@ public class ControladorAdmin {
         }
 
         try {
-            // Actualizar los datos en la tabla
-            seleccionado[1] = vista.getTxtNombre().getText().trim();
-            seleccionado[2] = vista.getTxtApellido().getText().trim();
-            seleccionado[3] = vista.getTxtUsuario().getText().trim();
-            seleccionado[4] = vista.getTxtEmail().getText().trim();
-            seleccionado[5] = vista.getCboRol().getValue();
+            // Leer usuarios existentes
+            Type tipoLista = ManejoJson.obtenerTipoLista(ModeloAdmin.class);
+            List<ModeloAdmin> usuarios = ManejoJson.leerJson(RUTA_JSON, tipoLista);
 
-            vista.getTabla().refresh();
+            // Buscar el usuario por ID y actualizar
+            String idBuscado = seleccionado[0];
+            for (ModeloAdmin usuario : usuarios) {
+                if (usuario.getId().equals(idBuscado)) {
+                    usuario.setNombre(vista.getTxtNombre().getText().trim());
+                    usuario.setUsuario(vista.getTxtUsuario().getText().trim());
+                    usuario.setEmail(vista.getTxtEmail().getText().trim());
+                    usuario.setRol(vista.getCboRol().getValue());
+
+                    // Solo actualizar contraseña si se ingresó una nueva
+                    if (!vista.getTxtPassword().getText().trim().isEmpty()) {
+                        usuario.setContrasena(vista.getTxtPassword().getText());
+                    }
+                    break;
+                }
+            }
+
+            // Guardar cambios en JSON
+            ManejoJson.escribirJson(RUTA_JSON, usuarios);
+
+            // Recargar la tabla
+            cargarDatos();
             vista.limpiarFormulario();
             mostrarExito("Usuario modificado correctamente");
 
-            // TODO: Implementar persistencia
-            // ManejoJson.modificarUsuario(usuario);
-
         } catch (Exception e) {
             mostrarError("Error al modificar", "No se pudo modificar el usuario: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 
@@ -135,20 +180,30 @@ public class ControladorAdmin {
         Alert confirmacion = new Alert(Alert.AlertType.CONFIRMATION);
         confirmacion.setTitle("Confirmar eliminación");
         confirmacion.setHeaderText("¿Está seguro de eliminar este usuario?");
-        confirmacion.setContentText("Usuario: " + seleccionado[1] + " " + seleccionado[2]);
+        confirmacion.setContentText("Usuario: " + seleccionado[2] + " (" + seleccionado[1] + ")");
 
         confirmacion.showAndWait().ifPresent(response -> {
             if (response == ButtonType.OK) {
                 try {
-                    vista.getTabla().getItems().remove(seleccionado);
+                    // Leer usuarios existentes
+                    Type tipoLista = ManejoJson.obtenerTipoLista(ModeloAdmin.class);
+                    List<ModeloAdmin> usuarios = ManejoJson.leerJson(RUTA_JSON, tipoLista);
+
+                    // Buscar y eliminar el usuario por ID
+                    String idBuscado = seleccionado[0];
+                    usuarios.removeIf(usuario -> usuario.getId().equals(idBuscado));
+
+                    // Guardar cambios en JSON
+                    ManejoJson.escribirJson(RUTA_JSON, usuarios);
+
+                    // Recargar la tabla
+                    cargarDatos();
                     vista.limpiarFormulario();
                     mostrarExito("Usuario eliminado correctamente");
 
-                    // TODO: Implementar persistencia
-                    // ManejoJson.eliminarUsuario(seleccionado[0]);
-
                 } catch (Exception e) {
                     mostrarError("Error al eliminar", "No se pudo eliminar el usuario: " + e.getMessage());
+                    e.printStackTrace();
                 }
             }
         });
@@ -158,13 +213,12 @@ public class ControladorAdmin {
     private void cargarDatosSeleccionados() {
         String[] seleccionado = vista.getTabla().getSelectionModel().getSelectedItem();
 
-        if (seleccionado != null && seleccionado.length >= 6) {
+        if (seleccionado != null && seleccionado.length >= 5) {
             vista.getTxtId().setText(seleccionado[0]);
             vista.getTxtNombre().setText(seleccionado[1]);
-            vista.getTxtApellido().setText(seleccionado[2]);
-            vista.getTxtUsuario().setText(seleccionado[3]);
-            vista.getTxtEmail().setText(seleccionado[4]);
-            vista.getCboRol().setValue(seleccionado[5]);
+            vista.getTxtUsuario().setText(seleccionado[2]);
+            vista.getTxtEmail().setText(seleccionado[3]);
+            vista.getCboRol().setValue(seleccionado[4]);
             // No cargamos la contraseña por seguridad
         }
     }
@@ -176,17 +230,14 @@ public class ControladorAdmin {
             return false;
         }
 
-        if (vista.getTxtApellido().getText().trim().isEmpty()) {
-            mostrarAdvertencia("Campo requerido", "El apellido es obligatorio.");
-            return false;
-        }
 
         if (vista.getTxtUsuario().getText().trim().isEmpty()) {
             mostrarAdvertencia("Campo requerido", "El nombre de usuario es obligatorio.");
             return false;
         }
 
-        if (vista.getTxtPassword().getText().trim().isEmpty() && vista.getTxtId().getText().isEmpty()) {
+        // Contraseña obligatoria solo para usuarios nuevos (sin ID)
+        if (vista.getTxtPassword().getText().trim().isEmpty() && vista.getTxtId().getText().trim().isEmpty()) {
             mostrarAdvertencia("Campo requerido", "La contraseña es obligatoria para usuarios nuevos.");
             return false;
         }

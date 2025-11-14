@@ -9,6 +9,7 @@ import javafx.scene.Scene;
 // Importaciones del proyecto
 import view.frmInicio;
 import view.frmPrincipal;
+import view.frmRegistro;
 import model.ModeloAdmin;
 import files.ManejoJson;
 
@@ -37,8 +38,8 @@ public class ControladorInicio {
         // Evento: al hacer clic en "Iniciar Sesión"
         vista.getBtnIniciarSesion().setOnAction(e -> iniciarSesion());
 
-        // Evento: al hacer clic en "Registrarse"
-        vista.getBtnRegistrarse().setOnAction(e -> registrarUsuario());
+        // Evento: al hacer clic en "Registrarse" - abre ventana de registro
+        vista.getLinkRegistrarse().setOnAction(e -> abrirVentanaRegistro());
 
         // Evento: al hacer clic en "Olvidaste tu contraseña" (por implementar)
         vista.getLinkOlvidastePassword().setOnAction(e -> {
@@ -86,70 +87,23 @@ public class ControladorInicio {
         }
     }
 
-    // Metodo que registra un nuevo usuario en el sistema
-    private void registrarUsuario() {
-        // 1) Obtener los datos ingresados en el formulario de registro
-        String usuario = vista.getTxtUsuarioRegistro().getText().trim();
-        String nombre = vista.getTxtNombreRegistro().getText().trim();
-        String email = vista.getTxtEmailRegistro().getText().trim();
-        String rol = vista.getCboRolRegistro().getValue();
-        String password = vista.getTxtPasswordRegistro().getText();
-        String confirmarPassword = vista.getTxtConfirmarPasswordRegistro().getText();
+    // Metodo que abre la ventana de registro
+    private void abrirVentanaRegistro() {
+        try {
+            // Crear una nueva instancia de la ventana de registro
+            frmRegistro ventanaRegistro = new frmRegistro(stage);
 
-        // 2) Validación: todos los campos deben estar completos
-        if (usuario.isEmpty() || nombre.isEmpty() || email.isEmpty() ||
-            rol == null || password.isEmpty() || confirmarPassword.isEmpty()) {
-            mostrarAlerta(Alert.AlertType.WARNING, "Campos incompletos",
-                    "Por favor complete todos los campos.");
-            return;
+            // Crear el controlador para manejar los eventos de registro
+            new ControladorRegistro(ventanaRegistro);
+
+            // Mostrar la ventana de registro (modal)
+            ventanaRegistro.showAndWait();
+
+        } catch (Exception e) {
+            mostrarAlerta(Alert.AlertType.ERROR, "Error",
+                    "No se pudo abrir la ventana de registro: " + e.getMessage());
+            e.printStackTrace();
         }
-
-        // 3) Validación: las contraseñas deben coincidir
-        if (!password.equals(confirmarPassword)) {
-            mostrarAlerta(Alert.AlertType.WARNING, "Contraseñas no coinciden",
-                    "Las contraseñas ingresadas no son iguales.");
-            return;
-        }
-
-        // 4) Validación: la contraseña debe tener al menos 6 caracteres
-        if (password.length() < 6) {
-            mostrarAlerta(Alert.AlertType.WARNING, "Contraseña débil",
-                    "La contraseña debe tener al menos 6 caracteres.");
-            return;
-        }
-
-        // 5) Leer la lista actual de usuarios
-        Type tipoLista = ManejoJson.obtenerTipoLista(ModeloAdmin.class);
-        List<ModeloAdmin> usuarios = ManejoJson.leerJson(RUTA_JSON, tipoLista);
-
-        // 6) Validación: verificar que el nombre de usuario no esté en uso
-        boolean usuarioExiste = usuarios.stream()
-                .anyMatch(u -> u.getUsuario().equalsIgnoreCase(usuario));
-
-        if (usuarioExiste) {
-            mostrarAlerta(Alert.AlertType.WARNING, "Usuario existente",
-                    "El nombre de usuario ya está registrado. Elija otro.");
-            return;
-        }
-
-        // 7) Crear el nuevo usuario con ID único generado por UUID
-        ModeloAdmin nuevoUsuario = new ModeloAdmin(
-                UUID.randomUUID().toString(), // Genera un ID único
-                usuario,
-                password, // ⚠️ ADVERTENCIA: En producción se debe hashear la contraseña
-                nombre,
-                rol,
-                email
-        );
-
-        // 8) Agregar el nuevo usuario a la lista y guardar en el archivo JSON
-        usuarios.add(nuevoUsuario);
-        ManejoJson.escribirJson(RUTA_JSON, usuarios);
-
-        // 9) Confirmar registro exitoso y limpiar formulario
-        mostrarAlerta(Alert.AlertType.INFORMATION, "Registro exitoso",
-                "Usuario registrado correctamente. Ya puede iniciar sesión.");
-        limpiarFormularioRegistro();
     }
 
     // Metodo que abre la ventana principal del sistema
@@ -194,15 +148,6 @@ public class ControladorInicio {
         }
     }
 
-    // Metodo utilitario para limpiar los campos del formulario de registro
-    private void limpiarFormularioRegistro() {
-        vista.getTxtUsuarioRegistro().clear();
-        vista.getTxtNombreRegistro().clear();
-        vista.getTxtEmailRegistro().clear();
-        vista.getCboRolRegistro().setValue(null);
-        vista.getTxtPasswordRegistro().clear();
-        vista.getTxtConfirmarPasswordRegistro().clear();
-    }
 
     // Metodo utilitario para mostrar alertas al usuario
     // Alert.AlertType define el tipo de alerta (INFO, WARNING, ERROR, etc.)

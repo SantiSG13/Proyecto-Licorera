@@ -19,7 +19,6 @@ public class frmAdmin extends Stage {
     // Campos de entrada para datos del usuario
     private final TextField txtId = new TextField();
     private final TextField txtNombre = new TextField();
-    private final TextField txtApellido = new TextField();
     private final TextField txtUsuario = new TextField();
     private final PasswordField txtPassword = new PasswordField();
     private final TextField txtEmail = new TextField();
@@ -45,13 +44,13 @@ public class frmAdmin extends Stage {
         initOwner(ventanaPadre);
         initStyle(StageStyle.UNDECORATED); // Quitar botones de gestión de ventanas (minimizar, maximizar, cerrar)
 
-        // Construir la estructura de la vista
+        // Construir la estructura de la vista (formulario arriba, tabla abajo)
         root.setTop(buildFormulario());
         root.setCenter(buildTabla());
         root.setBottom(buildBotones());
 
         // Crear la escena
-        Scene scene = new Scene(root, 800, 600);
+        Scene scene = new Scene(root, 1000, 1000);
 
         // Cargar el CSS
         try {
@@ -76,13 +75,12 @@ public class frmAdmin extends Stage {
         txtId.setPromptText("ID (auto)");
         txtId.setEditable(false);
         txtNombre.setPromptText("Nombre del usuario");
-        txtApellido.setPromptText("Apellido del usuario");
         txtUsuario.setPromptText("Nombre de usuario");
         txtPassword.setPromptText("Contraseña");
         txtEmail.setPromptText("correo@ejemplo.com");
 
         // ComboBox para roles
-        cboRol.getItems().addAll("Administrador", "Cliente", "Proveedor");
+        cboRol.getItems().addAll("Administrador", "Tienda");
         cboRol.setPromptText("Seleccione rol");
         cboRol.setPrefWidth(200); // Ancho preferido
 
@@ -93,20 +91,17 @@ public class frmAdmin extends Stage {
         grid.add(new Label("Nombre:"), 0, 1);
         grid.add(txtNombre, 1, 1);
 
-        grid.add(new Label("Apellido:"), 0, 2);
-        grid.add(txtApellido, 1, 2);
-
         grid.add(new Label("Usuario:"), 2, 0);
         grid.add(txtUsuario, 3, 0);
 
         grid.add(new Label("Contraseña:"), 2, 1);
         grid.add(txtPassword, 3, 1);
 
-        grid.add(new Label("Email:"), 2, 2);
-        grid.add(txtEmail, 3, 2);
+        grid.add(new Label("Email:"), 0, 2);
+        grid.add(txtEmail, 1, 2);
 
-        grid.add(new Label("Rol:"), 0, 3);
-        grid.add(cboRol, 1, 3);
+        grid.add(new Label("Rol:"), 2, 2);
+        grid.add(cboRol, 3, 2);
 
         VBox box = new VBox(10); // Espaciado entre elementos
         box.getStyleClass().add("formulario-container"); // Aplica clase CSS al contenedor
@@ -126,25 +121,21 @@ public class frmAdmin extends Stage {
 
         TableColumn<String[], String> colNombre = new TableColumn<>("Nombre");
         colNombre.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue()[1]));
-        colNombre.setPrefWidth(120);
-
-        TableColumn<String[], String> colApellido = new TableColumn<>("Apellido");
-        colApellido.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue()[2]));
-        colApellido.setPrefWidth(120);
+        colNombre.setPrefWidth(150);
 
         TableColumn<String[], String> colUsuario = new TableColumn<>("Usuario");
-        colUsuario.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue()[3]));
+        colUsuario.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue()[2]));
         colUsuario.setPrefWidth(120);
 
         TableColumn<String[], String> colEmail = new TableColumn<>("Email");
-        colEmail.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue()[4]));
-        colEmail.setPrefWidth(180);
+        colEmail.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue()[3]));
+        colEmail.setPrefWidth(200);
 
         TableColumn<String[], String> colRol = new TableColumn<>("Rol");
-        colRol.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue()[5]));
-        colRol.setPrefWidth(100);
+        colRol.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue()[4]));
+        colRol.setPrefWidth(120);
 
-        tabla.getColumns().addAll(colId, colNombre, colApellido, colUsuario, colEmail, colRol);
+        tabla.getColumns().addAll(colId, colNombre, colUsuario, colEmail, colRol);
 
         // Hacer que las columnas se ajusten proporcionalmente al ancho de la tabla
         tabla.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_FLEX_LAST_COLUMN);
@@ -213,7 +204,6 @@ public class frmAdmin extends Stage {
     // Getters para el controlador
     public TextField getTxtId() { return txtId; }
     public TextField getTxtNombre() { return txtNombre; }
-    public TextField getTxtApellido() { return txtApellido; }
     public TextField getTxtUsuario() { return txtUsuario; }
     public PasswordField getTxtPassword() { return txtPassword; }
     public TextField getTxtEmail() { return txtEmail; }
@@ -228,7 +218,6 @@ public class frmAdmin extends Stage {
     public void limpiarFormulario() {
         txtId.clear();
         txtNombre.clear();
-        txtApellido.clear();
         txtUsuario.clear();
         txtPassword.clear();
         txtEmail.clear();
