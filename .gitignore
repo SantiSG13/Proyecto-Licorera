@@ -106,6 +106,6 @@ jacoco.exec
 ### Datos persistentes generados en runtime (si decides separar) ###
 # Si en el futuro mueves los JSON que son "datos" a data/ para no versionarlos, descomenta:
 # /data/*.json
-# Por ahora NO ignoramos .json porque tbCliente.json, tbProveedor.json y tbAdmin.json son parte del modelo inicial.
+# Por ahora NO ignoramos .json porque tbCliente.json, tbVenta.json y tbAdmin.json son parte del modelo inicial.
 
 # NOTA: Se eliminaron las excepciones !**/src/main/**/target/ y !**/src/test/**/target/ porque no se crean subcarpetas target dentro de src; eran redundantes.

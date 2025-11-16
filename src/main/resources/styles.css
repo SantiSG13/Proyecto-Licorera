@@ -12,226 +12,313 @@
    • Acentos morados: Violet 500 (#8b5cf6)
    • Alertas: Red 400 (#f87171)
 
-   ESTRUCTURA DEL ARCHIVO:
-   ──────────────────────
-   1. Configuración Global y Fuentes
-   2. Contenedores Base y Layouts
-   3. Componentes de Formularios (Inputs, ComboBox, etc.)
-   4. Tablas y Listas
-   5. Botones de Acción (Guardar, Modificar, Eliminar, Salir)
-   6. Navegación y Menús (Barra de navegación, Menús)
-   7. Scrollbars (Barras de desplazamiento)
-   8. Pantalla de Inicio de Sesión (frmInicio - Login)
-   9. Pantalla de Registro (frmRegistro)
-   10. Pantalla Principal (frmPrincipal)
+   ÍNDICE DE CONTENIDO:
+   ───────────────────
+   1. CONFIGURACIÓN GLOBAL
+      1.1 Fuentes
+      1.2 Root y configuración base
+      1.3 Contenedores base
+      1.4 Etiquetas y textos
+
+   2. LAYOUTS Y CONTENEDORES
+      2.1 Contenedor de formularios
+      2.2 Contenedor de tablas
+      2.3 Contenedor de botones
+      2.4 Separadores
+      2.5 Títulos de secciones
+
+   3. COMPONENTES DE FORMULARIOS
+      3.1 Campos de texto y contraseña
+      3.2 ComboBox (selector desplegable)
+
+   4. TABLAS
+      4.1 Contenedor principal
+      4.2 Encabezados de columnas
+      4.3 Filas de datos
+      4.4 Celdas individuales
+      4.5 Scrollbars de tabla
+      4.6 Placeholder (tabla vacía)
+
+   5. BOTONES
+      5.1 Botones de acción generales (Guardar, Modificar, Eliminar)
+      5.2 Botón Salir
+      5.3 Botón de Login
+      5.4 Botones de Registro
+
+   6. NAVEGACIÓN Y MENÚS
+      6.1 Barra de navegación (frmPrincipal)
+      6.2 Botones de navegación
+      6.3 Barra de menú superior
+      6.4 Menús contextuales
+
+   7. SCROLLBARS GLOBALES
+
+   8. PANTALLA DE INICIO DE SESIÓN (frmInicio)
+      8.1 Contenedores y paneles
+      8.2 Títulos y subtítulos
+      8.3 Campos de entrada
+      8.4 Enlaces (Hyperlinks)
+
+   9. PANTALLA DE REGISTRO (frmRegistro)
+      9.1 Contenedor principal
+      9.2 Títulos y subtítulos
+      9.3 Campos de entrada
+      9.4 Botones específicos
+
+   10. PANTALLA PRINCIPAL (frmPrincipal)
+       10.1 Mensaje de bienvenida
+       10.2 Barra de estado
 */
 
+
+
+
+
 /* ════════════════════════════════════════════════════════════════════════════
-   1. CONFIGURACIÓN GLOBAL Y FUENTES
+   1. CONFIGURACIÓN GLOBAL
    ════════════════════════════════════════════════════════════════════════════ */
 
-/* Importar fuente profesional Poppins desde Google Fonts */
+/* ────────────────────────────────────────────────────────────────────────── */
+/* 1.1 FUENTES */
+/* ────────────────────────────────────────────────────────────────────────── */
+
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
-/* ─────────────────────────────────────────────────────────────────────────────
-   1.1 Configuración raíz - Aplica a toda la aplicación
-   ───────────────────────────────────────────────────────────────────────────── */
+
+/* ────────────────────────────────────────────────────────────────────────── */
+/* 1.2 ROOT Y CONFIGURACIÓN BASE */
+/* ────────────────────────────────────────────────────────────────────────── */
+
 .root {
     -fx-font-family: "Poppins", "Segoe UI", Arial, sans-serif;
     -fx-font-size: 14px;
-    -fx-background-color: #0f172a; /* Slate 900 - Fondo principal oscuro */
-    -fx-text-fill: #f1f5f9; /* Slate 100 - Texto claro y legible */
+    -fx-background-color: #0f172a;
+    -fx-text-fill: #f1f5f9;
     -fx-transition: background-color 0.3s ease-in-out;
 }
 
-/* ─────────────────────────────────────────────────────────────────────────────
-   1.2 Contenedores base - Herencia de fondos
-   ───────────────────────────────────────────────────────────────────────────── */
-.border-pane, .vbox, .hbox, .grid-pane {
-    -fx-background-color: transparent; /* Hereda el fondo del padre */
+
+/* ────────────────────────────────────────────────────────────────────────── */
+/* 1.3 CONTENEDORES BASE */
+/* ────────────────────────────────────────────────────────────────────────── */
+
+.border-pane,
+.vbox,
+.hbox,
+.grid-pane {
+    -fx-background-color: transparent;
 }
 
-/* ─────────────────────────────────────────────────────────────────────────────
-   1.3 Etiquetas y textos generales
-   ───────────────────────────────────────────────────────────────────────────── */
+
+/* ────────────────────────────────────────────────────────────────────────── */
+/* 1.4 ETIQUETAS Y TEXTOS */
+/* ────────────────────────────────────────────────────────────────────────── */
+
 .label {
-    -fx-text-fill: #f1f5f9; /* Texto blanco suave */
+    -fx-text-fill: #f1f5f9;
 }
 
 .field-label {
     -fx-font-weight: 500;
-    -fx-text-fill: #cbd5e1; /* Slate 300 - Texto secundario */
+    -fx-text-fill: #cbd5e1;
     -fx-font-size: 14px;
 }
 
+
+
+
+
 /* ════════════════════════════════════════════════════════════════════════════
-   2. CONTENEDORES Y LAYOUTS - Organización visual de secciones
+   2. LAYOUTS Y CONTENEDORES
    ════════════════════════════════════════════════════════════════════════════ */
 
-/* ─────────────────────────────────────────────────────────────────────────────
-   2.1 Contenedor de formularios - Área de entrada de datos
-   ───────────────────────────────────────────────────────────────────────────── */
+/* ────────────────────────────────────────────────────────────────────────── */
+/* 2.1 CONTENEDOR DE FORMULARIOS */
+/* ────────────────────────────────────────────────────────────────────────── */
+
 .formulario-container {
-    -fx-background-color: #1e293b; /* Slate 800 */
+    -fx-background-color: #1e293b;
     -fx-padding: 24px 24px 20px 24px;
-    -fx-border-color: #334155; /* Slate 700 */
+    -fx-border-color: #334155;
     -fx-border-width: 0 0 1px 0;
     -fx-border-radius: 0 0 8px 8px;
     -fx-font-size: 15px;
     -fx-effect: innershadow(gaussian, rgba(0,0,0,0.1), 4, 0, 0, 0);
 }
 
-/* ─────────────────────────────────────────────────────────────────────────────
-   2.2 Contenedor de tablas - Área de visualización de datos
-   ───────────────────────────────────────────────────────────────────────────── */
+
+/* ────────────────────────────────────────────────────────────────────────── */
+/* 2.2 CONTENEDOR DE TABLAS */
+/* ────────────────────────────────────────────────────────────────────────── */
+
 .tabla-container {
-    -fx-background-color: #0f172a; /* Slate 900 */
+    -fx-background-color: #0f172a;
     -fx-padding: 20px 24px;
 }
 
-/* ─────────────────────────────────────────────────────────────────────────────
-   2.3 Contenedor de botones - Área de acciones
-   ───────────────────────────────────────────────────────────────────────────── */
+
+/* ────────────────────────────────────────────────────────────────────────── */
+/* 2.3 CONTENEDOR DE BOTONES */
+/* ────────────────────────────────────────────────────────────────────────── */
+
 .botones-container {
-    -fx-background-color: #1e293b; /* Slate 800 */
+    -fx-background-color: #1e293b;
     -fx-padding: 20px 24px;
-    -fx-border-color: #334155; /* Slate 700 */
+    -fx-border-color: #334155;
     -fx-border-width: 1px 0 0 0;
     -fx-spacing: 16px;
     -fx-alignment: CENTER;
 }
 
-/* ─────────────────────────────────────────────────────────────────────────────
-   2.4 Separadores - Líneas divisorias entre secciones
-   ───────────────────────────────────────────────────────────────────────────── */
+
+/* ────────────────────────────────────────────────────────────────────────── */
+/* 2.4 SEPARADORES */
+/* ────────────────────────────────────────────────────────────────────────── */
+
 .separator .line {
-    -fx-border-color: #334155; /* Slate 700 */
+    -fx-border-color: #334155;
     -fx-background-color: #334155;
     -fx-stroke: #334155;
 }
 
-/* ─────────────────────────────────────────────────────────────────────────────
-   2.5 Títulos de secciones
-   ───────────────────────────────────────────────────────────────────────────── */
+
+/* ────────────────────────────────────────────────────────────────────────── */
+/* 2.5 TÍTULOS DE SECCIONES */
+/* ────────────────────────────────────────────────────────────────────────── */
+
 .titulo-formulario {
     -fx-font-size: 32px;
     -fx-font-weight: 600;
-    -fx-text-fill: #3b82f6; /* Blue 500 - Azul principal */
+    -fx-text-fill: #3b82f6;
     -fx-effect: dropshadow(gaussian, rgba(59,130,246,0.2), 6, 0, 0, 2);
 }
 
 .titulo-tabla {
     -fx-font-weight: 500;
-    -fx-text-fill: #f1f5f9; /* Blanco suave */
+    -fx-text-fill: #f1f5f9;
     -fx-font-size: 15px;
 }
 
+
+
+
+
 /* ════════════════════════════════════════════════════════════════════════════
-   3. COMPONENTES DE FORMULARIOS - Campos de entrada y selección
+   3. COMPONENTES DE FORMULARIOS
    ════════════════════════════════════════════════════════════════════════════ */
 
-/* ─────────────────────────────────────────────────────────────────────────────
-   3.1 Campos de texto y contraseña - Inputs generales
-   ───────────────────────────────────────────────────────────────────────────── */
+/* ────────────────────────────────────────────────────────────────────────── */
+/* 3.1 CAMPOS DE TEXTO Y CONTRASEÑA */
+/* ────────────────────────────────────────────────────────────────────────── */
 
-/* Estilo base para todos los campos de texto y contraseña */
-.text-field, .password-field {
-    -fx-background-color: #1e293b; /* Slate 800 - Fondo oscuro */
-    -fx-text-fill: #f1f5f9; /* Texto claro */
-    -fx-border-color: #334155; /* Slate 700 - Borde sutil */
+/* Estado base */
+.text-field,
+.password-field {
+    -fx-background-color: #1e293b;
+    -fx-text-fill: #f1f5f9;
+    -fx-border-color: #334155;
     -fx-border-width: 1px;
     -fx-border-radius: 8px;
     -fx-background-radius: 8px;
     -fx-padding: 12px 16px;
-    -fx-prompt-text-fill: #94a3b8; /* Slate 400 - Placeholder gris */
+    -fx-prompt-text-fill: #94a3b8;
     -fx-font-size: 14px;
     -fx-transition: all 0.3s ease;
     -fx-effect: innershadow(gaussian, rgba(0,0,0,0.1), 2, 0, 0, 0);
 }
 
-/* Estado de foco - Borde azul al seleccionar el campo */
-.text-field:focused, .password-field:focused {
-    -fx-border-color: #3b82f6; /* Blue 500 - Borde azul al enfocar */
+/* Estado de foco */
+.text-field:focused,
+.password-field:focused {
+    -fx-border-color: #3b82f6;
     -fx-border-width: 2px;
     -fx-effect: dropshadow(gaussian, rgba(59,130,246,0.2), 6, 0, 0, 2);
 }
 
-/* Estado deshabilitado - Campo no editable */
+/* Estado deshabilitado */
 .text-field:disabled {
-    -fx-background-color: #0f172a; /* Slate 900 - Fondo más oscuro */
-    -fx-text-fill: #64748b; /* Slate 500 - Texto gris */
+    -fx-background-color: #0f172a;
+    -fx-text-fill: #64748b;
     -fx-opacity: 0.7;
 }
 
-/* ─────────────────────────────────────────────────────────────────────────────
-   3.2 ComboBox - Selector desplegable
-   ───────────────────────────────────────────────────────────────────────────── */
 
-/* Estilo base del ComboBox */
+/* ────────────────────────────────────────────────────────────────────────── */
+/* 3.2 COMBOBOX (SELECTOR DESPLEGABLE) */
+/* ────────────────────────────────────────────────────────────────────────── */
+
+/* Estado base */
 .combo-box {
-    -fx-background-color: #1e293b; /* Slate 800 */
+    -fx-background-color: #1e293b;
     -fx-text-fill: #f1f5f9;
-    -fx-border-color: #334155; /* Slate 700 */
+    -fx-border-color: #334155;
     -fx-border-width: 1px;
     -fx-border-radius: 8px;
     -fx-background-radius: 8px;
     -fx-padding: 12px 16px;
-    -fx-prompt-text-fill: #94a3b8; /* Slate 400 */
+    -fx-prompt-text-fill: #94a3b8;
     -fx-font-size: 14px;
     -fx-transition: all 0.3s ease;
     -fx-effect: innershadow(gaussian, rgba(0,0,0,0.1), 2, 0, 0, 0);
 }
 
-/* Estado de foco del ComboBox */
+/* Estado de foco */
 .combo-box:focused {
     -fx-border-color: #3b82f6;
     -fx-border-width: 2px;
     -fx-effect: dropshadow(gaussian, rgba(59,130,246,0.2), 6, 0, 0, 2);
 }
 
-/* Celda individual del ComboBox */
+/* Celda individual */
 .combo-box .list-cell {
     -fx-background-color: #1e293b;
     -fx-text-fill: #f1f5f9;
 }
 
-/* Lista desplegable del ComboBox */
+/* Lista desplegable */
 .combo-box-popup .list-view {
     -fx-background-color: #1e293b;
     -fx-border-color: #3b82f6;
     -fx-border-radius: 8px;
 }
 
-/* Hover en opciones del ComboBox */
+/* Hover en opciones */
 .combo-box-popup .list-view .list-cell:hover {
-    -fx-background-color: #334155; /* Slate 700 - Fondo al pasar el mouse */
+    -fx-background-color: #334155;
     -fx-text-fill: #f1f5f9;
 }
 
+
+
+
+
 /* ════════════════════════════════════════════════════════════════════════════
-   4. TABLAS - Visualización de datos en formato tabular
+   4. TABLAS
    ════════════════════════════════════════════════════════════════════════════ */
 
-/* ─────────────────────────────────────────────────────────────────────────────
-   4.1 Contenedor principal de la tabla
-   ───────────────────────────────────────────────────────────────────────────── */
+/* ────────────────────────────────────────────────────────────────────────── */
+/* 4.1 CONTENEDOR PRINCIPAL */
+/* ────────────────────────────────────────────────────────────────────────── */
+
 .table-view {
-    -fx-background-color: #1e293b; /* Slate 800 */
-    -fx-border-color: #334155; /* Slate 700 */
+    -fx-background-color: #1e293b;
+    -fx-border-color: #334155;
     -fx-border-width: 1px;
     -fx-border-radius: 8px;
 }
 
-/* ─────────────────────────────────────────────────────────────────────────────
-   4.2 Encabezados de columnas
-   ───────────────────────────────────────────────────────────────────────────── */
+
+/* ────────────────────────────────────────────────────────────────────────── */
+/* 4.2 ENCABEZADOS DE COLUMNAS */
+/* ────────────────────────────────────────────────────────────────────────── */
+
 .table-view .column-header {
-    -fx-background-color: #0f172a; /* Slate 900 - Fondo oscuro */
-    -fx-text-fill: #3b82f6; /* Blue 500 - Texto azul */
+    -fx-background-color: #0f172a;
+    -fx-text-fill: #3b82f6;
     -fx-font-weight: 500;
     -fx-alignment: CENTER-LEFT;
     -fx-padding: 12px 16px;
-    -fx-border-color: #334155; /* Slate 700 */
+    -fx-border-color: #334155;
     -fx-background-radius: 8px 8px 0 0;
 }
 
@@ -240,55 +327,55 @@
 }
 
 .table-view .column-header .label {
-    -fx-text-fill: #3b82f6; /* Blue 500 */
+    -fx-text-fill: #3b82f6;
 }
 
 .table-view .column-header-background .filler {
     -fx-background-color: #0f172a;
 }
 
-/* ─────────────────────────────────────────────────────────────────────────────
-   4.3 Filas de datos
-   ───────────────────────────────────────────────────────────────────────────── */
 
-/* Fila normal (par) */
+/* ────────────────────────────────────────────────────────────────────────── */
+/* 4.3 FILAS DE DATOS */
+/* ────────────────────────────────────────────────────────────────────────── */
+
+/* Fila normal */
 .table-row-cell {
-    -fx-background-color: #0f172a; /* Slate 900 */
-    -fx-text-fill: #f1f5f9; /* Texto claro */
+    -fx-background-color: #1e293b;
+    -fx-text-fill: #f1f5f9;
     -fx-border-color: transparent;
     -fx-padding: 12px 16px;
     -fx-transition: background-color 0.2s ease;
 }
 
-/* Fila alternada (impar) - Para mejor legibilidad */
-.table-row-cell:odd {
-    -fx-background-color: #1e293b; /* Slate 800 */
-}
-
 /* Fila seleccionada */
 .table-row-cell:selected {
-    -fx-background-color: #3b82f6; /* Blue 500 - Resalta la selección */
-    -fx-text-fill: #ffffff; /* Texto blanco */
+    -fx-background-color: #3b82f6;
+    -fx-text-fill: #ffffff;
     -fx-effect: innershadow(gaussian, rgba(59,130,246,0.2), 4, 0, 0, 0);
 }
 
-/* Fila en hover (pasar el mouse) */
+/* Fila en hover */
 .table-row-cell:hover {
-    -fx-background-color: #334155; /* Slate 700 - Feedback visual */
+    -fx-background-color: #334155;
 }
 
-/* ─────────────────────────────────────────────────────────────────────────────
-   4.4 Celdas individuales
-   ───────────────────────────────────────────────────────────────────────────── */
+
+/* ────────────────────────────────────────────────────────────────────────── */
+/* 4.4 CELDAS INDIVIDUALES */
+/* ────────────────────────────────────────────────────────────────────────── */
+
 .table-view .table-cell {
-    -fx-text-fill: #f1f5f9; /* Texto claro */
+    -fx-text-fill: #f1f5f9;
     -fx-border-color: transparent;
     -fx-padding: 0 8px;
 }
 
-/* ─────────────────────────────────────────────────────────────────────────────
-   4.5 Scrollbars de la tabla
-   ───────────────────────────────────────────────────────────────────────────── */
+
+/* ────────────────────────────────────────────────────────────────────────── */
+/* 4.5 SCROLLBARS DE TABLA */
+/* ────────────────────────────────────────────────────────────────────────── */
+
 .table-view .scroll-bar:vertical,
 .table-view .scroll-bar:horizontal {
     -fx-background-color: transparent;
@@ -296,166 +383,252 @@
 }
 
 .table-view .scroll-bar .thumb {
-    -fx-background-color: #475569; /* Slate 600 */
+    -fx-background-color: #475569;
     -fx-background-radius: 6px;
     -fx-transition: background-color 0.2s ease;
 }
 
 .table-view .scroll-bar .thumb:hover {
-    -fx-background-color: #3b82f6; /* Blue 500 */
+    -fx-background-color: #3b82f6;
 }
 
-/* ─────────────────────────────────────────────────────────────────────────────
-   4.6 Placeholder (cuando la tabla está vacía)
-   ───────────────────────────────────────────────────────────────────────────── */
+
+/* ────────────────────────────────────────────────────────────────────────── */
+/* 4.6 PLACEHOLDER (TABLA VACÍA) */
+/* ────────────────────────────────────────────────────────────────────────── */
+
 .table-view .placeholder {
     -fx-background-color: #0f172a;
 }
 
 .table-view .placeholder .label {
-    -fx-text-fill: #94a3b8; /* Slate 400 - Mensaje de tabla vacía */
+    -fx-text-fill: #94a3b8;
 }
+
+
+
+
 
 /* ════════════════════════════════════════════════════════════════════════════
-   5. BOTONES DE ACCIÓN - Botones con bordes redondeados y efectos
+   5. BOTONES
    ════════════════════════════════════════════════════════════════════════════ */
 
-/* ─────────────────────────────────────────────────────────────────────────────
-   5.1 Botón Guardar - Azul primario (Blue 500)
-   ───────────────────────────────────────────────────────────────────────────── */
-.btn-guardar {
-    -fx-background-color: transparent;
-    -fx-text-fill: #3b82f6; /* Blue 500 */
-    -fx-border-color: #3b82f6;
-    -fx-border-width: 2px;
-    -fx-border-radius: 18px;
-    -fx-background-radius: 18px;
-    -fx-font-weight: 500;
-    -fx-font-size: 13px;
-    -fx-cursor: hand;
-    -fx-padding: 10px 20px;
-    -fx-effect: dropshadow(gaussian, rgba(59,130,246,0.25), 6, 0, 0, 2);
-}
+/* ────────────────────────────────────────────────────────────────────────── */
+/* 5.1 BOTONES DE ACCIÓN GENERALES (Guardar, Modificar, Eliminar) */
+/* ────────────────────────────────────────────────────────────────────────── */
 
-.btn-guardar:hover {
-    -fx-background-color: #3b82f6;
-    -fx-text-fill: #ffffff;
-    -fx-effect: dropshadow(gaussian, rgba(59,130,246,0.5), 10, 0, 0, 4);
-}
-
-.btn-guardar:pressed {
-    -fx-background-color: #2563eb; /* Blue 600 */
-    -fx-text-fill: #ffffff;
-    -fx-effect: dropshadow(gaussian, rgba(37,99,235,0.3), 4, 0, 0, 1);
-}
-
-/* ─────────────────────────────────────────────────────────────────────────────
-   5.2 Botón Modificar - Cian (Cyan 500)
-   ───────────────────────────────────────────────────────────────────────────── */
-.btn-modificar {
-    -fx-background-color: transparent;
-    -fx-text-fill: #06b6d4; /* Cyan 500 */
-    -fx-border-color: #06b6d4;
-    -fx-border-width: 2px;
-    -fx-border-radius: 18px;
-    -fx-background-radius: 18px;
-    -fx-font-weight: 500;
-    -fx-font-size: 13px;
-    -fx-cursor: hand;
-    -fx-padding: 10px 20px;
-    -fx-effect: dropshadow(gaussian, rgba(6,182,212,0.25), 6, 0, 0, 2);
-}
-
-.btn-modificar:hover {
-    -fx-background-color: #06b6d4;
-    -fx-text-fill: #ffffff;
-    -fx-effect: dropshadow(gaussian, rgba(6,182,212,0.5), 10, 0, 0, 4);
-}
-
-.btn-modificar:pressed {
-    -fx-background-color: #0891b2; /* Cyan 600 */
-    -fx-text-fill: #ffffff;
-    -fx-effect: dropshadow(gaussian, rgba(8,145,178,0.3), 4, 0, 0, 1);
-}
-
-/* ─────────────────────────────────────────────────────────────────────────────
-   5.3 Botón Eliminar - Violeta (Violet 500)
-   ───────────────────────────────────────────────────────────────────────────── */
+/* Estado base */
+.btn-guardar,
+.btn-modificar,
 .btn-eliminar {
-    -fx-background-color: transparent;
-    -fx-text-fill: #8b5cf6; /* Violet 500 */
-    -fx-border-color: #8b5cf6;
-    -fx-border-width: 2px;
-    -fx-border-radius: 18px;
-    -fx-background-radius: 18px;
-    -fx-font-weight: 500;
-    -fx-font-size: 13px;
+    -fx-background-color: #1e293b;
+    -fx-text-fill: #3B82F6;
+    -fx-font-weight: 600;
+    -fx-font-size: 12px;
+    -fx-padding: 10 24;
+    -fx-background-radius: 12;
+    -fx-border-radius: 12;
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.4), 8, 0, 4, 4),
+                innershadow(gaussian, rgba(255,255,255,0.05), 6, 0, -2, -2);
     -fx-cursor: hand;
-    -fx-padding: 10px 20px;
-    -fx-effect: dropshadow(gaussian, rgba(139,92,246,0.25), 6, 0, 0, 2);
+    -fx-background-insets: 0;
 }
 
+/* Hover */
+.btn-guardar:hover,
+.btn-modificar:hover,
 .btn-eliminar:hover {
-    -fx-background-color: #8b5cf6;
-    -fx-text-fill: #ffffff;
-    -fx-effect: dropshadow(gaussian, rgba(139,92,246,0.5), 10, 0, 0, 4);
+    -fx-background-color: #2563EB;
+    -fx-text-fill: white;
+    -fx-effect: dropshadow(gaussian, rgba(37,99,235,0.5), 12, 0, 0, 4),
+                innershadow(gaussian, rgba(255,255,255,0.08), 6, 0, -2, -2);
+    -fx-translate-y: -1;
 }
 
+/* Click */
+.btn-guardar:pressed,
+.btn-modificar:pressed,
 .btn-eliminar:pressed {
-    -fx-background-color: #7c3aed; /* Violet 600 */
-    -fx-text-fill: #ffffff;
-    -fx-effect: dropshadow(gaussian, rgba(124,58,237,0.3), 4, 0, 0, 1);
+    -fx-effect: innershadow(gaussian, rgba(0,0,0,0.3), 8, 0, 2, 2);
+    -fx-translate-y: 0;
 }
 
-/* ─────────────────────────────────────────────────────────────────────────────
-   5.4 Botón Salir - Gris neutro (Slate 400)
-   ───────────────────────────────────────────────────────────────────────────── */
+
+/* ────────────────────────────────────────────────────────────────────────── */
+/* 5.2 BOTÓN SALIR */
+/* ────────────────────────────────────────────────────────────────────────── */
+
+/* Estado base: mismo estilo que los botones azules, pero en paleta roja */
 .btn-salir {
+    -fx-background-color: #1e293b; /* mismo fondo base oscuro */
+    -fx-text-fill: #F87171;       /* rojo suave para el texto */
+    -fx-font-weight: 600;
+    -fx-font-size: 12px;
+    -fx-padding: 10 24;
+    -fx-background-radius: 12;
+    -fx-border-radius: 12;
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.4), 8, 0, 4, 4),
+                innershadow(gaussian, rgba(255,255,255,0.05), 6, 0, -2, -2);
+    -fx-cursor: hand;
+    -fx-background-insets: 0;
+}
+
+/* Hover: mismo efecto que los azules pero con rojo degradado */
+.btn-salir:hover {
+    -fx-background-color: linear-gradient(to right, #DC2626, #F97316);
+    -fx-text-fill: white;
+    -fx-effect: dropshadow(gaussian, rgba(220,38,38,0.5), 12, 0, 0, 4),
+                innershadow(gaussian, rgba(255,255,255,0.08), 6, 0, -2, -2);
+    -fx-translate-y: -1;
+}
+
+/* Click: mismo comportamiento que los otros botones */
+.btn-salir:pressed {
+    -fx-effect: innershadow(gaussian, rgba(0,0,0,0.3), 8, 0, 2, 2);
+    -fx-translate-y: 0;
+}
+
+
+/* ────────────────────────────────────────────────────────────────────────── */
+/* 5.3 BOTÓN DE LOGIN */
+/* ────────────────────────────────────────────────────────────────────────── */
+
+/* Estado base */
+.btn-login {
+    -fx-background-color: linear-gradient(to bottom, #3b82f6, #2563eb);
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 16px;
+    -fx-font-weight: 600;
+    -fx-letter-spacing: 0.05em;
+    -fx-padding: 16px 44px;
+    -fx-border-radius: 28px;
+    -fx-background-radius: 28px;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(59,130,246,0.4), 8, 0, 0, 2);
+    -fx-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Hover */
+.btn-login:hover {
+    -fx-background-color: linear-gradient(to bottom, #2563eb, #1d4ed8);
+    -fx-effect: dropshadow(gaussian, rgba(37,99,235,0.6), 12, 0, 0, 4);
+    -fx-scale-x: 1.03;
+    -fx-scale-y: 1.03;
+}
+
+/* Click */
+.btn-login:pressed {
+    -fx-background-color: #1d4ed8;
+    -fx-effect: dropshadow(gaussian, rgba(29,78,216,0.4), 4, 0, 0, 1);
+    -fx-scale-x: 0.97;
+    -fx-scale-y: 0.97;
+}
+
+
+/* ────────────────────────────────────────────────────────────────────────── */
+/* 5.4 BOTONES DE REGISTRO */
+/* ────────────────────────────────────────────────────────────────────────── */
+
+/* Botón Registrarse - Estado base */
+.btn-registro {
+    -fx-background-color: linear-gradient(to bottom, #06b6d4, #0891b2);
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 11px;
+    -fx-font-weight: 600;
+    -fx-letter-spacing: 0.05em;
+    -fx-padding: 16px 30px;
+    -fx-border-radius: 28px;
+    -fx-background-radius: 28px;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(6,182,212,0.4), 8, 0, 0, 2);
+    -fx-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Hover */
+.btn-registro:hover {
+    -fx-background-color: linear-gradient(to bottom, #0891b2, #0e7490);
+    -fx-effect: dropshadow(gaussian, rgba(8,145,178,0.6), 12, 0, 0, 4);
+    -fx-scale-x: 1.03;
+    -fx-scale-y: 1.03;
+}
+
+/* Click */
+.btn-registro:pressed {
+    -fx-background-color: #0891b2;
+    -fx-effect: dropshadow(gaussian, rgba(8,145,178,0.4), 4, 0, 0, 1);
+    -fx-scale-x: 0.97;
+    -fx-scale-y: 0.97;
+}
+
+/* Botón Cancelar - Estado base */
+.btn-cancelar {
     -fx-background-color: transparent;
-    -fx-text-fill: #94a3b8; /* Slate 400 */
+    -fx-text-fill: #94a3b8;
     -fx-border-color: #94a3b8;
     -fx-border-width: 2px;
-    -fx-border-radius: 18px;
-    -fx-background-radius: 18px;
-    -fx-font-weight: 500;
-    -fx-font-size: 13px;
+    -fx-font-size: 11px;
+    -fx-font-weight: 600;
+    -fx-letter-spacing: 0.05em;
+    -fx-padding: 16px 30px;
+    -fx-border-radius: 28px;
+    -fx-background-radius: 28px;
     -fx-cursor: hand;
-    -fx-padding: 10px 20px;
-    -fx-effect: dropshadow(gaussian, rgba(148,163,184,0.2), 6, 0, 0, 2);
+    -fx-effect: dropshadow(gaussian, rgba(148,163,184,0.2), 8, 0, 0, 2);
+    -fx-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.btn-salir:hover {
+/* Hover */
+.btn-cancelar:hover {
     -fx-background-color: #94a3b8;
     -fx-text-fill: #ffffff;
-    -fx-effect: dropshadow(gaussian, rgba(148,163,184,0.4), 10, 0, 0, 4);
+    -fx-effect: dropshadow(gaussian, rgba(148,163,184,0.4), 12, 0, 0, 4);
+    -fx-scale-x: 1.03;
+    -fx-scale-y: 1.03;
 }
 
-.btn-salir:pressed {
-    -fx-background-color: #64748b; /* Slate 500 */
+/* Click */
+.btn-cancelar:pressed {
+    -fx-background-color: #64748b;
     -fx-text-fill: #ffffff;
-    -fx-effect: dropshadow(gaussian, rgba(100,116,139,0.2), 4, 0, 0, 1);
+    -fx-effect: dropshadow(gaussian, rgba(100,116,139,0.3), 4, 0, 0, 1);
+    -fx-scale-x: 0.97;
+    -fx-scale-y: 0.97;
 }
+
+
+
+
 
 /* ════════════════════════════════════════════════════════════════════════════
-   6. NAVEGACIÓN Y MENÚS - Barras de navegación y menús desplegables
+   6. NAVEGACIÓN Y MENÚS
    ════════════════════════════════════════════════════════════════════════════ */
 
-/* ─────────────────────────────────────────────────────────────────────────────
-   6.1 Barra de navegación (frmPrincipal)
-   ───────────────────────────────────────────────────────────────────────────── */
+/* ────────────────────────────────────────────────────────────────────────── */
+/* 6.1 BARRA DE NAVEGACIÓN (frmPrincipal) */
+/* ────────────────────────────────────────────────────────────────────────── */
+
 #nav-bar {
     -fx-padding: 5px;
-    -fx-background-color: #1e293b; /* Slate 800 */
-    -fx-border-color: #334155; /* Slate 700 */
+    -fx-background-color: #1e293b;
+    -fx-border-color: #334155;
     -fx-border-width: 0 0 1px 0;
     -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 6, 0, 0, 2);
     -fx-alignment: center-left;
 }
 
-/* Botones de navegación estilo minimalista */
+
+/* ────────────────────────────────────────────────────────────────────────── */
+/* 6.2 BOTONES DE NAVEGACIÓN */
+/* ────────────────────────────────────────────────────────────────────────── */
+
+/* Botón de navegación normal */
 .nav-button {
     -fx-background-color: transparent;
-    -fx-text-fill: #94a3b8; /* Slate 400 */
+    -fx-text-fill: #94a3b8;
     -fx-border-color: transparent;
     -fx-border-width: 0 0 3px 0;
     -fx-border-radius: 0;
@@ -467,21 +640,23 @@
     -fx-transition: all 0.3s ease;
 }
 
+/* Hover */
 .nav-button:hover {
-    -fx-text-fill: #60a5fa; /* Blue 400 */
+    -fx-text-fill: #60a5fa;
     -fx-border-color: #60a5fa;
     -fx-background-color: rgba(96,165,250,0.05);
 }
 
+/* Click */
 .nav-button:pressed {
-    -fx-text-fill: #3b82f6; /* Blue 500 */
+    -fx-text-fill: #3b82f6;
     -fx-background-color: rgba(59,130,246,0.1);
 }
 
-/* Botón de navegación destacado (Nueva Venta) */
+/* Botón destacado (Nueva Venta) */
 .nav-button-highlight {
-    -fx-background-color: #3b82f6; /* Blue 500 - Fondo azul sólido */
-    -fx-text-fill: #ffffff; /* Texto blanco */
+    -fx-background-color: #3b82f6;
+    -fx-text-fill: #ffffff;
     -fx-border-color: #3b82f6;
     -fx-border-width: 0 0 3px 0;
     -fx-border-radius: 6px;
@@ -494,8 +669,9 @@
     -fx-effect: dropshadow(gaussian, rgba(59,130,246,0.4), 8, 0, 0, 3);
 }
 
+/* Hover */
 .nav-button-highlight:hover {
-    -fx-background-color: #60a5fa; /* Blue 400 - Más claro al hover */
+    -fx-background-color: #60a5fa;
     -fx-text-fill: #ffffff;
     -fx-border-color: #60a5fa;
     -fx-scale-x: 1.05;
@@ -503,18 +679,19 @@
     -fx-effect: dropshadow(gaussian, rgba(96,165,250,0.6), 12, 0, 0, 4);
 }
 
+/* Click */
 .nav-button-highlight:pressed {
-    -fx-background-color: #2563eb; /* Blue 600 - Más oscuro al presionar */
+    -fx-background-color: #2563eb;
     -fx-text-fill: #ffffff;
     -fx-scale-x: 0.98;
     -fx-scale-y: 0.98;
     -fx-effect: dropshadow(gaussian, rgba(37,99,235,0.3), 4, 0, 0, 1);
 }
 
-/* Botón de salir en navegación con estilo rojo */
+/* Botón de salir en navegación */
 .nav-button-exit {
     -fx-background-color: transparent;
-    -fx-text-fill: #94a3b8; /* Slate 400 */
+    -fx-text-fill: #94a3b8;
     -fx-border-color: transparent;
     -fx-border-width: 0 0 3px 0;
     -fx-border-radius: 0;
@@ -526,23 +703,27 @@
     -fx-transition: all 0.3s ease;
 }
 
+/* Hover */
 .nav-button-exit:hover {
-    -fx-text-fill: #f87171; /* Red 400 */
+    -fx-text-fill: #f87171;
     -fx-border-color: #f87171;
     -fx-background-color: rgba(248,113,113,0.05);
 }
 
+/* Click */
 .nav-button-exit:pressed {
-    -fx-text-fill: #ef4444; /* Red 500 */
+    -fx-text-fill: #ef4444;
     -fx-background-color: rgba(239,68,68,0.1);
 }
 
-/* ─────────────────────────────────────────────────────────────────────────────
-   6.2 Barra de menú superior
-   ───────────────────────────────────────────────────────────────────────────── */
+
+/* ────────────────────────────────────────────────────────────────────────── */
+/* 6.3 BARRA DE MENÚ SUPERIOR */
+/* ────────────────────────────────────────────────────────────────────────── */
+
 .menu-bar {
-    -fx-background-color: #1e293b; /* Slate 800 */
-    -fx-border-color: #334155; /* Slate 700 */
+    -fx-background-color: #1e293b;
+    -fx-border-color: #334155;
     -fx-border-width: 0 0 1px 0;
 }
 
@@ -552,12 +733,14 @@
 
 .menu-bar .menu:hover,
 .menu-bar .menu:showing {
-    -fx-background-color: #334155; /* Slate 700 */
+    -fx-background-color: #334155;
 }
 
-/* ─────────────────────────────────────────────────────────────────────────────
-   6.3 Menús contextuales y desplegables
-   ───────────────────────────────────────────────────────────────────────────── */
+
+/* ────────────────────────────────────────────────────────────────────────── */
+/* 6.4 MENÚS CONTEXTUALES */
+/* ────────────────────────────────────────────────────────────────────────── */
+
 .context-menu {
     -fx-background-color: #1e293b;
     -fx-border-color: #3b82f6;
@@ -574,36 +757,40 @@
 
 .menu-item:hover,
 .menu-item:focused {
-    -fx-background-color: #334155; /* Slate 700 */
-    -fx-text-fill: #3b82f6; /* Blue 500 */
+    -fx-background-color: #334155;
+    -fx-text-fill: #3b82f6;
 }
 
+
+
+
+
 /* ════════════════════════════════════════════════════════════════════════════
-   7. SCROLLBARS - Barras de desplazamiento personalizadas
+   7. SCROLLBARS GLOBALES
    ════════════════════════════════════════════════════════════════════════════ */
 
-/* Barra de desplazamiento base (vertical y horizontal) */
+/* Barra de desplazamiento base */
 .scroll-bar {
     -fx-background-color: transparent;
     -fx-pref-width: 12px;
 }
 
-/* El "thumb" es la parte arrastrable de la barra */
+/* Thumb (parte arrastrable) */
 .scroll-bar .thumb {
-    -fx-background-color: #475569; /* Slate 600 */
+    -fx-background-color: #475569;
     -fx-background-radius: 6px;
     -fx-transition: all 0.2s ease;
 }
 
 .scroll-bar .thumb:hover {
-    -fx-background-color: #3b82f6; /* Blue 500 - Resalta al hover */
+    -fx-background-color: #3b82f6;
 }
 
 .scroll-bar .thumb:pressed {
-    -fx-background-color: #2563eb; /* Blue 600 - Más oscuro al presionar */
+    -fx-background-color: #2563eb;
 }
 
-/* Botones de incremento/decremento (flechas) */
+/* Botones de incremento/decremento */
 .scroll-bar .increment-button,
 .scroll-bar .decrement-button {
     -fx-background-color: transparent;
@@ -611,189 +798,160 @@
 
 .scroll-bar .increment-button:hover,
 .scroll-bar .decrement-button:hover {
-    -fx-background-color: #334155; /* Slate 700 */
+    -fx-background-color: #334155;
 }
+
+
+
+
 
 /* ════════════════════════════════════════════════════════════════════════════
    8. PANTALLA DE INICIO DE SESIÓN (frmInicio)
    ════════════════════════════════════════════════════════════════════════════ */
 
-/* ─────────────────────────────────────────────────────────────────────────────
-   8.1 Contenedor principal y paneles
-   ───────────────────────────────────────────────────────────────────────────── */
+/* ────────────────────────────────────────────────────────────────────────── */
+/* 8.1 CONTENEDORES Y PANELES */
+/* ────────────────────────────────────────────────────────────────────────── */
 
-/* Contenedor raíz con gradiente elegante de oscuro a menos oscuro */
 #login-root {
     -fx-background-color: linear-gradient(to bottom, #0f172a 0%, #1e293b 100%);
 }
 
-/* Panel de login centrado */
 #panel-login {
-    -fx-background-color: #1e293b; /* Slate 800 */
-    -fx-border-color: #334155; /* Slate 700 */
+    -fx-background-color: #1e293b;
+    -fx-border-color: #334155;
     -fx-border-width: 0 1px 0 0;
 }
 
-/* ─────────────────────────────────────────────────────────────────────────────
-   8.2 Títulos y subtítulos
-   ───────────────────────────────────────────────────────────────────────────── */
 
-/* Título principal "INICIAR SESIÓN" */
+/* ────────────────────────────────────────────────────────────────────────── */
+/* 8.2 TÍTULOS Y SUBTÍTULOS */
+/* ────────────────────────────────────────────────────────────────────────── */
+
 .titulo-login {
     -fx-font-size: 30px;
     -fx-font-weight: 600;
-    -fx-text-fill: #3b82f6; /* Blue 500 */
+    -fx-text-fill: #3b82f6;
     -fx-effect: dropshadow(gaussian, rgba(59,130,246,0.3), 6, 0, 0, 2);
 }
 
-/* Subtítulo "Accede a tu cuenta" */
 .subtitulo-login {
     -fx-font-size: 15px;
     -fx-font-weight: 400;
-    -fx-text-fill: #cbd5e1; /* Slate 300 */
+    -fx-text-fill: #cbd5e1;
 }
 
-/* ─────────────────────────────────────────────────────────────────────────────
-   8.3 Campos de entrada de login
-   ───────────────────────────────────────────────────────────────────────────── */
 
-/* Campos de usuario y contraseña en login - Tamaño uniforme */
+/* ────────────────────────────────────────────────────────────────────────── */
+/* 8.3 CAMPOS DE ENTRADA */
+/* ────────────────────────────────────────────────────────────────────────── */
+
+/* Estado base */
 .login-field {
-    -fx-background-color: #1e293b; /* Slate 800 */
-    -fx-text-fill: #f1f5f9; /* Texto claro */
-    -fx-border-color: #334155; /* Slate 700 */
+    -fx-background-color: #1e293b;
+    -fx-text-fill: #f1f5f9;
+    -fx-border-color: #334155;
     -fx-border-width: 1px;
     -fx-border-radius: 10px;
     -fx-background-radius: 10px;
     -fx-padding: 11px 16px;
     -fx-font-size: 13px;
-    -fx-prompt-text-fill: #94a3b8; /* Slate 400 - Placeholder */
+    -fx-prompt-text-fill: #94a3b8;
 }
 
-/* Estado de foco en campos de login */
+/* Estado de foco */
 .login-field:focused {
-    -fx-border-color: #3b82f6; /* Blue 500 */
+    -fx-border-color: #3b82f6;
     -fx-border-width: 2px;
     -fx-effect: dropshadow(gaussian, rgba(59,130,246,0.3), 8, 0, 0, 2);
 }
 
-/* ─────────────────────────────────────────────────────────────────────────────
-   8.4 Botón de inicio de sesión
-   ───────────────────────────────────────────────────────────────────────────── */
 
-/* Botón principal de login con gradiente azul y efecto de profundidad */
-.btn-login {
-    -fx-background-color: linear-gradient(to bottom, #3b82f6, #2563eb);
-    -fx-text-fill: #ffffff;
-    -fx-font-size: 16px;
-    -fx-font-weight: 600;
-    -fx-letter-spacing: 0.05em;
-    -fx-padding: 16px 44px; /* 16px vertical | 44px horizontal */
-    -fx-border-radius: 28px;
-    -fx-background-radius: 28px;
-    -fx-cursor: hand;
-    -fx-effect: dropshadow(gaussian, rgba(59,130,246,0.4), 8, 0, 0, 2);
-    -fx-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-/* Efecto hover - Se agranda ligeramente y aumenta el brillo */
-.btn-login:hover {
-    -fx-background-color: linear-gradient(to bottom, #2563eb, #1d4ed8);
-    -fx-effect: dropshadow(gaussian, rgba(37,99,235,0.6), 12, 0, 0, 4);
-    -fx-scale-x: 1.03;
-    -fx-scale-y: 1.03;
-}
-
-/* Efecto al presionar - Se reduce ligeramente */
-.btn-login:pressed {
-    -fx-background-color: #1d4ed8; /* Blue 700 */
-    -fx-effect: dropshadow(gaussian, rgba(29,78,216,0.4), 4, 0, 0, 1);
-    -fx-scale-x: 0.97;
-    -fx-scale-y: 0.97;
-}
-
-/* ─────────────────────────────────────────────────────────────────────────────
-   8.5 Enlaces (Hyperlinks)
-   ───────────────────────────────────────────────────────────────────────────── */
+/* ────────────────────────────────────────────────────────────────────────── */
+/* 8.4 ENLACES (HYPERLINKS) */
+/* ────────────────────────────────────────────────────────────────────────── */
 
 /* Link "¿Olvidaste tu contraseña?" */
 .link-olvido {
-    -fx-text-fill: #3b82f6; /* Blue 500 */
+    -fx-text-fill: #3b82f6;
     -fx-font-size: 13px;
     -fx-padding: 0;
     -fx-transition: color 0.2s ease;
 }
 
 .link-olvido:hover {
-    -fx-text-fill: #60a5fa; /* Blue 400 - Más claro al hover */
+    -fx-text-fill: #60a5fa;
     -fx-underline: true;
 }
 
 /* Link "¿No tienes cuenta? Regístrate" */
 .link-registro {
-    -fx-text-fill: #06b6d4; /* Cyan 500 */
+    -fx-text-fill: #06b6d4;
     -fx-font-size: 13px;
     -fx-padding: 0;
     -fx-transition: color 0.2s ease;
 }
 
 .link-registro:hover {
-    -fx-text-fill: #22d3ee; /* Cyan 400 - Más claro al hover */
+    -fx-text-fill: #22d3ee;
     -fx-underline: true;
 }
+
+
+
+
 
 /* ════════════════════════════════════════════════════════════════════════════
    9. PANTALLA DE REGISTRO (frmRegistro)
    ════════════════════════════════════════════════════════════════════════════ */
 
-/* ─────────────────────────────────────────────────────────────────────────────
-   9.1 Contenedor principal
-   ───────────────────────────────────────────────────────────────────────────── */
+/* ────────────────────────────────────────────────────────────────────────── */
+/* 9.1 CONTENEDOR PRINCIPAL */
+/* ────────────────────────────────────────────────────────────────────────── */
 
-/* Contenedor raíz con el mismo gradiente que login */
 #registro-root {
     -fx-background-color: linear-gradient(to bottom, #0f172a 0%, #1e293b 100%);
 }
 
-/* ─────────────────────────────────────────────────────────────────────────────
-   9.2 Títulos y subtítulos
-   ───────────────────────────────────────────────────────────────────────────── */
 
-/* Título "REGISTRARSE" */
+/* ────────────────────────────────────────────────────────────────────────── */
+/* 9.2 TÍTULOS Y SUBTÍTULOS */
+/* ────────────────────────────────────────────────────────────────────────── */
+
 .titulo-registro {
     -fx-font-size: 30px;
     -fx-font-weight: 600;
-    -fx-text-fill: #3b82f6; /* Blue 500 */
+    -fx-text-fill: #3b82f6;
     -fx-effect: dropshadow(gaussian, rgba(59,130,246,0.3), 6, 0, 0, 2);
 }
 
-/* Subtítulo "Crea una nueva cuenta" */
 .subtitulo-registro {
     -fx-font-size: 15px;
     -fx-font-weight: 400;
-    -fx-text-fill: #cbd5e1; /* Slate 300 */
+    -fx-text-fill: #cbd5e1;
 }
 
-/* ─────────────────────────────────────────────────────────────────────────────
-   9.3 Campos de entrada de registro
-   ───────────────────────────────────────────────────────────────────────────── */
 
-/* Campos de registro - Mismo estilo que login para consistencia */
+/* ────────────────────────────────────────────────────────────────────────── */
+/* 9.3 CAMPOS DE ENTRADA */
+/* ────────────────────────────────────────────────────────────────────────── */
+
+/* Estado base */
 .registro-field {
-    -fx-background-color: #1e293b; /* Slate 800 */
+    -fx-background-color: #1e293b;
     -fx-text-fill: #f1f5f9;
-    -fx-border-color: #334155; /* Slate 700 */
+    -fx-border-color: #334155;
     -fx-border-width: 1px;
     -fx-border-radius: 10px;
     -fx-background-radius: 10px;
     -fx-padding: 11px 16px;
     -fx-font-size: 13px;
-    -fx-prompt-text-fill: #94a3b8; /* Slate 400 */
+    -fx-prompt-text-fill: #94a3b8;
 }
 
-/* Estado de foco en campos de registro - Borde cian para diferenciar */
+/* Estado de foco */
 .registro-field:focused {
-    -fx-border-color: #06b6d4; /* Cyan 500 */
+    -fx-border-color: #06b6d4;
     -fx-border-width: 2px;
     -fx-effect: dropshadow(gaussian, rgba(6,182,212,0.3), 8, 0, 0, 2);
 }
@@ -814,105 +972,53 @@
     -fx-text-fill: #3b82f6;
 }
 
-/* ─────────────────────────────────────────────────────────────────────────────
-   9.4 Botones de registro
-   ───────────────────────────────────────────────────────────────────────────── */
 
-/* Botón "REGISTRARSE" con gradiente cian */
-.btn-registro {
-    -fx-background-color: linear-gradient(to bottom, #06b6d4, #0891b2);
-    -fx-text-fill: #ffffff;
-    -fx-font-size: 11px;
-    -fx-font-weight: 600;
-    -fx-letter-spacing: 0.05em;
-    -fx-padding: 16px 30px; /* 16px vertical | 30px horizontal */
-    -fx-border-radius: 28px;
-    -fx-background-radius: 28px;
-    -fx-cursor: hand;
-    -fx-effect: dropshadow(gaussian, rgba(6,182,212,0.4), 8, 0, 0, 2);
-    -fx-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
+/* ────────────────────────────────────────────────────────────────────────── */
+/* 9.4 BOTONES ESPECÍFICOS (Ver sección 5.4 para estilos completos) */
+/* ────────────────────────────────────────────────────────────────────────── */
 
-.btn-registro:hover {
-    -fx-background-color: linear-gradient(to bottom, #0891b2, #0e7490);
-    -fx-effect: dropshadow(gaussian, rgba(8,145,178,0.6), 12, 0, 0, 4);
-    -fx-scale-x: 1.03;
-    -fx-scale-y: 1.03;
-}
+/* Los estilos de .btn-registro y .btn-cancelar están en la sección 5.4 */
 
-.btn-registro:pressed {
-    -fx-background-color: #0891b2; /* Cyan 600 */
-    -fx-effect: dropshadow(gaussian, rgba(8,145,178,0.4), 4, 0, 0, 1);
-    -fx-scale-x: 0.97;
-    -fx-scale-y: 0.97;
-}
 
-/* Botón "CANCELAR" - Gris neutro */
-.btn-cancelar {
-    -fx-background-color: transparent;
-    -fx-text-fill: #94a3b8; /* Slate 400 */
-    -fx-border-color: #94a3b8;
-    -fx-border-width: 2px;
-    -fx-font-size: 11px;
-    -fx-font-weight: 600;
-    -fx-letter-spacing: 0.05em;
-    -fx-padding: 16px 30px;
-    -fx-border-radius: 28px;
-    -fx-background-radius: 28px;
-    -fx-cursor: hand;
-    -fx-effect: dropshadow(gaussian, rgba(148,163,184,0.2), 8, 0, 0, 2);
-    -fx-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
 
-.btn-cancelar:hover {
-    -fx-background-color: #94a3b8;
-    -fx-text-fill: #ffffff;
-    -fx-effect: dropshadow(gaussian, rgba(148,163,184,0.4), 12, 0, 0, 4);
-    -fx-scale-x: 1.03;
-    -fx-scale-y: 1.03;
-}
 
-.btn-cancelar:pressed {
-    -fx-background-color: #64748b; /* Slate 500 */
-    -fx-text-fill: #ffffff;
-    -fx-effect: dropshadow(gaussian, rgba(100,116,139,0.3), 4, 0, 0, 1);
-    -fx-scale-x: 0.97;
-    -fx-scale-y: 0.97;
-}
 
 /* ════════════════════════════════════════════════════════════════════════════
    10. PANTALLA PRINCIPAL (frmPrincipal)
    ════════════════════════════════════════════════════════════════════════════ */
 
-/* ─────────────────────────────────────────────────────────────────────────────
-   10.1 Mensaje de bienvenida
-   ───────────────────────────────────────────────────────────────────────────── */
+/* ────────────────────────────────────────────────────────────────────────── */
+/* 10.1 MENSAJE DE BIENVENIDA */
+/* ────────────────────────────────────────────────────────────────────────── */
 
-/* Mensaje central de bienvenida con efecto brillante */
 #welcome-label {
     -fx-font-size: 20px;
-    -fx-text-fill: #60a5fa; /* Blue 400 */
+    -fx-text-fill: #60a5fa;
     -fx-padding: 50px;
     -fx-font-weight: 500;
     -fx-effect: dropshadow(gaussian, rgba(96,165,250,0.3), 4, 0, 0, 2);
 }
 
-/* ─────────────────────────────────────────────────────────────────────────────
-   10.2 Barra de estado
-   ───────────────────────────────────────────────────────────────────────────── */
 
-/* Barra inferior de estado con bordes sutiles */
+/* ────────────────────────────────────────────────────────────────────────── */
+/* 10.2 BARRA DE ESTADO */
+/* ────────────────────────────────────────────────────────────────────────── */
+
 #status-bar {
     -fx-padding: 10px 16px;
-    -fx-background-color: #1e293b; /* Slate 800 */
-    -fx-border-color: #334155; /* Slate 700 */
+    -fx-background-color: #1e293b;
+    -fx-border-color: #334155;
     -fx-border-width: 1 0 0 0;
     -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 4, 0, 0, 1);
 }
 
-/* Etiqueta de texto en la barra de estado */
 #status-label {
-    -fx-text-fill: #cbd5e1; /* Slate 300 */
+    -fx-text-fill: #cbd5e1;
     -fx-font-size: 13px;
     -fx-font-weight: 400;
 }
+
+
+/* ════════════════════════════════════════════════════════════════════════════
+   FIN DEL ARCHIVO CSS
+   ════════════════════════════════════════════════════════════════════════════ */

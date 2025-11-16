@@ -4,6 +4,7 @@ import javafx.application.Platform; // Proporciona métodos para interactuar con
 import javafx.stage.Stage; // Representa una ventana
 import view.frmPrincipal; // Vista principal que este controlador gestiona
 import view.frmAdmin; // Vista de gestión de usuarios
+import view.frmCliente; // Vista de gestión de clientes
 
 
 // Controlador de la vista principal.
@@ -21,10 +22,8 @@ public class ControladorPrincipal {
 
     // Registra las acciones/lógicas asociadas a cada botón.
     private void wireActions() {
-        // Acción: Nuevo Cliente (pendiente de implementar)
-        vista.getBtnNuevoCliente().setOnAction(e -> {
-            vista.setStatus("Nuevo Cliente - Funcionalidad pendiente de implementar");
-        });
+        // Acción: Nuevo Cliente - abre la ventana de gestión de clientes
+        vista.getBtnNuevoCliente().setOnAction(e -> abrirVentanaClientes());
 
         // Acción: Nueva Venta (pendiente de implementar)
         vista.getBtnNuevaVenta().setOnAction(e -> {
@@ -58,5 +57,25 @@ public class ControladorPrincipal {
             e.printStackTrace();
         }
     }
-}
 
+    // Abre la ventana emergente (modal) de gestión de clientes
+    private void abrirVentanaClientes() {
+        try {
+            // Crear la ventana de clientes pasándole el Stage principal como padre
+            frmCliente ventanaClientes = new frmCliente(stagePrincipal);
+
+            // Crear el controlador y pasarle la ventana
+            new ControladorCliente(ventanaClientes);
+
+            // Mostrar la ventana como modal (bloquea la ventana principal hasta que se cierre)
+            ventanaClientes.showAndWait();
+
+            // Actualizar estado cuando se cierra la ventana
+            vista.setStatus("Ventana de Clientes cerrada.");
+        } catch (Exception e) {
+            // Manejo de errores en caso de que falle la carga
+            vista.setStatus("Error al abrir ventana de Clientes: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+}

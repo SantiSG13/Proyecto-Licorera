@@ -173,14 +173,11 @@ public class frmAdmin extends Stage {
         HBox box = new HBox(); // Contenedor horizontal para los botones
         box.getStyleClass().add("botones-container"); // Aplica clase CSS que incluye spacing, padding y alignment
 
-        // Los botones se ajustan automáticamente al contenido según el padding del CSS
-        // No establecer ancho fijo para permitir que el texto quepa correctamente
-
-        // Aplicar clases CSS a cada botón
-        btnGuardar.getStyleClass().add("btn-guardar");
-        btnModificar.getStyleClass().add("btn-modificar");
-        btnEliminar.getStyleClass().add("btn-eliminar");
-        btnSalir.getStyleClass().add("btn-salir");
+        // Aplicar clases CSS: base más gradiente tipo "button-87"
+        btnGuardar.getStyleClass().addAll("btn-guardar", "btn-gradient");
+        btnModificar.getStyleClass().addAll("btn-modificar", "btn-gradient");
+        btnEliminar.getStyleClass().addAll("btn-eliminar", "btn-gradient");
+        btnSalir.getStyleClass().addAll("btn-salir", "btn-gradient-exit");
 
         // Configurar acción del botón salir para cerrar solo esta ventana
         btnSalir.setOnAction(e -> close());
@@ -241,4 +238,3 @@ public class frmAdmin extends Stage {
         cboRol.setValue(null);
     }
 }
-
