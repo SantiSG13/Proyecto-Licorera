@@ -3,13 +3,13 @@
     "nombre": "Cerveza Corona",
     "categoria": "Cervezas",
     "precio": 5000.0,
-    "stock": 100
+    "stock": 96
   },
   {
     "nombre": "Cerveza Pilsen",
     "categoria": "Cervezas",
     "precio": 2000.0,
-    "stock": 50
+    "stock": 47
   },
   {
     "nombre": "Ron Medellín 750ml",

@@ -5,6 +5,7 @@ import javafx.stage.Stage; // Representa una ventana
 import view.frmPrincipal; // Vista principal que este controlador gestiona
 import view.frmCliente; // Vista de gestión de clientes
 import view.frmProductos; // Vista de gestión de productos
+import view.frmVenta; // Vista de gestión de ventas
 
 
 // Controlador de la vista principal.
@@ -27,6 +28,9 @@ public class ControladorPrincipal {
 
         // Acción: Productos - abre la ventana de gestión de productos
         vista.getBtnProductos().setOnAction(e -> abrirVentanaProductos());
+
+        // Acción: Ventas - abre la ventana de gestión de ventas
+        vista.getBtnVentas().setOnAction(e -> abrirVentanaVentas());
 
         // Acción: Salir de la aplicación
         vista.getBtnSalir().setOnAction(e -> Platform.exit());
@@ -79,6 +83,33 @@ public class ControladorPrincipal {
         } catch (Exception e) {
             // Manejo de errores en caso de que falle la carga
             vista.setStatus("Error al abrir ventana de Productos: " + e.getMessage());
+            e.printStackTrace();
+        } finally {
+            // Habilitar el navbar nuevamente cuando se cierra la ventana
+            vista.setNavBarEnabled(true);
+        }
+    }
+
+    // Abre la ventana emergente (modal) de gestión de ventas
+    private void abrirVentanaVentas() {
+        try {
+            // Deshabilitar el navbar mientras la ventana modal está abierta
+            vista.setNavBarEnabled(false);
+
+            // Crear la ventana de ventas pasándole el Stage principal como padre
+            frmVenta ventanaVentas = new frmVenta(stagePrincipal);
+
+            // Crear el controlador y pasarle la ventana
+            new ControladorVenta(ventanaVentas);
+
+            // Mostrar la ventana como modal (bloquea la ventana principal hasta que se cierre)
+            ventanaVentas.showAndWait();
+
+            // Actualizar estado cuando se cierra la ventana
+            vista.setStatus("Ventana de Ventas cerrada.");
+        } catch (Exception e) {
+            // Manejo de errores en caso de que falle la carga
+            vista.setStatus("Error al abrir ventana de Ventas: " + e.getMessage());
             e.printStackTrace();
         } finally {
             // Habilitar el navbar nuevamente cuando se cierra la ventana
