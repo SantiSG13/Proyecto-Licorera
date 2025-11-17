@@ -1,31 +1,28 @@
 package model;
 
-// Clase modelo que representa un usuario del sistema.
-// Responsabilidad: Almacenar datos de usuario (POJO - Plain Old Java Object).
+// Clase que representa un usuario administrador del sistema
 public class ModeloAdmin {
-    // Atributos privados que representan las propiedades de un usuario
-    private String id;          // Identificador único del usuario
-    private String usuario;     // Nombre de usuario para login
-    private String contrasena;  // Contraseña (en producción debería estar hasheada)
-    private String nombre;      // Nombre completo del usuario
-    private String rol;         // Rol del usuario (Admin, Empleado, etc.)
-    private String email;       // Correo electrónico del usuario
+    private String id;
+    private String usuario;
+    private String contrasena;
+    private String nombre;
+    private String rol;
+    private String correo;
 
-    // Constructor vacío: necesario para que Gson pueda deserializar desde JSON
-    public ModeloAdmin() {
-    }
+    // Constructor vacío (requerido para serialización JSON)
+    public ModeloAdmin() {}
 
-    // Constructor completo: facilita la creación de instancias con todos los datos
-    public ModeloAdmin(String id, String usuario, String contrasena, String nombre, String rol, String email) {
+    // Constructor con parámetros
+    public ModeloAdmin(String id, String usuario, String contrasena, String nombre, String rol, String correo) {
         this.id = id;
         this.usuario = usuario;
         this.contrasena = contrasena;
         this.nombre = nombre;
         this.rol = rol;
-        this.email = email;
+        this.correo = correo;
     }
 
-    // Getters y Setters: permiten acceder y modificar cada atributo de forma controlada
+    // Getters y Setters
     public String getId() {
         return id;
     }
@@ -66,23 +63,23 @@ public class ModeloAdmin {
         this.rol = rol;
     }
 
-    public String getEmail() {
-        return email;
+    public String getCorreo() {
+        return correo;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setCorreo(String correo) {
+        this.correo = correo;
     }
 
-    // toString: útil para debugging y logs, muestra el estado del objeto
     @Override
     public String toString() {
-        return "ModeloUsuario{" +
+        return "ModeloAdmin{" +
                 "id='" + id + '\'' +
                 ", usuario='" + usuario + '\'' +
                 ", nombre='" + nombre + '\'' +
                 ", rol='" + rol + '\'' +
-                ", email='" + email + '\'' +
+                ", correo='" + correo + '\'' +
                 '}';
     }
 }
+

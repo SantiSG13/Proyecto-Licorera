@@ -11,7 +11,7 @@ import javafx.stage.StageStyle;
 
 // Vista de registro como ventana independiente modal
 public class frmRegistro extends Stage {
-    private final BorderPane root = new BorderPane();
+    private final BorderPane contenedorRegistro = new BorderPane();
 
     // Componentes para REGISTRO
     private TextField txtUsuarioRegistro;
@@ -37,7 +37,7 @@ public class frmRegistro extends Stage {
         inicializarComponentes();
 
         // Crear la escena
-        Scene scene = new Scene(root, 700, 700);
+        Scene scene = new Scene(contenedorRegistro, 700, 700);
 
         // Cargar el CSS
         try {
@@ -52,10 +52,10 @@ public class frmRegistro extends Stage {
     }
 
     private void inicializarComponentes() {
-        root.setId("registro-root");
+        contenedorRegistro.setId("registro-contenedorRegistro");
 
-        VBox panelRegistro = crearPanelRegistro();
-        root.setCenter(panelRegistro);
+        VBox contenedorRegistro = crearPanelRegistro();
+        this.contenedorRegistro.setCenter(contenedorRegistro);
     }
 
     private VBox crearPanelRegistro() {

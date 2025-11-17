@@ -1,106 +1,30 @@
 /* ╔════════════════════════════════════════════════════════════════════════════╗
    ║                    PROYECTO LICORERA - HOJA DE ESTILOS                    ║
-   ║                    TEMA OSCURO PROFESIONAL CON AZUL ELEGANTE              ║
+   ║                    TEMA OSCURO ELEGANTE NEGRO CON ACENTOS DORADOS         ║
    ╚════════════════════════════════════════════════════════════════════════════╝
 
    PALETA DE COLORES:
    ─────────────────
-   • Fondos principales: Slate 900 (#0f172a), Slate 800 (#1e293b)
-   • Bordes y divisores: Slate 700 (#334155), Slate 600 (#475569)
-   • Textos: Slate 100 (#f1f5f9), Slate 300 (#cbd5e1), Slate 400 (#94a3b8)
-   • Acentos azules: Blue 500 (#3b82f6), Blue 400 (#60a5fa), Cyan 500 (#06b6d4)
-   • Acentos morados: Violet 500 (#8b5cf6)
-   • Alertas: Red 400 (#f87171)
-
-   ÍNDICE DE CONTENIDO:
-   ───────────────────
-   1. CONFIGURACIÓN GLOBAL
-      1.1 Fuentes
-      1.2 Root y configuración base
-      1.3 Contenedores base
-      1.4 Etiquetas y textos
-
-   2. LAYOUTS Y CONTENEDORES
-      2.1 Contenedor de formularios
-      2.2 Contenedor de tablas
-      2.3 Contenedor de botones
-      2.4 Separadores
-      2.5 Títulos de secciones
-
-   3. COMPONENTES DE FORMULARIOS
-      3.1 Campos de texto y contraseña
-      3.2 ComboBox (selector desplegable)
-
-   4. TABLAS
-      4.1 Contenedor principal
-      4.2 Encabezados de columnas
-      4.3 Filas de datos
-      4.4 Celdas individuales
-      4.5 Scrollbars de tabla
-      4.6 Placeholder (tabla vacía)
-
-   5. BOTONES
-      5.1 Botones de acción generales (Guardar, Modificar, Eliminar)
-      5.2 Botón Salir
-      5.3 Botón de Login
-      5.4 Botones de Registro
-
-   6. NAVEGACIÓN Y MENÚS
-      6.1 Barra de navegación (frmPrincipal)
-      6.2 Botones de navegación
-      6.3 Barra de menú superior
-      6.4 Menús contextuales
-
-   7. SCROLLBARS GLOBALES
-
-   8. PANTALLA DE INICIO DE SESIÓN (frmInicio)
-      8.1 Contenedores y paneles
-      8.2 Títulos y subtítulos
-      8.3 Campos de entrada
-      8.4 Enlaces (Hyperlinks)
-
-   9. PANTALLA DE REGISTRO (frmRegistro)
-      9.1 Contenedor principal
-      9.2 Títulos y subtítulos
-      9.3 Campos de entrada
-      9.4 Botones específicos
-
-   10. PANTALLA PRINCIPAL (frmPrincipal)
-       10.1 Mensaje de bienvenida
-       10.2 Barra de estado
+   • Fondos principales: Negro (#0d0d0d), Gris oscuro (#1a1a1a), Gris medio (#2a2a2a)
+   • Bordes y divisores: Gris (#3a3a3a), Gris claro (#4a4a4a)
+   • Textos: Blanco (#ffffff), Gris claro (#b0b0b0), Gris medio (#808080)
+   • Acentos dorados: Dorado (#d4af37), Dorado claro (#e4bf47), Dorado oscuro (#b89b2f)
+   • Alertas: Rojo (#ff4444), Verde (#44ff44)
 */
-
-
-
-
 
 /* ════════════════════════════════════════════════════════════════════════════
    1. CONFIGURACIÓN GLOBAL
    ════════════════════════════════════════════════════════════════════════════ */
 
-/* ────────────────────────────────────────────────────────────────────────── */
-/* 1.1 FUENTES */
-/* ────────────────────────────────────────────────────────────────────────── */
-
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
-
-
-/* ────────────────────────────────────────────────────────────────────────── */
-/* 1.2 ROOT Y CONFIGURACIÓN BASE */
-/* ────────────────────────────────────────────────────────────────────────── */
 
 .root {
     -fx-font-family: "Poppins", "Segoe UI", Arial, sans-serif;
     -fx-font-size: 14px;
-    -fx-background-color: #0f172a;
+    -fx-background-color: #0d0d0d;
     -fx-text-fill: #f1f5f9;
     -fx-transition: background-color 0.3s ease-in-out;
 }
-
-
-/* ────────────────────────────────────────────────────────────────────────── */
-/* 1.3 CONTENEDORES BASE */
-/* ────────────────────────────────────────────────────────────────────────── */
 
 .border-pane,
 .vbox,
@@ -108,11 +32,6 @@
 .grid-pane {
     -fx-background-color: transparent;
 }
-
-
-/* ────────────────────────────────────────────────────────────────────────── */
-/* 1.4 ETIQUETAS Y TEXTOS */
-/* ────────────────────────────────────────────────────────────────────────── */
 
 .label {
     -fx-text-fill: #f1f5f9;
@@ -124,257 +43,177 @@
     -fx-font-size: 14px;
 }
 
-
-
-
-
 /* ════════════════════════════════════════════════════════════════════════════
    2. LAYOUTS Y CONTENEDORES
    ════════════════════════════════════════════════════════════════════════════ */
 
-/* ────────────────────────────────────────────────────────────────────────── */
-/* 2.1 CONTENEDOR DE FORMULARIOS */
-/* ────────────────────────────────────────────────────────────────────────── */
-
 .formulario-container {
-    -fx-background-color: #1e293b;
+    -fx-background-color: #1a1a1a;
     -fx-padding: 24px 24px 20px 24px;
-    -fx-border-color: #334155;
+    -fx-border-color: #2a2a2a;
     -fx-border-width: 0 0 1px 0;
     -fx-border-radius: 0 0 8px 8px;
     -fx-font-size: 15px;
     -fx-effect: innershadow(gaussian, rgba(0,0,0,0.1), 4, 0, 0, 0);
 }
 
-
-/* ────────────────────────────────────────────────────────────────────────── */
-/* 2.2 CONTENEDOR DE TABLAS */
-/* ────────────────────────────────────────────────────────────────────────── */
-
 .tabla-container {
-    -fx-background-color: #0f172a;
+    -fx-background-color: #0d0d0d;
     -fx-padding: 20px 24px;
 }
 
-
-/* ────────────────────────────────────────────────────────────────────────── */
-/* 2.3 CONTENEDOR DE BOTONES */
-/* ────────────────────────────────────────────────────────────────────────── */
-
 .botones-container {
-    -fx-background-color: #1e293b;
+    -fx-background-color: #1a1a1a;
     -fx-padding: 20px 24px;
-    -fx-border-color: #334155;
+    -fx-border-color: #2a2a2a;
     -fx-border-width: 1px 0 0 0;
     -fx-spacing: 16px;
     -fx-alignment: CENTER;
 }
 
-
-/* ────────────────────────────────────────────────────────────────────────── */
-/* 2.4 SEPARADORES */
-/* ────────────────────────────────────────────────────────────────────────── */
-
 .separator .line {
-    -fx-border-color: #334155;
-    -fx-background-color: #334155;
-    -fx-stroke: #334155;
+    -fx-border-color: #3a3a3a;
+    -fx-background-color: #3a3a3a;
+    -fx-stroke: #3a3a3a;
 }
-
-
-/* ────────────────────────────────────────────────────────────────────────── */
-/* 2.5 TÍTULOS DE SECCIONES */
-/* ────────────────────────────────────────────────────────────────────────── */
 
 .titulo-formulario {
     -fx-font-size: 32px;
     -fx-font-weight: 600;
-    -fx-text-fill: #3b82f6;
-    -fx-effect: dropshadow(gaussian, rgba(59,130,246,0.2), 6, 0, 0, 2);
+    -fx-text-fill: #d4af37;
+    -fx-effect: dropshadow(gaussian, rgba(212,175,55,0.3), 6, 0, 0, 2);
 }
 
 .titulo-tabla {
     -fx-font-weight: 500;
-    -fx-text-fill: #f1f5f9;
+    -fx-text-fill: #ffffff;
     -fx-font-size: 15px;
 }
-
-
-
-
 
 /* ════════════════════════════════════════════════════════════════════════════
    3. COMPONENTES DE FORMULARIOS
    ════════════════════════════════════════════════════════════════════════════ */
 
-/* ────────────────────────────────────────────────────────────────────────── */
-/* 3.1 CAMPOS DE TEXTO Y CONTRASEÑA */
-/* ────────────────────────────────────────────────────────────────────────── */
-
-/* Estado base */
 .text-field,
 .password-field {
-    -fx-background-color: #1e293b;
-    -fx-text-fill: #f1f5f9;
-    -fx-border-color: #334155;
+    -fx-background-color: #2a2a2a;
+    -fx-text-fill: #ffffff;
+    -fx-border-color: #3a3a3a;
     -fx-border-width: 1px;
     -fx-border-radius: 8px;
     -fx-background-radius: 8px;
     -fx-padding: 12px 16px;
-    -fx-prompt-text-fill: #94a3b8;
+    -fx-prompt-text-fill: #808080;
     -fx-font-size: 14px;
     -fx-transition: all 0.3s ease;
-    -fx-effect: innershadow(gaussian, rgba(0,0,0,0.1), 2, 0, 0, 0);
+    -fx-effect: innershadow(gaussian, rgba(0,0,0,0.5), 3, 0, 0, 1);
 }
 
-/* Estado de foco */
 .text-field:focused,
 .password-field:focused {
-    -fx-border-color: #3b82f6;
+    -fx-border-color: #d4af37;
     -fx-border-width: 2px;
-    -fx-effect: dropshadow(gaussian, rgba(59,130,246,0.2), 6, 0, 0, 2);
+    -fx-effect: dropshadow(gaussian, rgba(212,175,55,0.4), 8, 0, 0, 0);
 }
 
-/* Estado deshabilitado */
 .text-field:disabled {
-    -fx-background-color: #0f172a;
-    -fx-text-fill: #64748b;
-    -fx-opacity: 0.7;
+    -fx-background-color: #1f1f1f;
+    -fx-text-fill: #606060;
+    -fx-opacity: 0.5;
 }
 
-
-/* ────────────────────────────────────────────────────────────────────────── */
-/* 3.2 COMBOBOX (SELECTOR DESPLEGABLE) */
-/* ────────────────────────────────────────────────────────────────────────── */
-
-/* Estado base */
 .combo-box {
-    -fx-background-color: #1e293b;
-    -fx-text-fill: #f1f5f9;
-    -fx-border-color: #334155;
+    -fx-background-color: #2a2a2a;
+    -fx-text-fill: #ffffff;
+    -fx-border-color: #3a3a3a;
     -fx-border-width: 1px;
     -fx-border-radius: 8px;
     -fx-background-radius: 8px;
     -fx-padding: 12px 16px;
-    -fx-prompt-text-fill: #94a3b8;
+    -fx-prompt-text-fill: #808080;
     -fx-font-size: 14px;
     -fx-transition: all 0.3s ease;
     -fx-effect: innershadow(gaussian, rgba(0,0,0,0.1), 2, 0, 0, 0);
 }
 
-/* Estado de foco */
 .combo-box:focused {
-    -fx-border-color: #3b82f6;
+    -fx-border-color: #d4af37;
     -fx-border-width: 2px;
-    -fx-effect: dropshadow(gaussian, rgba(59,130,246,0.2), 6, 0, 0, 2);
+    -fx-effect: dropshadow(gaussian, rgba(212,175,55,0.4), 6, 0, 0, 2);
 }
 
-/* Celda individual */
 .combo-box .list-cell {
-    -fx-background-color: #1e293b;
-    -fx-text-fill: #f1f5f9;
+    -fx-background-color: #2a2a2a;
+    -fx-text-fill: #ffffff;
 }
 
-/* Lista desplegable */
 .combo-box-popup .list-view {
-    -fx-background-color: #1e293b;
-    -fx-border-color: #3b82f6;
+    -fx-background-color: #2a2a2a;
+    -fx-border-color: #d4af37;
     -fx-border-radius: 8px;
 }
 
-/* Hover en opciones */
 .combo-box-popup .list-view .list-cell:hover {
-    -fx-background-color: #334155;
-    -fx-text-fill: #f1f5f9;
+    -fx-background-color: #3a3a3a;
+    -fx-text-fill: #ffffff;
 }
-
-
-
-
 
 /* ════════════════════════════════════════════════════════════════════════════
    4. TABLAS
    ════════════════════════════════════════════════════════════════════════════ */
 
-/* ────────────────────────────────────────────────────────────────────────── */
-/* 4.1 CONTENEDOR PRINCIPAL */
-/* ────────────────────────────────────────────────────────────────────────── */
-
 .table-view {
-    -fx-background-color: #1e293b;
+    -fx-background-color: #0d0d0d;
     -fx-border-color: #334155;
     -fx-border-width: 1px;
     -fx-border-radius: 8px;
 }
 
-
-/* ────────────────────────────────────────────────────────────────────────── */
-/* 4.2 ENCABEZADOS DE COLUMNAS */
-/* ────────────────────────────────────────────────────────────────────────── */
-
 .table-view .column-header {
-    -fx-background-color: #0f172a;
-    -fx-text-fill: #3b82f6;
+    -fx-background-color: #0d0d0d;
+    -fx-text-fill: #d4af37;
     -fx-font-weight: 500;
     -fx-alignment: CENTER-LEFT;
     -fx-padding: 12px 16px;
-    -fx-border-color: #334155;
+    -fx-border-color: #2a2a2a;
     -fx-background-radius: 8px 8px 0 0;
 }
 
 .table-view .column-header-background {
-    -fx-background-color: #0f172a;
+    -fx-background-color: #0d0d0d;
 }
 
 .table-view .column-header .label {
-    -fx-text-fill: #3b82f6;
+    -fx-text-fill: #d4af37;
 }
 
 .table-view .column-header-background .filler {
-    -fx-background-color: #0f172a;
+    -fx-background-color: #0d0d0d;
 }
 
-
-/* ────────────────────────────────────────────────────────────────────────── */
-/* 4.3 FILAS DE DATOS */
-/* ────────────────────────────────────────────────────────────────────────── */
-
-/* Fila normal */
 .table-row-cell {
-    -fx-background-color: #1e293b;
-    -fx-text-fill: #f1f5f9;
+    -fx-background-color: #1a1a1a;
+    -fx-text-fill: #ffffff;
     -fx-border-color: transparent;
     -fx-padding: 12px 16px;
     -fx-transition: background-color 0.2s ease;
 }
 
-/* Fila seleccionada */
 .table-row-cell:selected {
-    -fx-background-color: #3b82f6;
-    -fx-text-fill: #ffffff;
-    -fx-effect: innershadow(gaussian, rgba(59,130,246,0.2), 4, 0, 0, 0);
+    -fx-background-color: #d4af37;
+    -fx-text-fill: #0d0d0d;
+    -fx-effect: innershadow(gaussian, rgba(212,175,55,0.2), 4, 0, 0, 0);
 }
 
-/* Fila en hover */
 .table-row-cell:hover {
-    -fx-background-color: #334155;
+    -fx-background-color: #2a2a2a;
 }
-
-
-/* ────────────────────────────────────────────────────────────────────────── */
-/* 4.4 CELDAS INDIVIDUALES */
-/* ────────────────────────────────────────────────────────────────────────── */
 
 .table-view .table-cell {
-    -fx-text-fill: #f1f5f9;
+    -fx-text-fill: #ffffff;
     -fx-border-color: transparent;
     -fx-padding: 0 8px;
 }
-
-
-/* ────────────────────────────────────────────────────────────────────────── */
-/* 4.5 SCROLLBARS DE TABLA */
-/* ────────────────────────────────────────────────────────────────────────── */
 
 .table-view .scroll-bar:vertical,
 .table-view .scroll-bar:horizontal {
@@ -383,124 +222,87 @@
 }
 
 .table-view .scroll-bar .thumb {
-    -fx-background-color: #475569;
+    -fx-background-color: #3a3a3a;
     -fx-background-radius: 6px;
     -fx-transition: background-color 0.2s ease;
 }
 
 .table-view .scroll-bar .thumb:hover {
-    -fx-background-color: #3b82f6;
+    -fx-background-color: #d4af37;
 }
 
-
-/* ────────────────────────────────────────────────────────────────────────── */
-/* 4.6 PLACEHOLDER (TABLA VACÍA) */
-/* ────────────────────────────────────────────────────────────────────────── */
-
 .table-view .placeholder {
-    -fx-background-color: #0f172a;
+    -fx-background-color: #0d0d0d;
 }
 
 .table-view .placeholder .label {
-    -fx-text-fill: #94a3b8;
+    -fx-text-fill: #808080;
 }
-
-
-
-
 
 /* ════════════════════════════════════════════════════════════════════════════
    5. BOTONES
    ════════════════════════════════════════════════════════════════════════════ */
 
-/* ────────────────────────────────────────────────────────────────────────── */
-/* 5.1 BOTONES DE ACCIÓN GENERALES (Guardar, Modificar, Eliminar) */
-/* ────────────────────────────────────────────────────────────────────────── */
-
-/* Estado base */
 .btn-guardar,
 .btn-modificar,
 .btn-eliminar {
-    -fx-background-color: #1e293b;
-    -fx-text-fill: #3B82F6;
+    -fx-background-color: linear-gradient(to bottom, #3a3a3a, #2a2a2a);
+    -fx-text-fill: #ffffff;
     -fx-font-weight: 600;
     -fx-font-size: 12px;
     -fx-padding: 10 24;
     -fx-background-radius: 12;
     -fx-border-radius: 12;
-    -fx-border-color: transparent;
-    -fx-border-width: 0;
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.4), 8, 0, 4, 4),
-                innershadow(gaussian, rgba(255,255,255,0.05), 6, 0, -2, -2);
+    -fx-border-color: #4a4a4a;
+    -fx-border-width: 1;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.5), 3, 0, 0, 2);
     -fx-cursor: hand;
     -fx-background-insets: 0;
 }
 
-/* Hover */
 .btn-guardar:hover,
 .btn-modificar:hover,
 .btn-eliminar:hover {
-    -fx-background-color: #2563EB;
-    -fx-text-fill: white;
-    -fx-effect: dropshadow(gaussian, rgba(37,99,235,0.5), 12, 0, 0, 4),
-                innershadow(gaussian, rgba(255,255,255,0.08), 6, 0, -2, -2);
+    -fx-background-color: linear-gradient(to bottom, #4a4a4a, #3a3a3a);
+    -fx-border-color: #d4af37;
+    -fx-effect: dropshadow(gaussian, rgba(212,175,55,0.5), 8, 0, 0, 0);
     -fx-translate-y: -1;
 }
 
-/* Click */
 .btn-guardar:pressed,
 .btn-modificar:pressed,
 .btn-eliminar:pressed {
-    -fx-effect: innershadow(gaussian, rgba(0,0,0,0.3), 8, 0, 2, 2);
-    -fx-translate-y: 0;
+    -fx-background-color: linear-gradient(to bottom, #2a2a2a, #1a1a1a);
+    -fx-translate-y: 2;
 }
 
-
-/* ────────────────────────────────────────────────────────────────────────── */
-/* 5.2 BOTÓN SALIR */
-/* ────────────────────────────────────────────────────────────────────────── */
-
-/* Estado base: mismo estilo que los botones azules, pero en paleta roja */
 .btn-salir {
-    -fx-background-color: #1e293b; /* mismo fondo base oscuro */
-    -fx-text-fill: #F87171;       /* rojo suave para el texto */
-    -fx-font-weight: 600;
-    -fx-font-size: 12px;
+    -fx-background-color: linear-gradient(to bottom, #8b0000, #660000);
+    -fx-text-fill: #ffffff;
     -fx-padding: 10 24;
     -fx-background-radius: 12;
     -fx-border-radius: 12;
-    -fx-border-color: transparent;
-    -fx-border-width: 0;
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.4), 8, 0, 4, 4),
-                innershadow(gaussian, rgba(255,255,255,0.05), 6, 0, -2, -2);
+    -fx-border-color: #aa0000;
+    -fx-border-width: 1;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.5), 3, 0, 0, 2);
     -fx-cursor: hand;
-    -fx-background-insets: 0;
 }
 
-/* Hover: mismo efecto que los azules pero con rojo degradado */
 .btn-salir:hover {
-    -fx-background-color: linear-gradient(to right, #DC2626, #F97316);
-    -fx-text-fill: white;
-    -fx-effect: dropshadow(gaussian, rgba(220,38,38,0.5), 12, 0, 0, 4),
-                innershadow(gaussian, rgba(255,255,255,0.08), 6, 0, -2, -2);
-    -fx-translate-y: -1;
+    -fx-background-color: linear-gradient(to bottom, #aa0000, #8b0000);
+    -fx-effect: dropshadow(gaussian, rgba(170,0,0,0.6), 8, 0, 0, 0);
+    -fx-scale-y: 1.05;
+    -fx-scale-x: 1.05;
 }
 
-/* Click: mismo comportamiento que los otros botones */
 .btn-salir:pressed {
-    -fx-effect: innershadow(gaussian, rgba(0,0,0,0.3), 8, 0, 2, 2);
-    -fx-translate-y: 0;
+    -fx-background-color: #660000;
+    -fx-translate-y: 2;
 }
 
-
-/* ────────────────────────────────────────────────────────────────────────── */
-/* 5.3 BOTÓN DE LOGIN */
-/* ────────────────────────────────────────────────────────────────────────── */
-
-/* Estado base */
 .btn-login {
-    -fx-background-color: linear-gradient(to bottom, #3b82f6, #2563eb);
-    -fx-text-fill: #ffffff;
+    -fx-background-color: linear-gradient(to bottom, #d4af37, #b89b2f);
+    -fx-text-fill: #0d0d0d;
     -fx-font-size: 16px;
     -fx-font-weight: 600;
     -fx-letter-spacing: 0.05em;
@@ -508,35 +310,27 @@
     -fx-border-radius: 28px;
     -fx-background-radius: 28px;
     -fx-cursor: hand;
-    -fx-effect: dropshadow(gaussian, rgba(59,130,246,0.4), 8, 0, 0, 2);
+    -fx-effect: dropshadow(gaussian, rgba(212,175,55,0.6), 8, 0, 0, 2);
     -fx-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Hover */
 .btn-login:hover {
-    -fx-background-color: linear-gradient(to bottom, #2563eb, #1d4ed8);
-    -fx-effect: dropshadow(gaussian, rgba(37,99,235,0.6), 12, 0, 0, 4);
+    -fx-background-color: linear-gradient(to bottom, #e4bf47, #d4af37);
+    -fx-effect: dropshadow(gaussian, rgba(212,175,55,0.8), 12, 0, 0, 0);
     -fx-scale-x: 1.03;
     -fx-scale-y: 1.03;
 }
 
-/* Click */
 .btn-login:pressed {
-    -fx-background-color: #1d4ed8;
-    -fx-effect: dropshadow(gaussian, rgba(29,78,216,0.4), 4, 0, 0, 1);
+    -fx-background-color: #b89b2f;
+    -fx-effect: dropshadow(gaussian, rgba(184,155,47,0.4), 4, 0, 0, 1);
     -fx-scale-x: 0.97;
     -fx-scale-y: 0.97;
 }
 
-
-/* ────────────────────────────────────────────────────────────────────────── */
-/* 5.4 BOTONES DE REGISTRO */
-/* ────────────────────────────────────────────────────────────────────────── */
-
-/* Botón Registrarse - Estado base */
 .btn-registro {
-    -fx-background-color: linear-gradient(to bottom, #06b6d4, #0891b2);
-    -fx-text-fill: #ffffff;
+    -fx-background-color: linear-gradient(to bottom, #d4af37, #b89b2f);
+    -fx-text-fill: #0d0d0d;
     -fx-font-size: 11px;
     -fx-font-weight: 600;
     -fx-letter-spacing: 0.05em;
@@ -544,31 +338,28 @@
     -fx-border-radius: 28px;
     -fx-background-radius: 28px;
     -fx-cursor: hand;
-    -fx-effect: dropshadow(gaussian, rgba(6,182,212,0.4), 8, 0, 0, 2);
+    -fx-effect: dropshadow(gaussian, rgba(212,175,55,0.6), 8, 0, 0, 2);
     -fx-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Hover */
 .btn-registro:hover {
-    -fx-background-color: linear-gradient(to bottom, #0891b2, #0e7490);
-    -fx-effect: dropshadow(gaussian, rgba(8,145,178,0.6), 12, 0, 0, 4);
+    -fx-background-color: linear-gradient(to bottom, #e4bf47, #d4af37);
+    -fx-effect: dropshadow(gaussian, rgba(212,175,55,0.8), 12, 0, 0, 0);
     -fx-scale-x: 1.03;
     -fx-scale-y: 1.03;
 }
 
-/* Click */
 .btn-registro:pressed {
-    -fx-background-color: #0891b2;
-    -fx-effect: dropshadow(gaussian, rgba(8,145,178,0.4), 4, 0, 0, 1);
+    -fx-background-color: #b89b2f;
+    -fx-effect: dropshadow(gaussian, rgba(184,155,47,0.4), 4, 0, 0, 1);
     -fx-scale-x: 0.97;
     -fx-scale-y: 0.97;
 }
 
-/* Botón Cancelar - Estado base */
 .btn-cancelar {
     -fx-background-color: transparent;
-    -fx-text-fill: #94a3b8;
-    -fx-border-color: #94a3b8;
+    -fx-text-fill: #b0b0b0;
+    -fx-border-color: #4a4a4a;
     -fx-border-width: 2px;
     -fx-font-size: 11px;
     -fx-font-weight: 600;
@@ -577,149 +368,112 @@
     -fx-border-radius: 28px;
     -fx-background-radius: 28px;
     -fx-cursor: hand;
-    -fx-effect: dropshadow(gaussian, rgba(148,163,184,0.2), 8, 0, 0, 2);
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 8, 0, 0, 2);
     -fx-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Hover */
 .btn-cancelar:hover {
-    -fx-background-color: #94a3b8;
+    -fx-background-color: #4a4a4a;
     -fx-text-fill: #ffffff;
-    -fx-effect: dropshadow(gaussian, rgba(148,163,184,0.4), 12, 0, 0, 4);
+    -fx-border-color: #ffffff;
+    -fx-effect: dropshadow(gaussian, rgba(74,74,74,0.4), 12, 0, 0, 4);
     -fx-scale-x: 1.03;
     -fx-scale-y: 1.03;
 }
 
-/* Click */
 .btn-cancelar:pressed {
-    -fx-background-color: #64748b;
+    -fx-background-color: #3a3a3a;
     -fx-text-fill: #ffffff;
-    -fx-effect: dropshadow(gaussian, rgba(100,116,139,0.3), 4, 0, 0, 1);
+    -fx-effect: dropshadow(gaussian, rgba(58,58,58,0.3), 4, 0, 0, 1);
     -fx-scale-x: 0.97;
     -fx-scale-y: 0.97;
 }
-
-
-
-
 
 /* ════════════════════════════════════════════════════════════════════════════
    6. NAVEGACIÓN Y MENÚS
    ════════════════════════════════════════════════════════════════════════════ */
 
-/* ────────────────────────────────────────────────────────────────────────── */
-/* 6.1 BARRA DE NAVEGACIÓN (frmPrincipal) */
-/* ────────────────────────────────────────────────────────────────────────── */
-
 #nav-bar {
     -fx-padding: 5px;
-    -fx-background-color: #1e293b;
-    -fx-border-color: #334155;
-    -fx-border-width: 0 0 1px 0;
-    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 6, 0, 0, 2);
-    -fx-alignment: center-left;
+    -fx-background-color: linear-gradient(to bottom, #1a1a1a, #0d0d0d);
+    -fx-border-color: #2a2a2a;
+    -fx-border-width: 0 0 2 0;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.7), 10, 0, 0, 3);
+    -fx-alignment: center;
 }
 
-
-/* ────────────────────────────────────────────────────────────────────────── */
-/* 6.2 BOTONES DE NAVEGACIÓN */
-/* ────────────────────────────────────────────────────────────────────────── */
-
-/* Botón de navegación normal */
 .nav-button {
-    -fx-background-color: transparent;
-    -fx-text-fill: #94a3b8;
-    -fx-border-color: transparent;
-    -fx-border-width: 0 0 3px 0;
-    -fx-border-radius: 0;
-    -fx-background-radius: 0;
-    -fx-padding: 10px 20px;
+    -fx-background-color: linear-gradient(to bottom, #2a2a2a, #1a1a1a);
+    -fx-text-fill: #ffffff;
+    -fx-border-color: #3a3a3a;
+    -fx-border-width: 1;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-padding: 12px 25px;
     -fx-font-size: 14px;
-    -fx-font-weight: 500;
+    -fx-font-weight: bold;
     -fx-cursor: hand;
     -fx-transition: all 0.3s ease;
 }
 
-/* Hover */
 .nav-button:hover {
-    -fx-text-fill: #60a5fa;
-    -fx-border-color: #60a5fa;
-    -fx-background-color: rgba(96,165,250,0.05);
-}
-
-/* Click */
-.nav-button:pressed {
-    -fx-text-fill: #3b82f6;
-    -fx-background-color: rgba(59,130,246,0.1);
-}
-
-/* Botón destacado (Nueva Venta) */
-.nav-button-highlight {
-    -fx-background-color: #3b82f6;
-    -fx-text-fill: #ffffff;
-    -fx-border-color: #3b82f6;
-    -fx-border-width: 0 0 3px 0;
-    -fx-border-radius: 6px;
-    -fx-background-radius: 6px;
-    -fx-padding: 10px 24px;
-    -fx-font-size: 14px;
-    -fx-font-weight: 600;
-    -fx-cursor: hand;
-    -fx-transition: all 0.3s ease;
-    -fx-effect: dropshadow(gaussian, rgba(59,130,246,0.4), 8, 0, 0, 3);
-}
-
-/* Hover */
-.nav-button-highlight:hover {
-    -fx-background-color: #60a5fa;
-    -fx-text-fill: #ffffff;
-    -fx-border-color: #60a5fa;
+    -fx-background-color: linear-gradient(to bottom, #3a3a3a, #2a2a2a);
+    -fx-border-color: #d4af37;
     -fx-scale-x: 1.05;
     -fx-scale-y: 1.05;
-    -fx-effect: dropshadow(gaussian, rgba(96,165,250,0.6), 12, 0, 0, 4);
 }
 
-/* Click */
-.nav-button-highlight:pressed {
-    -fx-background-color: #2563eb;
-    -fx-text-fill: #ffffff;
-    -fx-scale-x: 0.98;
-    -fx-scale-y: 0.98;
-    -fx-effect: dropshadow(gaussian, rgba(37,99,235,0.3), 4, 0, 0, 1);
+.nav-button:pressed {
+    -fx-background-color: linear-gradient(to bottom, #1a1a1a, #0d0d0d);
 }
 
-/* Botón de salir en navegación */
-.nav-button-exit {
-    -fx-background-color: transparent;
-    -fx-text-fill: #94a3b8;
-    -fx-border-color: transparent;
-    -fx-border-width: 0 0 3px 0;
-    -fx-border-radius: 0;
-    -fx-background-radius: 0;
-    -fx-padding: 10px 20px;
+.nav-button-highlight {
+    -fx-background-color: linear-gradient(to bottom, #d4af37, #b89b2f);
+    -fx-text-fill: #0d0d0d;
+    -fx-border-color: #e4bf47;
+    -fx-border-width: 1;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-padding: 12px 25px;
     -fx-font-size: 14px;
-    -fx-font-weight: 500;
+    -fx-font-weight: bold;
     -fx-cursor: hand;
     -fx-transition: all 0.3s ease;
 }
 
-/* Hover */
+.nav-button-highlight:hover {
+    -fx-background-color: linear-gradient(to bottom, #e4bf47, #d4af37);
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+}
+
+.nav-button-highlight:pressed {
+    -fx-background-color: #b89b2f;
+}
+
+.nav-button-exit {
+    -fx-background-color: linear-gradient(to bottom, #8b0000, #660000);
+    -fx-text-fill: #ffffff;
+    -fx-border-color: #aa0000;
+    -fx-border-width: 1;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-padding: 12px 25px;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+    -fx-transition: all 0.3s ease;
+}
+
 .nav-button-exit:hover {
-    -fx-text-fill: #f87171;
-    -fx-border-color: #f87171;
-    -fx-background-color: rgba(248,113,113,0.05);
+    -fx-background-color: linear-gradient(to bottom, #aa0000, #8b0000);
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
 }
 
-/* Click */
 .nav-button-exit:pressed {
-    -fx-text-fill: #ef4444;
-    -fx-background-color: rgba(239,68,68,0.1);
+    -fx-background-color: #660000;
 }
-
-
-/* ────────────────────────────────────────────────────────────────────────── */
-/* 6.3 BARRA DE MENÚ SUPERIOR */
-/* ────────────────────────────────────────────────────────────────────────── */
 
 .menu-bar {
     -fx-background-color: #1e293b;
@@ -731,196 +485,148 @@
     -fx-text-fill: #f1f5f9;
 }
 
-.menu-bar .menu:hover,
-.menu-bar .menu:showing {
+.menu .label {
+    -fx-text-fill: #f1f5f9;
+}
+
+.menu:hover {
     -fx-background-color: #334155;
 }
 
-
-/* ────────────────────────────────────────────────────────────────────────── */
-/* 6.4 MENÚS CONTEXTUALES */
-/* ────────────────────────────────────────────────────────────────────────── */
-
 .context-menu {
-    -fx-background-color: #1e293b;
-    -fx-border-color: #3b82f6;
+    -fx-background-color: #2a2a2a;
+    -fx-border-color: #d4af37;
     -fx-border-width: 1px;
     -fx-border-radius: 8px;
 }
 
 .menu-item {
-    -fx-background-color: #1e293b;
-    -fx-text-fill: #f1f5f9;
+    -fx-background-color: #2a2a2a;
+    -fx-text-fill: #ffffff;
     -fx-padding: 10px 20px;
     -fx-transition: background-color 0.2s ease;
 }
 
 .menu-item:hover,
 .menu-item:focused {
-    -fx-background-color: #334155;
-    -fx-text-fill: #3b82f6;
+    -fx-background-color: #d4af37;
+    -fx-text-fill: #0d0d0d;
 }
-
-
-
-
 
 /* ════════════════════════════════════════════════════════════════════════════
    7. SCROLLBARS GLOBALES
    ════════════════════════════════════════════════════════════════════════════ */
 
-/* Barra de desplazamiento base */
 .scroll-bar {
-    -fx-background-color: transparent;
+    -fx-background-color: #1a1a1a;
     -fx-pref-width: 12px;
 }
 
-/* Thumb (parte arrastrable) */
 .scroll-bar .thumb {
-    -fx-background-color: #475569;
-    -fx-background-radius: 6px;
+    -fx-background-color: #3a3a3a;
+    -fx-background-radius: 5px;
     -fx-transition: all 0.2s ease;
 }
 
 .scroll-bar .thumb:hover {
-    -fx-background-color: #3b82f6;
+    -fx-background-color: #4a4a4a;
 }
 
 .scroll-bar .thumb:pressed {
-    -fx-background-color: #2563eb;
+    -fx-background-color: #d4af37;
 }
 
-/* Botones de incremento/decremento */
 .scroll-bar .increment-button,
 .scroll-bar .decrement-button {
-    -fx-background-color: transparent;
+    -fx-background-color: #2a2a2a;
 }
 
-.scroll-bar .increment-button:hover,
-.scroll-bar .decrement-button:hover {
-    -fx-background-color: #334155;
+.scroll-bar .increment-arrow,
+.scroll-bar .decrement-arrow {
+    -fx-background-color: #808080;
 }
-
-
-
-
 
 /* ════════════════════════════════════════════════════════════════════════════
    8. PANTALLA DE INICIO DE SESIÓN (frmInicio)
    ════════════════════════════════════════════════════════════════════════════ */
 
-/* ────────────────────────────────────────────────────────────────────────── */
-/* 8.1 CONTENEDORES Y PANELES */
-/* ────────────────────────────────────────────────────────────────────────── */
-
 #login-root {
-    -fx-background-color: linear-gradient(to bottom, #0f172a 0%, #1e293b 100%);
+    -fx-background-color: linear-gradient(to bottom right, #0d0d0d, #1a1a1a, #0d0d0d);
 }
 
 #panel-login {
-    -fx-background-color: #1e293b;
-    -fx-border-color: #334155;
+    -fx-background-color: #1a1a1a;
+    -fx-border-color: #2a2a2a;
     -fx-border-width: 0 1px 0 0;
 }
 
-
-/* ────────────────────────────────────────────────────────────────────────── */
-/* 8.2 TÍTULOS Y SUBTÍTULOS */
-/* ────────────────────────────────────────────────────────────────────────── */
-
 .titulo-login {
-    -fx-font-size: 30px;
-    -fx-font-weight: 600;
-    -fx-text-fill: #3b82f6;
-    -fx-effect: dropshadow(gaussian, rgba(59,130,246,0.3), 6, 0, 0, 2);
+    -fx-font-size: 32px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #d4af37;
+    -fx-effect: dropshadow(gaussian, rgba(212,175,55,0.5), 5, 0, 0, 0);
 }
 
 .subtitulo-login {
-    -fx-font-size: 15px;
+    -fx-font-size: 16px;
     -fx-font-weight: 400;
-    -fx-text-fill: #cbd5e1;
+    -fx-text-fill: #b0b0b0;
 }
 
-
-/* ────────────────────────────────────────────────────────────────────────── */
-/* 8.3 CAMPOS DE ENTRADA */
-/* ────────────────────────────────────────────────────────────────────────── */
-
-/* Estado base */
 .login-field {
-    -fx-background-color: #1e293b;
-    -fx-text-fill: #f1f5f9;
-    -fx-border-color: #334155;
+    -fx-background-color: #2a2a2a;
+    -fx-text-fill: #ffffff;
+    -fx-border-color: #3a3a3a;
     -fx-border-width: 1px;
-    -fx-border-radius: 10px;
-    -fx-background-radius: 10px;
-    -fx-padding: 11px 16px;
-    -fx-font-size: 13px;
-    -fx-prompt-text-fill: #94a3b8;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+    -fx-padding: 12px 15px;
+    -fx-font-size: 14px;
+    -fx-prompt-text-fill: #808080;
+    -fx-effect: innershadow(gaussian, rgba(0,0,0,0.5), 3, 0, 0, 1);
 }
 
-/* Estado de foco */
 .login-field:focused {
-    -fx-border-color: #3b82f6;
+    -fx-border-color: #d4af37;
     -fx-border-width: 2px;
-    -fx-effect: dropshadow(gaussian, rgba(59,130,246,0.3), 8, 0, 0, 2);
+    -fx-effect: dropshadow(gaussian, rgba(212,175,55,0.4), 8, 0, 0, 0);
 }
 
-
-/* ────────────────────────────────────────────────────────────────────────── */
-/* 8.4 ENLACES (HYPERLINKS) */
-/* ────────────────────────────────────────────────────────────────────────── */
-
-/* Link "¿Olvidaste tu contraseña?" */
 .link-olvido {
-    -fx-text-fill: #3b82f6;
-    -fx-font-size: 13px;
+    -fx-text-fill: #d4af37;
+    -fx-font-size: 12px;
     -fx-padding: 0;
-    -fx-transition: color 0.2s ease;
+    -fx-border-color: transparent;
 }
 
 .link-olvido:hover {
-    -fx-text-fill: #60a5fa;
+    -fx-text-fill: #e4bf47;
     -fx-underline: true;
 }
 
-/* Link "¿No tienes cuenta? Regístrate" */
 .link-registro {
-    -fx-text-fill: #06b6d4;
-    -fx-font-size: 13px;
+    -fx-text-fill: #d4af37;
+    -fx-font-size: 12px;
     -fx-padding: 0;
-    -fx-transition: color 0.2s ease;
+    -fx-border-color: transparent;
 }
 
 .link-registro:hover {
-    -fx-text-fill: #22d3ee;
+    -fx-text-fill: #e4bf47;
     -fx-underline: true;
 }
-
-
-
-
 
 /* ════════════════════════════════════════════════════════════════════════════
    9. PANTALLA DE REGISTRO (frmRegistro)
    ════════════════════════════════════════════════════════════════════════════ */
 
-/* ────────────────────────────────────────────────────────────────────────── */
-/* 9.1 CONTENEDOR PRINCIPAL */
-/* ────────────────────────────────────────────────────────────────────────── */
-
 #registro-root {
     -fx-background-color: linear-gradient(to bottom, #0f172a 0%, #1e293b 100%);
 }
 
-
-/* ────────────────────────────────────────────────────────────────────────── */
-/* 9.2 TÍTULOS Y SUBTÍTULOS */
-/* ────────────────────────────────────────────────────────────────────────── */
-
 .titulo-registro {
-    -fx-font-size: 30px;
-    -fx-font-weight: 600;
+    -fx-font-size: 32px;
+    -fx-font-weight: 700;
     -fx-text-fill: #3b82f6;
     -fx-effect: dropshadow(gaussian, rgba(59,130,246,0.3), 6, 0, 0, 2);
 }
@@ -931,93 +637,370 @@
     -fx-text-fill: #cbd5e1;
 }
 
-
-/* ────────────────────────────────────────────────────────────────────────── */
-/* 9.3 CAMPOS DE ENTRADA */
-/* ────────────────────────────────────────────────────────────────────────── */
-
-/* Estado base */
 .registro-field {
-    -fx-background-color: #1e293b;
-    -fx-text-fill: #f1f5f9;
-    -fx-border-color: #334155;
+    -fx-background-color: #2a2a2a;
+    -fx-text-fill: #ffffff;
+    -fx-border-color: #3a3a3a;
     -fx-border-width: 1px;
-    -fx-border-radius: 10px;
-    -fx-background-radius: 10px;
-    -fx-padding: 11px 16px;
-    -fx-font-size: 13px;
-    -fx-prompt-text-fill: #94a3b8;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+    -fx-padding: 12px 15px;
+    -fx-font-size: 14px;
+    -fx-prompt-text-fill: #808080;
+    -fx-effect: innershadow(gaussian, rgba(0,0,0,0.5), 3, 0, 0, 1);
 }
 
-/* Estado de foco */
 .registro-field:focused {
-    -fx-border-color: #06b6d4;
+    -fx-border-color: #d4af37;
     -fx-border-width: 2px;
-    -fx-effect: dropshadow(gaussian, rgba(6,182,212,0.3), 8, 0, 0, 2);
+    -fx-effect: dropshadow(gaussian, rgba(212,175,55,0.4), 8, 0, 0, 0);
 }
 
-/* ComboBox específico del registro */
 .registro-field.combo-box .list-cell {
-    -fx-background-color: #1e293b;
-    -fx-text-fill: #f1f5f9;
+    -fx-background-color: #2a2a2a;
+    -fx-text-fill: #ffffff;
 }
 
 .registro-field.combo-box-popup .list-view {
-    -fx-background-color: #1e293b;
-    -fx-border-color: #06b6d4;
+    -fx-background-color: #2a2a2a;
+    -fx-border-color: #d4af37;
 }
 
 .registro-field.combo-box-popup .list-view .list-cell:hover {
-    -fx-background-color: #334155;
-    -fx-text-fill: #3b82f6;
+    -fx-background-color: #3a3a3a;
+    -fx-text-fill: #ffffff;
 }
-
-
-/* ────────────────────────────────────────────────────────────────────────── */
-/* 9.4 BOTONES ESPECÍFICOS (Ver sección 5.4 para estilos completos) */
-/* ────────────────────────────────────────────────────────────────────────── */
-
-/* Los estilos de .btn-registro y .btn-cancelar están en la sección 5.4 */
-
-
-
-
 
 /* ════════════════════════════════════════════════════════════════════════════
    10. PANTALLA PRINCIPAL (frmPrincipal)
    ════════════════════════════════════════════════════════════════════════════ */
 
-/* ────────────────────────────────────────────────────────────────────────── */
-/* 10.1 MENSAJE DE BIENVENIDA */
-/* ────────────────────────────────────────────────────────────────────────── */
-
 #welcome-label {
-    -fx-font-size: 20px;
-    -fx-text-fill: #60a5fa;
+    -fx-font-size: 28px;
+    -fx-text-fill: #d4af37;
     -fx-padding: 50px;
-    -fx-font-weight: 500;
-    -fx-effect: dropshadow(gaussian, rgba(96,165,250,0.3), 4, 0, 0, 2);
+    -fx-font-weight: bold;
+    -fx-alignment: center;
 }
 
-
-/* ────────────────────────────────────────────────────────────────────────── */
-/* 10.2 BARRA DE ESTADO */
-/* ────────────────────────────────────────────────────────────────────────── */
-
 #status-bar {
-    -fx-padding: 10px 16px;
-    -fx-background-color: #1e293b;
-    -fx-border-color: #334155;
-    -fx-border-width: 1 0 0 0;
-    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 4, 0, 0, 1);
+    -fx-padding: 10px 20px;
+    -fx-background-color: linear-gradient(to top, #1a1a1a, #0d0d0d);
+    -fx-border-color: #2a2a2a;
+    -fx-border-width: 2 0 0 0;
 }
 
 #status-label {
-    -fx-text-fill: #cbd5e1;
-    -fx-font-size: 13px;
+    -fx-text-fill: #b0b0b0;
+    -fx-font-size: 12px;
     -fx-font-weight: 400;
 }
 
+/* ════════════════════════════════════════════════════════════════════════════
+   11. PANTALLA DE CLIENTES (frmCliente)
+   ════════════════════════════════════════════════════════════════════════════ */
+
+.clientes-header {
+    -fx-background-color: #1a1a1a;
+    -fx-border-color: #2a2a2a;
+    -fx-border-width: 0 0 1px 0;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 6, 0, 0, 2);
+}
+
+.clientes-titulo {
+    -fx-font-size: 32px;
+    -fx-font-weight: 600;
+    -fx-text-fill: #d4af37;
+    -fx-effect: dropshadow(gaussian, rgba(212,175,55,0.3), 6, 0, 0, 2);
+}
+
+.clientes-subtitulo {
+    -fx-font-size: 14px;
+    -fx-font-weight: 400;
+    -fx-text-fill: #b0b0b0;
+}
+
+.btn-agregar {
+    -fx-background-color: linear-gradient(to bottom, #d4af37, #b89b2f);
+    -fx-text-fill: #0d0d0d;
+    -fx-font-size: 14px;
+    -fx-font-weight: 600;
+    -fx-padding: 12px 24px;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(212,175,55,0.4), 8, 0, 0, 2);
+    -fx-transition: all 0.3s ease;
+}
+
+.btn-agregar:hover {
+    -fx-background-color: linear-gradient(to bottom, #e4bf47, #d4af37);
+    -fx-effect: dropshadow(gaussian, rgba(212,175,55,0.6), 12, 0, 0, 4);
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+}
+
+.btn-agregar:pressed {
+    -fx-background-color: #b89b2f;
+    -fx-effect: dropshadow(gaussian, rgba(184,155,47,0.4), 4, 0, 0, 1);
+    -fx-scale-x: 0.98;
+    -fx-scale-y: 0.98;
+}
+
+.clientes-centro-container {
+    -fx-background-color: #0d0d0d;
+}
+
+.clientes-buscador-wrapper {
+    -fx-padding: 0;
+}
+
+.clientes-buscador {
+    -fx-background-color: #1a1a1a;
+    -fx-text-fill: #ffffff;
+    -fx-border-color: #3a3a3a;
+    -fx-border-width: 1px;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+    -fx-padding: 14px 20px;
+    -fx-font-size: 14px;
+    -fx-prompt-text-fill: #808080;
+    -fx-pref-width: 100%;
+    -fx-max-width: Infinity;
+}
+
+.clientes-buscador:focused {
+    -fx-border-color: #d4af37;
+    -fx-border-width: 2px;
+    -fx-effect: dropshadow(gaussian, rgba(212,175,55,0.4), 8, 0, 0, 2);
+}
+
+.clientes-overlay {
+    -fx-background-color: rgba(13, 13, 13, 0.85);
+    -fx-alignment: center;
+}
+
+.clientes-form-overlay {
+    -fx-background-color: #1a1a1a;
+    -fx-border-color: #d4af37;
+    -fx-border-width: 2px;
+    -fx-border-radius: 16px;
+    -fx-background-radius: 16px;
+    -fx-padding: 40px;
+    -fx-spacing: 24px;
+    -fx-max-width: 650px;
+    -fx-min-width: 650px;
+    -fx-max-height: 700px;
+    -fx-pref-height: auto;
+    -fx-effect: dropshadow(gaussian, rgba(212,175,55,0.3), 20, 0, 0, 8);
+}
+
+.clientes-form-overlay .label {
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 14px;
+    -fx-font-weight: 500;
+}
+
+.clientes-form-overlay .text-field,
+.clientes-form-overlay .combo-box {
+    -fx-pref-width: 350px;
+    -fx-background-color: #2a2a2a;
+    -fx-text-fill: #ffffff;
+    -fx-border-color: #3a3a3a;
+    -fx-border-width: 1px;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+    -fx-padding: 12px 16px;
+    -fx-font-size: 14px;
+    -fx-prompt-text-fill: #808080;
+}
+
+.clientes-form-overlay .text-field:focused,
+.clientes-form-overlay .combo-box:focused {
+    -fx-border-color: #d4af37;
+    -fx-border-width: 2px;
+    -fx-effect: dropshadow(gaussian, rgba(212,175,55,0.4), 6, 0, 0, 2);
+}
+
+.clientes-form-overlay .combo-box .list-cell {
+    -fx-background-color: #2a2a2a;
+    -fx-text-fill: #ffffff;
+}
+
+.clientes-form-overlay .separator .line {
+    -fx-border-color: #3a3a3a;
+    -fx-background-color: #3a3a3a;
+}
+
+.clientes-form-overlay .button {
+    -fx-min-width: 200px;
+    -fx-pref-width: 200px;
+    -fx-padding: 14px 28px;
+    -fx-font-size: 15px;
+    -fx-font-weight: 600;
+}
+
+.clientes-form-overlay .titulo-formulario {
+    -fx-font-size: 28px;
+    -fx-font-weight: 700;
+    -fx-text-fill: #d4af37;
+    -fx-effect: dropshadow(gaussian, rgba(212,175,55,0.5), 8, 0, 0, 2);
+}
+
+/* ════════════════════════════════════════════════════════════════════════════
+   12. PANTALLA DE VENTAS (frmVenta)
+   ════════════════════════════════════════════════════════════════════════════ */
+
+.ventas-container {
+    -fx-background-color: #0d0d0d;
+    -fx-padding: 20px;
+}
+
+.ventas-titulo {
+    -fx-font-size: 28px;
+    -fx-font-weight: 600;
+    -fx-text-fill: #d4af37;
+    -fx-effect: dropshadow(gaussian, rgba(212,175,55,0.3), 6, 0, 0, 2);
+}
+
+/* ════════════════════════════════════════════════════════════════════════════
+   13. PANTALLA DE ADMINISTRACIÓN (frmAdmin)
+   ════════════════════════════════════════════════════════════════════════════ */
+
+.admin-container {
+    -fx-background-color: #0d0d0d;
+}
+
+.admin-titulo {
+    -fx-font-size: 28px;
+    -fx-font-weight: 600;
+    -fx-text-fill: #d4af37;
+    -fx-effect: dropshadow(gaussian, rgba(212,175,55,0.3), 6, 0, 0, 2);
+}
+
+/* ════════════════════════════════════════════════════════════════════════════
+   14. PANTALLA DE PRODUCTOS (frmProductos)
+   ════════════════════════════════════════════════════════════════════════════ */
+
+.productos-header {
+    -fx-background-color: #1a1a1a;
+    -fx-border-color: #2a2a2a;
+    -fx-border-width: 0 0 1px 0;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 6, 0, 0, 2);
+}
+
+.productos-titulo {
+    -fx-font-size: 32px;
+    -fx-font-weight: 600;
+    -fx-text-fill: #d4af37;
+    -fx-effect: dropshadow(gaussian, rgba(212,175,55,0.3), 6, 0, 0, 2);
+}
+
+.productos-subtitulo {
+    -fx-font-size: 14px;
+    -fx-font-weight: 400;
+    -fx-text-fill: #b0b0b0;
+}
+
+.productos-centro-container {
+    -fx-background-color: #0d0d0d;
+}
+
+.productos-buscador-wrapper {
+    -fx-padding: 0;
+}
+
+.productos-buscador {
+    -fx-background-color: #1a1a1a;
+    -fx-text-fill: #ffffff;
+    -fx-border-color: #3a3a3a;
+    -fx-border-width: 1px;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+    -fx-padding: 14px 20px;
+    -fx-font-size: 14px;
+    -fx-prompt-text-fill: #808080;
+    -fx-pref-width: 100%;
+    -fx-max-width: Infinity;
+}
+
+.productos-buscador:focused {
+    -fx-border-color: #d4af37;
+    -fx-border-width: 2px;
+    -fx-effect: dropshadow(gaussian, rgba(212,175,55,0.4), 8, 0, 0, 2);
+}
+
+.productos-overlay {
+    -fx-background-color: rgba(13, 13, 13, 0.85);
+    -fx-alignment: center;
+}
+
+.productos-form-overlay {
+    -fx-background-color: #1a1a1a;
+    -fx-border-color: #d4af37;
+    -fx-border-width: 2px;
+    -fx-border-radius: 16px;
+    -fx-background-radius: 16px;
+    -fx-padding: 40px;
+    -fx-spacing: 24px;
+    -fx-max-width: 650px;
+    -fx-min-width: 650px;
+    -fx-max-height: 700px;
+    -fx-pref-height: auto;
+    -fx-effect: dropshadow(gaussian, rgba(212,175,55,0.3), 20, 0, 0, 8);
+}
+
+.productos-form-overlay .label {
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 14px;
+    -fx-font-weight: 500;
+}
+
+.productos-form-overlay .text-field,
+.productos-form-overlay .combo-box {
+    -fx-pref-width: 350px;
+    -fx-background-color: #2a2a2a;
+    -fx-text-fill: #ffffff;
+    -fx-border-color: #3a3a3a;
+    -fx-border-width: 1px;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+    -fx-padding: 12px 16px;
+    -fx-font-size: 14px;
+    -fx-prompt-text-fill: #808080;
+}
+
+.productos-form-overlay .text-field:focused,
+.productos-form-overlay .combo-box:focused {
+    -fx-border-color: #d4af37;
+    -fx-border-width: 2px;
+    -fx-effect: dropshadow(gaussian, rgba(212,175,55,0.4), 6, 0, 0, 2);
+}
+
+.productos-form-overlay .combo-box .list-cell {
+    -fx-background-color: #2a2a2a;
+    -fx-text-fill: #ffffff;
+}
+
+.productos-form-overlay .separator .line {
+    -fx-border-color: #3a3a3a;
+    -fx-background-color: #3a3a3a;
+}
+
+.productos-form-overlay .button {
+    -fx-min-width: 200px;
+    -fx-pref-width: 200px;
+    -fx-padding: 14px 28px;
+    -fx-font-size: 15px;
+    -fx-font-weight: 600;
+}
+
+.productos-form-overlay .titulo-formulario {
+    -fx-font-size: 28px;
+    -fx-font-weight: 700;
+    -fx-text-fill: #d4af37;
+    -fx-effect: dropshadow(gaussian, rgba(212,175,55,0.5), 8, 0, 0, 2);
+}
 
 /* ════════════════════════════════════════════════════════════════════════════
    FIN DEL ARCHIVO CSS

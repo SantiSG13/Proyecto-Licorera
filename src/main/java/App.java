@@ -19,7 +19,7 @@ public class App extends Application {
         new ControladorInicio(vistaInicio, primaryStage);
 
         // 3) Crear la escena (Scene = contenedor de nodos que se monta sobre el Stage).
-        Scene scene = new Scene(vistaInicio.getRoot(), 700, 700); // Tamaño ajustado para pantalla de login.
+        Scene scene = new Scene(vistaInicio.getContenedorInicioRaiz(), 700, 700); // Tamaño ajustado para pantalla de login.
 
         // 4) Intentar cargar hoja de estilos CSS opcional desde resources (no es crítico si falla).
         try {

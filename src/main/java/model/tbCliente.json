@@ -6,5 +6,21 @@
     "telefono": "3126361815",
     "correo": "santigale27@gmail.com",
     "tipoCliente": "Normal"
+  },
+  {
+    "tipoDocumento": "CC",
+    "documento": "39213967",
+    "nombreCompleto": "Diana Rivera",
+    "telefono": "3233652161",
+    "correo": "diafresa@gmail.com",
+    "tipoCliente": "Normal"
+  },
+  {
+    "tipoDocumento": "CC",
+    "documento": "79569927",
+    "nombreCompleto": "Freddy Galeano",
+    "telefono": "3135082517",
+    "correo": "jgfgaleano@gmail.com",
+    "tipoCliente": "Normal"
   }
 ]

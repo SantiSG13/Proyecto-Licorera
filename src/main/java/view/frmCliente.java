@@ -1,6 +1,7 @@
 package view;
 
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -15,7 +16,7 @@ import javafx.stage.StageStyle;
 // Vista para la gestión de clientes.
 // Permite registrar nuevos clientes y ver la lista de clientes registrados.
 public class frmCliente extends Stage {
-    private final BorderPane root = new BorderPane();
+    private final BorderPane contenedorCliente = new BorderPane();
 
     // Campos del formulario
     private final ComboBox<String> cboTipoDocumento = new ComboBox<>();
@@ -28,9 +29,17 @@ public class frmCliente extends Stage {
     // Tabla para mostrar clientes
     private final TableView<String[]> tablaClientes = new TableView<>();
 
+    // Buscador (estilo similar a la caja de búsqueda de la imagen)
+    private final TextField txtBuscar = new TextField();
+
     // Botones
     private final Button btnGuardar = new Button("Guardar");
     private final Button btnSalir = new Button("Salir");
+    private final Button btnAgregarCliente = new Button("+ Agregar cliente");
+
+    // Panel flotante con formulario para nuevo cliente
+    private final StackPane panelEmergenteNuevoUsuario = new StackPane();
+    private final VBox panelFormulario = new VBox(12);
 
     public frmCliente(Stage ventanaPadre) {
         setTitle("Gestión de Clientes");
@@ -38,9 +47,33 @@ public class frmCliente extends Stage {
         initModality(Modality.APPLICATION_MODAL);
         initStyle(StageStyle.UNDECORATED);
 
-        root.setTop(buildFormulario());
-        root.setCenter(buildTabla());
-        root.setBottom(buildBotones());
+        // Construir la parte superior (título grande + subtítulo y botón agregar similar a la imagen)
+        HBox header = buildHeader();
+
+        // Buscador y tabla en un solo bloque central oscuro
+        VBox centro = new VBox(16);
+        centro.getStyleClass().add("clientes-centro-container");
+        centro.setPadding(new Insets(20, 32, 24, 32));
+
+        // Buscador
+        txtBuscar.setPromptText("Buscar clientes por nombre, correo electrónico o teléfono.");
+        txtBuscar.getStyleClass().add("clientes-buscador");
+
+        VBox buscadorWrapper = new VBox(txtBuscar);
+        buscadorWrapper.getStyleClass().add("clientes-buscador-wrapper");
+
+        // Tabla
+        VBox tabla = buildTabla();
+
+        centro.getChildren().addAll(buscadorWrapper, tabla);
+
+        contenedorCliente.setTop(header);
+        contenedorCliente.setCenter(centro);
+        contenedorCliente.setBottom(buildBotones());
+
+        // Configurar panelEmergenteNuevoUsuario para formulario flotante
+        configurarPanelNuevoCliente();
+        StackPane contenedorPrincipal = new StackPane(contenedorCliente, panelEmergenteNuevoUsuario);
 
         // Obtener dimensiones de la pantalla (igual que frmAdmin)
         Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
@@ -51,7 +84,7 @@ public class frmCliente extends Stage {
         double navBarHeight = 50;
         double windowHeight = screenHeight - navBarHeight;
 
-        Scene scene = new Scene(root, screenWidth, windowHeight);
+        Scene scene = new Scene(contenedorPrincipal, screenWidth, windowHeight);
         try {
             String css = getClass().getResource("/styles.css").toExternalForm();
             scene.getStylesheets().add(css);
@@ -67,49 +100,87 @@ public class frmCliente extends Stage {
         setY(screenBounds.getMinY() + navBarHeight);
     }
 
-    private VBox buildFormulario() {
-        GridPane grid = new GridPane();
-        grid.setHgap(10);
-        grid.setVgap(10);
-        grid.setPadding(new Insets(10));
+    // Encabezado similar a la imagen: "Clientes" + subtítulo + botón agregar
+    private HBox buildHeader() {
+        Label titulo = new Label("Clientes");
+        titulo.getStyleClass().add("clientes-titulo");
 
-        // Configurar combos y campos
-        cboTipoDocumento.getItems().addAll("CC", "NIT", "CE");
+        Label subtitulo = new Label("Gestiona tu base de datos de clientes");
+        subtitulo.getStyleClass().add("clientes-subtitulo");
+
+        VBox textos = new VBox(4, titulo, subtitulo);
+
+        btnAgregarCliente.getStyleClass().add("btn-agregar");
+        btnAgregarCliente.setOnAction(e -> mostrarPanelFormulario());
+
+        Region spacer = new Region();
+        HBox.setHgrow(spacer, Priority.ALWAYS);
+
+        HBox header = new HBox(16, textos, spacer, btnAgregarCliente);
+        header.getStyleClass().add("clientes-header");
+        header.setPadding(new Insets(24, 32, 16, 32));
+        header.setAlignment(Pos.CENTER_LEFT);
+        return header;
+    }
+
+    private void configurarPanelNuevoCliente() {
+        panelFormulario.getChildren().clear();
+        panelFormulario.getStyleClass().add("clientes-form-overlay");
+        panelFormulario.setPadding(new Insets(20));
+
+        Label tituloNuevoCliente = new Label("Nuevo cliente");
+        tituloNuevoCliente.getStyleClass().add("titulo-formulario");
+
+        GridPane gridNuevoCliente = new GridPane();
+        gridNuevoCliente.setHgap(10);
+        gridNuevoCliente.setVgap(10);
+
+        // reutilizamos los campos ya declarados
+        cboTipoDocumento.getItems().setAll("CC", "NIT", "CE");
         cboTipoDocumento.setPromptText("Tipo de documento");
-
-        txtDocumento.setPromptText("Número de documento");
-        txtNombreCompleto.setPromptText("Nombre completo");
-        txtTelefono.setPromptText("Teléfono");
-        txtCorreo.setPromptText("correo@ejemplo.com");
-
-        cboTipoCliente.getItems().addAll("Normal", "Empresa");
+        cboTipoCliente.getItems().setAll("Normal", "Empresa");
         cboTipoCliente.setPromptText("Tipo de cliente");
 
-        // Agregar al grid (formulario arriba)
-        grid.add(new Label("Tipo Doc:"), 0, 0);
-        grid.add(cboTipoDocumento, 1, 0);
+        // Agregar al gridNuevoCliente (formulario arriba)
+        gridNuevoCliente.add(new Label("Tipo Doc:"), 0, 0);
+        gridNuevoCliente.add(cboTipoDocumento, 1, 0);
+        gridNuevoCliente.add(new Label("Documento:"), 0, 1);
+        gridNuevoCliente.add(txtDocumento, 1, 1);
+        gridNuevoCliente.add(new Label("Nombre completo:"), 0, 2);
+        gridNuevoCliente.add(txtNombreCompleto, 1, 2);
+        gridNuevoCliente.add(new Label("Teléfono:"), 0, 3);
+        gridNuevoCliente.add(txtTelefono, 1, 3);
+        gridNuevoCliente.add(new Label("Correo:"), 0, 4);
+        gridNuevoCliente.add(txtCorreo, 1, 4);
+        gridNuevoCliente.add(new Label("Tipo cliente:"), 0, 5);
+        gridNuevoCliente.add(cboTipoCliente, 1, 5);
 
-        grid.add(new Label("Documento:"), 2, 0);
-        grid.add(txtDocumento, 3, 0);
+        VBox botonesNuevoCliente = new VBox(12);
+        botonesNuevoCliente.setAlignment(Pos.CENTER);
+        Button btnSalir = new Button("Salir");
+        btnSalir.getStyleClass().add("btn-salir");
+        btnSalir.setOnAction(e -> ocultarPanelFormulario());
+        botonesNuevoCliente.getChildren().addAll(btnGuardar, btnSalir);
 
-        grid.add(new Label("Nombre completo:"), 0, 1);
-        grid.add(txtNombreCompleto, 1, 1, 3, 1);
+        panelFormulario.getChildren().addAll(tituloNuevoCliente, new Separator(), gridNuevoCliente, botonesNuevoCliente);
+        panelEmergenteNuevoUsuario.getChildren().setAll(panelFormulario);
+        panelEmergenteNuevoUsuario.getStyleClass().add("clientes-overlay");
+        panelEmergenteNuevoUsuario.setVisible(false);
+    }
 
-        grid.add(new Label("Teléfono:"), 0, 2);
-        grid.add(txtTelefono, 1, 2);
+    private void mostrarPanelFormulario() {
+        // Limpiar campos para un nuevo cliente
+        cboTipoDocumento.getSelectionModel().clearSelection();
+        txtDocumento.clear();
+        txtNombreCompleto.clear();
+        txtTelefono.clear();
+        txtCorreo.clear();
+        cboTipoCliente.getSelectionModel().clearSelection();
+        panelEmergenteNuevoUsuario.setVisible(true);
+    }
 
-        grid.add(new Label("Correo:"), 2, 2);
-        grid.add(txtCorreo, 3, 2);
-
-        grid.add(new Label("Tipo cliente:"), 0, 3);
-        grid.add(cboTipoCliente, 1, 3);
-
-        VBox box = new VBox(10);
-        box.getStyleClass().add("formulario-container");
-        Label titulo = new Label("Gestión de Clientes");
-        titulo.getStyleClass().add("titulo-formulario");
-        box.getChildren().addAll(titulo, new Separator(), grid);
-        return box;
+    private void ocultarPanelFormulario() {
+        panelEmergenteNuevoUsuario.setVisible(false);
     }
 
     private VBox buildTabla() {
@@ -148,29 +219,12 @@ public class frmCliente extends Stage {
         box.getStyleClass().add("botones-container");
 
         // Aplicar clases de estilo a los botones
-        btnGuardar.getStyleClass().add("btn-guardar");
         btnSalir.getStyleClass().add("btn-salir");
-
-        // Agregar iconos a los botones (misma ruta que en frmAdmin)
-        try {
-            String basePath = "file:src/main/java/model/Img/";
-
-            ImageView imgGuardar = new ImageView(new Image(basePath + "guardar.png"));
-            imgGuardar.setFitWidth(16);
-            imgGuardar.setFitHeight(16);
-            btnGuardar.setGraphic(imgGuardar);
-
-            ImageView imgSalir = new ImageView(new Image(basePath + "salir.png"));
-            imgSalir.setFitWidth(16);
-            imgSalir.setFitHeight(16);
-            btnSalir.setGraphic(imgSalir);
-        } catch (Exception e) {
-            System.out.println("No se pudieron cargar los iconos en frmCliente: " + e.getMessage());
-        }
+        btnGuardar.getStyleClass().add("btn-guardar");
 
         btnSalir.setOnAction(e -> close());
 
-        box.getChildren().addAll(btnGuardar, btnSalir);
+        box.getChildren().addAll(btnSalir);
         return box;
     }
 
@@ -184,4 +238,5 @@ public class frmCliente extends Stage {
     public TableView<String[]> getTablaClientes() { return tablaClientes; }
     public Button getBtnGuardar() { return btnGuardar; }
     public Button getBtnSalir() { return btnSalir; }
+    public TextField getTxtBuscar() { return txtBuscar; }
 }

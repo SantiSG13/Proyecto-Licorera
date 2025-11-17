@@ -6,13 +6,5 @@
     "nombre": "Administrador del Sistema",
     "rol": "Administrador",
     "email": "admin@licorera.com"
-  },
-  {
-    "id": "9c4094e0-5c73-49fe-870a-7b3137466ab3",
-    "usuario": "D1",
-    "contrasena": "aaaaaa",
-    "nombre": "Tiendas D1",
-    "rol": "Tienda",
-    "email": "tiendasd1@gmail.com"
   }
 ]

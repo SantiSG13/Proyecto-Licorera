@@ -16,7 +16,6 @@ import files.ManejoJson;
 // Importaciones de Java estándar
 import java.lang.reflect.Type;
 import java.util.List;
-import java.util.UUID;
 
 // Clase controladora que maneja la lógica de autenticación.
 // Responsabilidad: validar credenciales, registrar usuarios y gestionar transición a la pantalla principal.
@@ -123,7 +122,7 @@ public class ControladorInicio {
             new ControladorPrincipal(vistaPrincipal, stagePrincipal);
 
             // 5) Crear nueva escena con la vista principal (tamaño de pantalla completa)
-            Scene scene = new Scene(vistaPrincipal.getRoot());
+            Scene scene = new Scene(vistaPrincipal.getPanelPrincipal());
 
             // 6) Cargar estilos CSS
             try {

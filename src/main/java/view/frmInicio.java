@@ -7,11 +7,9 @@ import javafx.scene.control.*;
 import javafx.scene.layout.*;
 
 // Clase vista que construye la interfaz de inicio de sesión.
-// Responsabilidad: solo definir la estructura visual y exponer los componentes.
-// No contiene lógica de negocio (eso va en el controlador).
 public class frmInicio {
     // Contenedor raíz de la vista (BorderPane permite organizar contenido en 5 zonas)
-    private BorderPane root;
+    private BorderPane contenedorInicio;
 
     // Componentes para LOGIN
     private TextField txtUsuarioLogin;       // Campo para ingresar nombre de usuario
@@ -28,8 +26,8 @@ public class frmInicio {
     // Metodo que construye toda la estructura visual de la pantalla
     private void inicializarComponentes() {
         // BorderPane como contenedor principal (permite layout flexible)
-        root = new BorderPane();
-        root.setId("login-root"); // ID para aplicar estilos CSS
+        contenedorInicio = new BorderPane();
+        contenedorInicio.setId("login-contenedorInicio"); // ID para aplicar estilos CSS
 
         // Panel de login centrado
         VBox panelLogin = crearPanelLogin();
@@ -38,7 +36,7 @@ public class frmInicio {
         panelLogin.setPrefSize(500, 600); // Tamaño del panel de login
 
         // Colocar el panel de login en el centro del BorderPane
-        root.setCenter(panelLogin);
+        contenedorInicio.setCenter(panelLogin);
     }
 
     // Metodo que construye el panel de INICIO DE SESIÓN
@@ -97,8 +95,8 @@ public class frmInicio {
 
     // ========== GETTERS: Permiten que el controlador acceda a los componentes ==========
 
-    public BorderPane getRoot() {
-        return root;
+    public BorderPane getContenedorInicioRaiz() {
+        return contenedorInicio;
     }
 
     // Getters del panel LOGIN

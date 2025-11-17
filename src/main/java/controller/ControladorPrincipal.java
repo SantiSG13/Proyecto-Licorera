@@ -3,8 +3,8 @@ package controller;
 import javafx.application.Platform; // Proporciona métodos para interactuar con el hilo de la UI (ej: salir de la app)
 import javafx.stage.Stage; // Representa una ventana
 import view.frmPrincipal; // Vista principal que este controlador gestiona
-import view.frmAdmin; // Vista de gestión de usuarios
 import view.frmCliente; // Vista de gestión de clientes
+import view.frmProductos; // Vista de gestión de productos
 
 
 // Controlador de la vista principal.
@@ -25,42 +25,19 @@ public class ControladorPrincipal {
         // Acción: Nuevo Cliente - abre la ventana de gestión de clientes
         vista.getBtnNuevoCliente().setOnAction(e -> abrirVentanaClientes());
 
-        // Acción: Nueva Venta (pendiente de implementar)
-        vista.getBtnNuevaVenta().setOnAction(e -> {
-            vista.setStatus("Nueva Venta - Funcionalidad pendiente de implementar");
-        });
-
-        // Acción: abrir ventana emergente de gestión de usuarios (Administrar Usuarios)
-        vista.getBtnAdministrarUsuarios().setOnAction(e -> abrirVentanaUsuarios());
+        // Acción: Productos - abre la ventana de gestión de productos
+        vista.getBtnProductos().setOnAction(e -> abrirVentanaProductos());
 
         // Acción: Salir de la aplicación
         vista.getBtnSalir().setOnAction(e -> Platform.exit());
     }
 
-    // Abre la ventana emergente (modal) de gestión de usuarios
-    private void abrirVentanaUsuarios() {
-        try {
-            // Crear la ventana de usuarios pasándole el Stage principal como padre
-            frmAdmin ventanaUsuarios = new frmAdmin(stagePrincipal);
-
-            // Crear el controlador y pasarle la ventana
-            new ControladorAdmin(ventanaUsuarios);
-
-            // Mostrar la ventana como modal (bloquea la ventana principal hasta que se cierre)
-            ventanaUsuarios.showAndWait();
-
-            // Actualizar estado cuando se cierra la ventana
-            vista.setStatus("Ventana de Usuarios cerrada.");
-        } catch (Exception e) {
-            // Manejo de errores en caso de que falle la carga
-            vista.setStatus("Error al abrir ventana de Usuarios: " + e.getMessage());
-            e.printStackTrace();
-        }
-    }
-
     // Abre la ventana emergente (modal) de gestión de clientes
     private void abrirVentanaClientes() {
         try {
+            // Deshabilitar el navbar mientras la ventana modal está abierta
+            vista.setNavBarEnabled(false);
+
             // Crear la ventana de clientes pasándole el Stage principal como padre
             frmCliente ventanaClientes = new frmCliente(stagePrincipal);
 
@@ -76,6 +53,36 @@ public class ControladorPrincipal {
             // Manejo de errores en caso de que falle la carga
             vista.setStatus("Error al abrir ventana de Clientes: " + e.getMessage());
             e.printStackTrace();
+        } finally {
+            // Habilitar el navbar nuevamente cuando se cierra la ventana
+            vista.setNavBarEnabled(true);
+        }
+    }
+
+    // Abre la ventana emergente (modal) de gestión de productos
+    private void abrirVentanaProductos() {
+        try {
+            // Deshabilitar el navbar mientras la ventana modal está abierta
+            vista.setNavBarEnabled(false);
+
+            // Crear la ventana de productos pasándole el Stage principal como padre
+            frmProductos ventanaProductos = new frmProductos(stagePrincipal);
+
+            // Crear el controlador y pasarle la ventana
+            new ControladorProducto(ventanaProductos);
+
+            // Mostrar la ventana como modal (bloquea la ventana principal hasta que se cierre)
+            ventanaProductos.showAndWait();
+
+            // Actualizar estado cuando se cierra la ventana
+            vista.setStatus("Ventana de Productos cerrada.");
+        } catch (Exception e) {
+            // Manejo de errores en caso de que falle la carga
+            vista.setStatus("Error al abrir ventana de Productos: " + e.getMessage());
+            e.printStackTrace();
+        } finally {
+            // Habilitar el navbar nuevamente cuando se cierra la ventana
+            vista.setNavBarEnabled(true);
         }
     }
 }
