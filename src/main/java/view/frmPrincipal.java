@@ -15,8 +15,9 @@ public class frmPrincipal {
     // Etiqueta para mostrar mensajes de estado en la parte inferior.
     private final Label statusLabel = new Label("Listo");
     // Botones de navegación principal
-    private final Button btnNuevoCliente = new Button("Nuevo Cliente");
-    private final Button btnProductos = new Button("Productos");
+    private final Button btnAdministarUsuarios = new Button("Usuarios");
+    private final Button btnNuevoCliente = new Button("Clientes");
+    private final Button btnInventario = new Button("Inventario");
     private final Button btnVentas = new Button("Ventas");
     private final Button btnSalir = new Button("Salir");
 
@@ -40,13 +41,14 @@ public class frmPrincipal {
         navBar.setId("nav-bar"); // ID para aplicar estilos CSS
 
         // Aplicar clases CSS a los botones
+        btnAdministarUsuarios.getStyleClass().add("nav-button");
         btnNuevoCliente.getStyleClass().add("nav-button");
-        btnProductos.getStyleClass().add("nav-button");
+        btnInventario.getStyleClass().add("nav-button");
         btnVentas.getStyleClass().add("nav-button-highlight");
         btnSalir.getStyleClass().add("nav-button-exit");
 
         // Agregar todos los botones a la barra de navegación
-        navBar.getChildren().addAll(btnNuevoCliente, btnProductos, btnVentas, btnSalir);
+        navBar.getChildren().addAll(btnAdministarUsuarios, btnNuevoCliente, btnInventario, btnVentas, btnSalir);
 
         return navBar;
     }
@@ -72,15 +74,17 @@ public class frmPrincipal {
     public void setStatus(String text) { statusLabel.setText(text); }
 
     // Getters de botones para que el controlador registre manejadores de eventos.
+    public Button getBtnAdministarUsuarios() { return btnAdministarUsuarios; }
     public Button getBtnNuevoCliente() { return btnNuevoCliente; }
-    public Button getBtnProductos() { return btnProductos; }
+    public Button getBtnInventario() { return btnInventario; }
     public Button getBtnVentas() { return btnVentas; }
     public Button getBtnSalir() { return btnSalir; }
 
     // Habilitar o deshabilitar todos los botones del navbar
     public void setNavBarEnabled(boolean enabled) {
+        btnAdministarUsuarios.setDisable(!enabled);
         btnNuevoCliente.setDisable(!enabled);
-        btnProductos.setDisable(!enabled);
+        btnInventario.setDisable(!enabled);
         btnVentas.setDisable(!enabled);
         btnSalir.setDisable(!enabled);
     }

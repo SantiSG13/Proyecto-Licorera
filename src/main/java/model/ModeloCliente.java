@@ -8,19 +8,16 @@ public class ModeloCliente {
     private String nombreCompleto;  // Nombre completo del cliente
     private String telefono;        // Teléfono de contacto
     private String correo;          // Correo electrónico
-    private String tipoCliente;     // Normal, Empresa
 
     public ModeloCliente() {
     }
 
-    public ModeloCliente(String tipoDocumento, String documento, String nombreCompleto,
-                         String telefono, String correo, String tipoCliente) {
+    public ModeloCliente(String tipoDocumento, String documento, String nombreCompleto, String telefono, String correo) {
         this.tipoDocumento = tipoDocumento;
         this.documento = documento;
         this.nombreCompleto = nombreCompleto;
         this.telefono = telefono;
         this.correo = correo;
-        this.tipoCliente = tipoCliente;
     }
 
     public String getTipoDocumento() {
@@ -61,13 +58,5 @@ public class ModeloCliente {
 
     public void setCorreo(String correo) {
         this.correo = correo;
-    }
-
-    public String getTipoCliente() {
-        return tipoCliente;
-    }
-
-    public void setTipoCliente(String tipoCliente) {
-        this.tipoCliente = tipoCliente;
     }
 }

@@ -4,23 +4,27 @@
     "documento": "1011512285",
     "nombreCompleto": "Santiago Galeano",
     "telefono": "3126361815",
-    "correo": "santigale27@gmail.com",
-    "tipoCliente": "Normal"
+    "correo": "santigale27@gmail.com"
   },
   {
     "tipoDocumento": "CC",
     "documento": "39213967",
     "nombreCompleto": "Diana Rivera",
     "telefono": "3233652161",
-    "correo": "diafresa@gmail.com",
-    "tipoCliente": "Normal"
+    "correo": "diafresa@gmail.com"
   },
   {
     "tipoDocumento": "CC",
     "documento": "79569927",
     "nombreCompleto": "Freddy Galeano",
     "telefono": "3135082517",
-    "correo": "jgfgaleano@gmail.com",
-    "tipoCliente": "Normal"
+    "correo": "jgfgaleano@gmail.com"
+  },
+  {
+    "tipoDocumento": "CC",
+    "documento": "432432121",
+    "nombreCompleto": "Lionel Andres Messi",
+    "telefono": "3005415284",
+    "correo": "messi@gmail.com"
   }
 ]

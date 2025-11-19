@@ -10,16 +10,29 @@
    • Textos: Blanco (#ffffff), Gris claro (#b0b0b0), Gris medio (#808080)
    • Acentos dorados: Dorado (#d4af37), Dorado claro (#e4bf47), Dorado oscuro (#b89b2f)
    • Alertas: Rojo (#ff4444), Verde (#44ff44)
+
+   ÍNDICE DE CONTENIDO:
+   ────────────────────
+   1. CONFIGURACIÓN GLOBAL ............. Estilos base, fuentes y colores globales
+   2. LAYOUTS Y CONTENEDORES ........... Contenedores de formularios, tablas y botones
+   3. COMPONENTES DE FORMULARIOS ....... TextField, PasswordField, ComboBox
+   4. TABLAS ........................... TableView, columnas, filas y scrollbars
+   5. BOTONES .......................... Botones de acción (guardar, modificar, eliminar, etc.)
+   6. NAVEGACIÓN Y MENÚS ............... Barra de navegación, menús y botones de navegación
+   7. SCROLLBARS GLOBALES .............. Estilos para barras de desplazamiento
+   8. PANTALLA DE INICIO DE SESIÓN ..... Estilos específicos para frmInicio
+   9. PANTALLA DE REGISTRO ............. Estilos específicos para frmRegistro
+   10. PANTALLA PRINCIPAL .............. Estilos específicos para frmPrincipal
+   11. PANTALLA DE CLIENTES ............ Estilos específicos para frmCliente
+   12. PANTALLA DE PRODUCTOS ........... Estilos específicos para frmProductos
 */
 
 /* ════════════════════════════════════════════════════════════════════════════
    1. CONFIGURACIÓN GLOBAL
    ════════════════════════════════════════════════════════════════════════════ */
 
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
-
 .root {
-    -fx-font-family: "Poppins", "Segoe UI", Arial, sans-serif;
+    -fx-font-family: "Segoe UI", Arial, sans-serif;
     -fx-font-size: 14px;
     -fx-background-color: #0d0d0d;
     -fx-text-fill: #f1f5f9;
@@ -84,11 +97,6 @@
     -fx-effect: dropshadow(gaussian, rgba(212,175,55,0.3), 6, 0, 0, 2);
 }
 
-.titulo-tabla {
-    -fx-font-weight: 500;
-    -fx-text-fill: #ffffff;
-    -fx-font-size: 15px;
-}
 
 /* ════════════════════════════════════════════════════════════════════════════
    3. COMPONENTES DE FORMULARIOS
@@ -108,6 +116,7 @@
     -fx-transition: all 0.3s ease;
     -fx-effect: innershadow(gaussian, rgba(0,0,0,0.5), 3, 0, 0, 1);
 }
+
 
 .text-field:focused,
 .password-field:focused {
@@ -500,19 +509,6 @@
     -fx-border-radius: 8px;
 }
 
-.menu-item {
-    -fx-background-color: #2a2a2a;
-    -fx-text-fill: #ffffff;
-    -fx-padding: 10px 20px;
-    -fx-transition: background-color 0.2s ease;
-}
-
-.menu-item:hover,
-.menu-item:focused {
-    -fx-background-color: #d4af37;
-    -fx-text-fill: #0d0d0d;
-}
-
 /* ════════════════════════════════════════════════════════════════════════════
    7. SCROLLBARS GLOBALES
    ════════════════════════════════════════════════════════════════════════════ */
@@ -583,7 +579,7 @@
     -fx-padding: 12px 15px;
     -fx-font-size: 14px;
     -fx-prompt-text-fill: #808080;
-    -fx-effect: innershadow(gaussian, rgba(0,0,0,0.5), 3, 0, 0, 1);
+    -fx-effect: innershadow(gaussian, rgba(0,0,0,0.5), 3, 0, 0, 1); /* Sombra interior para profundidad */
 }
 
 .login-field:focused {
@@ -654,21 +650,6 @@
     -fx-border-color: #d4af37;
     -fx-border-width: 2px;
     -fx-effect: dropshadow(gaussian, rgba(212,175,55,0.4), 8, 0, 0, 0);
-}
-
-.registro-field.combo-box .list-cell {
-    -fx-background-color: #2a2a2a;
-    -fx-text-fill: #ffffff;
-}
-
-.registro-field.combo-box-popup .list-view {
-    -fx-background-color: #2a2a2a;
-    -fx-border-color: #d4af37;
-}
-
-.registro-field.combo-box-popup .list-view .list-cell:hover {
-    -fx-background-color: #3a3a3a;
-    -fx-text-fill: #ffffff;
 }
 
 /* ════════════════════════════════════════════════════════════════════════════
@@ -848,38 +829,7 @@
 }
 
 /* ════════════════════════════════════════════════════════════════════════════
-   12. PANTALLA DE VENTAS (frmVenta)
-   ════════════════════════════════════════════════════════════════════════════ */
-
-.ventas-container {
-    -fx-background-color: #0d0d0d;
-    -fx-padding: 20px;
-}
-
-.ventas-titulo {
-    -fx-font-size: 28px;
-    -fx-font-weight: 600;
-    -fx-text-fill: #d4af37;
-    -fx-effect: dropshadow(gaussian, rgba(212,175,55,0.3), 6, 0, 0, 2);
-}
-
-/* ════════════════════════════════════════════════════════════════════════════
-   13. PANTALLA DE ADMINISTRACIÓN (frmAdmin)
-   ════════════════════════════════════════════════════════════════════════════ */
-
-.admin-container {
-    -fx-background-color: #0d0d0d;
-}
-
-.admin-titulo {
-    -fx-font-size: 28px;
-    -fx-font-weight: 600;
-    -fx-text-fill: #d4af37;
-    -fx-effect: dropshadow(gaussian, rgba(212,175,55,0.3), 6, 0, 0, 2);
-}
-
-/* ════════════════════════════════════════════════════════════════════════════
-   14. PANTALLA DE PRODUCTOS (frmProductos)
+   12. PANTALLA DE PRODUCTOS (frmProductos)
    ════════════════════════════════════════════════════════════════════════════ */
 
 .productos-header {

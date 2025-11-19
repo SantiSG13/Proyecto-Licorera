@@ -6,6 +6,7 @@ import view.frmPrincipal; // Vista principal que este controlador gestiona
 import view.frmCliente; // Vista de gestión de clientes
 import view.frmProductos; // Vista de gestión de productos
 import view.frmVenta; // Vista de gestión de ventas
+import view.frmAdmin; // Vista de gestión de usuarios
 
 
 // Controlador de la vista principal.
@@ -23,17 +24,47 @@ public class ControladorPrincipal {
 
     // Registra las acciones/lógicas asociadas a cada botón.
     private void wireActions() {
+        // Acción: Administrar Usuarios - abre la ventana de gestión de usuarios
+        vista.getBtnAdministarUsuarios().setOnAction(e -> abrirVentanaUsuarios());
+
         // Acción: Nuevo Cliente - abre la ventana de gestión de clientes
         vista.getBtnNuevoCliente().setOnAction(e -> abrirVentanaClientes());
 
         // Acción: Productos - abre la ventana de gestión de productos
-        vista.getBtnProductos().setOnAction(e -> abrirVentanaProductos());
+        vista.getBtnInventario().setOnAction(e -> abrirVentanaProductos());
 
         // Acción: Ventas - abre la ventana de gestión de ventas
         vista.getBtnVentas().setOnAction(e -> abrirVentanaVentas());
 
         // Acción: Salir de la aplicación
         vista.getBtnSalir().setOnAction(e -> Platform.exit());
+    }
+
+    // Abre la ventana emergente (modal) de gestión de usuarios
+    private void abrirVentanaUsuarios() {
+        try {
+            // Deshabilitar el navbar mientras la ventana modal está abierta
+            vista.setNavBarEnabled(false);
+
+            // Crear la ventana de usuarios pasándole el Stage principal como padre
+            frmAdmin ventanaUsuarios = new frmAdmin(stagePrincipal);
+
+            // Crear el controlador y pasarle la ventana
+            new ControladorAdmin(ventanaUsuarios);
+
+            // Mostrar la ventana como modal (bloquea la ventana principal hasta que se cierre)
+            ventanaUsuarios.showAndWait();
+
+            // Actualizar estado cuando se cierra la ventana
+            vista.setStatus("Ventana de Usuarios cerrada.");
+        } catch (Exception e) {
+            // Manejo de errores en caso de que falle la carga
+            vista.setStatus("Error al abrir ventana de Usuarios: " + e.getMessage());
+            e.printStackTrace();
+        } finally {
+            // Habilitar el navbar nuevamente cuando se cierra la ventana
+            vista.setNavBarEnabled(true);
+        }
     }
 
     // Abre la ventana emergente (modal) de gestión de clientes

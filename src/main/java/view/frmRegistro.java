@@ -65,7 +65,7 @@ public class frmRegistro extends Stage {
 
         // Título del panel
         Label lblTitulo = new Label("REGISTRARSE");
-        lblTitulo.getStyleClass().add("titulo-registro");
+        lblTitulo.getStyleClass().add("titulo-login");
 
         // Subtítulo
         Label lblSubtitulo = new Label("Crea una nueva cuenta");

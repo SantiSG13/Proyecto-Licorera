@@ -5,8 +5,6 @@ import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.stage.Modality;
 import javafx.stage.Screen;
@@ -24,7 +22,6 @@ public class frmCliente extends Stage {
     private final TextField txtNombreCompleto = new TextField();
     private final TextField txtTelefono = new TextField();
     private final TextField txtCorreo = new TextField();
-    private final ComboBox<String> cboTipoCliente = new ComboBox<>();
 
     // Tabla para mostrar clientes
     private final TableView<String[]> tablaClientes = new TableView<>();
@@ -138,8 +135,6 @@ public class frmCliente extends Stage {
         // reutilizamos los campos ya declarados
         cboTipoDocumento.getItems().setAll("CC", "NIT", "CE");
         cboTipoDocumento.setPromptText("Tipo de documento");
-        cboTipoCliente.getItems().setAll("Normal", "Empresa");
-        cboTipoCliente.setPromptText("Tipo de cliente");
 
         // Agregar al gridNuevoCliente (formulario arriba)
         gridNuevoCliente.add(new Label("Tipo Doc:"), 0, 0);
@@ -152,10 +147,8 @@ public class frmCliente extends Stage {
         gridNuevoCliente.add(txtTelefono, 1, 3);
         gridNuevoCliente.add(new Label("Correo:"), 0, 4);
         gridNuevoCliente.add(txtCorreo, 1, 4);
-        gridNuevoCliente.add(new Label("Tipo cliente:"), 0, 5);
-        gridNuevoCliente.add(cboTipoCliente, 1, 5);
 
-        VBox botonesNuevoCliente = new VBox(12);
+        HBox botonesNuevoCliente = new HBox(12);
         botonesNuevoCliente.setAlignment(Pos.CENTER);
         Button btnSalir = new Button("Salir");
         btnSalir.getStyleClass().add("btn-salir");
@@ -175,7 +168,6 @@ public class frmCliente extends Stage {
         txtNombreCompleto.clear();
         txtTelefono.clear();
         txtCorreo.clear();
-        cboTipoCliente.getSelectionModel().clearSelection();
         panelEmergenteNuevoUsuario.setVisible(true);
     }
 
@@ -186,29 +178,29 @@ public class frmCliente extends Stage {
     private VBox buildTabla() {
         TableColumn<String[], String> colTipoDoc = new TableColumn<>("Tipo Doc");
         colTipoDoc.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue()[0]));
+        colTipoDoc.prefWidthProperty().bind(tablaClientes.widthProperty().multiply(0.12));
 
         TableColumn<String[], String> colDocumento = new TableColumn<>("Documento");
         colDocumento.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue()[1]));
+        colDocumento.prefWidthProperty().bind(tablaClientes.widthProperty().multiply(0.15));
 
         TableColumn<String[], String> colNombre = new TableColumn<>("Nombre completo");
         colNombre.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue()[2]));
+        colNombre.prefWidthProperty().bind(tablaClientes.widthProperty().multiply(0.30));
 
         TableColumn<String[], String> colTelefono = new TableColumn<>("Teléfono");
         colTelefono.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue()[3]));
+        colTelefono.prefWidthProperty().bind(tablaClientes.widthProperty().multiply(0.18));
 
         TableColumn<String[], String> colCorreo = new TableColumn<>("Correo");
         colCorreo.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue()[4]));
+        colCorreo.prefWidthProperty().bind(tablaClientes.widthProperty().multiply(0.25));
 
-        TableColumn<String[], String> colTipoCliente = new TableColumn<>("Tipo cliente");
-        colTipoCliente.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue()[5]));
-
-        tablaClientes.getColumns().addAll(colTipoDoc, colDocumento, colNombre, colTelefono, colCorreo, colTipoCliente);
-        tablaClientes.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_FLEX_LAST_COLUMN);
+        tablaClientes.getColumns().addAll(colTipoDoc, colDocumento, colNombre, colTelefono, colCorreo);
+        tablaClientes.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
         VBox box = new VBox(10);
-        box.getStyleClass().add("tabla-container");
         Label titulo = new Label("Lista de Clientes");
-        titulo.getStyleClass().add("titulo-tabla");
         box.getChildren().addAll(titulo, tablaClientes);
         VBox.setVgrow(tablaClientes, Priority.ALWAYS);
         return box;
@@ -234,9 +226,8 @@ public class frmCliente extends Stage {
     public TextField getTxtNombreCompleto() { return txtNombreCompleto; }
     public TextField getTxtTelefono() { return txtTelefono; }
     public TextField getTxtCorreo() { return txtCorreo; }
-    public ComboBox<String> getCboTipoCliente() { return cboTipoCliente; }
     public TableView<String[]> getTablaClientes() { return tablaClientes; }
     public Button getBtnGuardar() { return btnGuardar; }
-    public Button getBtnSalir() { return btnSalir; }
     public TextField getTxtBuscar() { return txtBuscar; }
 }
+

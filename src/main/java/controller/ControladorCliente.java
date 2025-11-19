@@ -40,7 +40,6 @@ public class ControladorCliente {
         String nombre = vista.getTxtNombreCompleto().getText().trim();
         String telefono = vista.getTxtTelefono().getText().trim();
         String correo = vista.getTxtCorreo().getText().trim();
-        String tipoCliente = vista.getCboTipoCliente().getValue();
 
         // Validaciones
         if (tipoDoc == null || tipoDoc.isEmpty()) {
@@ -73,11 +72,6 @@ public class ControladorCliente {
             return;
         }
 
-        if (tipoCliente == null || tipoCliente.isEmpty()) {
-            mostrarAlerta("Validación", "Debe seleccionar un tipo de cliente.");
-            return;
-        }
-
         // Leer lista actual del archivo
         Type tipoLista = ManejoJson.obtenerTipoLista(ModeloCliente.class);
         List<ModeloCliente> listaClientes = ManejoJson.leerJson(RUTA_ARCHIVO, tipoLista);
@@ -91,12 +85,12 @@ public class ControladorCliente {
         }
 
         // Crear y agregar nuevo cliente
-        ModeloCliente cliente = new ModeloCliente(tipoDoc, documento, nombre, telefono, correo, tipoCliente);
+        ModeloCliente cliente = new ModeloCliente(tipoDoc, documento, nombre, telefono, correo);
         listaClientes.add(cliente);
         ManejoJson.escribirJson(RUTA_ARCHIVO, listaClientes);
 
         // Actualizar tabla
-        datosTabla.add(new String[]{tipoDoc, documento, nombre, telefono, correo, tipoCliente});
+        datosTabla.add(new String[]{tipoDoc, documento, nombre, telefono, correo});
 
         limpiarFormulario();
         mostrarAlerta("Éxito", "Cliente guardado correctamente.");
@@ -113,8 +107,7 @@ public class ControladorCliente {
                     c.getDocumento(),
                     c.getNombreCompleto(),
                     c.getTelefono(),
-                    c.getCorreo(),
-                    c.getTipoCliente()
+                    c.getCorreo()
             });
         }
     }
@@ -125,7 +118,6 @@ public class ControladorCliente {
         vista.getTxtNombreCompleto().clear();
         vista.getTxtTelefono().clear();
         vista.getTxtCorreo().clear();
-        vista.getCboTipoCliente().setValue(null);
     }
 
     private void mostrarAlerta(String titulo, String mensaje) {
@@ -136,3 +128,4 @@ public class ControladorCliente {
         alert.showAndWait();
     }
 }
+
