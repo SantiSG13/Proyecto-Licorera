@@ -31,12 +31,19 @@ public class frmCliente extends Stage {
 
     // Botones
     private final Button btnGuardar = new Button("Guardar");
+    private final Button btnModificar = new Button("Modificar");
+    private final Button btnEliminar = new Button("Eliminar");
     private final Button btnSalir = new Button("Salir");
     private final Button btnAgregarCliente = new Button("+ Agregar cliente");
 
     // Panel flotante con formulario para nuevo cliente
     private final StackPane panelEmergenteNuevoUsuario = new StackPane();
     private final VBox panelFormulario = new VBox(12);
+
+    // Control de modo del formulario
+    private boolean modoEdicion = false; // false = agregar, true = modificar
+    private String documentoOriginal = null; // Documento del cliente que se está modificando
+    private Label tituloFormulario = new Label();
 
     public frmCliente(Stage ventanaPadre) {
         setTitle("Gestión de Clientes");
@@ -125,8 +132,8 @@ public class frmCliente extends Stage {
         panelFormulario.getStyleClass().add("clientes-form-overlay");
         panelFormulario.setPadding(new Insets(20));
 
-        Label tituloNuevoCliente = new Label("Nuevo cliente");
-        tituloNuevoCliente.getStyleClass().add("titulo-formulario");
+        tituloFormulario.setText("Nuevo cliente");
+        tituloFormulario.getStyleClass().add("titulo-formulario");
 
         GridPane gridNuevoCliente = new GridPane();
         gridNuevoCliente.setHgap(10);
@@ -155,16 +162,20 @@ public class frmCliente extends Stage {
         btnSalir.setOnAction(e -> ocultarPanelFormulario());
         botonesNuevoCliente.getChildren().addAll(btnGuardar, btnSalir);
 
-        panelFormulario.getChildren().addAll(tituloNuevoCliente, new Separator(), gridNuevoCliente, botonesNuevoCliente);
+        panelFormulario.getChildren().addAll(tituloFormulario, new Separator(), gridNuevoCliente, botonesNuevoCliente);
         panelEmergenteNuevoUsuario.getChildren().setAll(panelFormulario);
         panelEmergenteNuevoUsuario.getStyleClass().add("clientes-overlay");
         panelEmergenteNuevoUsuario.setVisible(false);
     }
 
     private void mostrarPanelFormulario() {
-        // Limpiar campos para un nuevo cliente
+        // Modo AGREGAR: Limpiar campos para un nuevo cliente
+        modoEdicion = false;
+        documentoOriginal = null;
+        tituloFormulario.setText("Nuevo cliente");
         cboTipoDocumento.getSelectionModel().clearSelection();
         txtDocumento.clear();
+        txtDocumento.setEditable(true); // Habilitar edición del documento
         txtNombreCompleto.clear();
         txtTelefono.clear();
         txtCorreo.clear();
@@ -173,34 +184,54 @@ public class frmCliente extends Stage {
 
     private void ocultarPanelFormulario() {
         panelEmergenteNuevoUsuario.setVisible(false);
+        modoEdicion = false;
+        documentoOriginal = null;
+    }
+
+    // Método público para abrir el formulario en modo EDICIÓN con datos pre-cargados
+    public void mostrarPanelParaEditar(String tipoDoc, String documento, String nombre, String telefono, String correo) {
+        modoEdicion = true;
+        documentoOriginal = documento;
+        tituloFormulario.setText("Modificar cliente");
+
+        // Cargar datos en los campos
+        cboTipoDocumento.setValue(tipoDoc);
+        txtDocumento.setText(documento);
+        txtDocumento.setEditable(false); // Deshabilitar edición del documento (es el ID único)
+        txtNombreCompleto.setText(nombre);
+        txtTelefono.setText(telefono);
+        txtCorreo.setText(correo);
+
+        panelEmergenteNuevoUsuario.setVisible(true);
     }
 
     private VBox buildTabla() {
         TableColumn<String[], String> colTipoDoc = new TableColumn<>("Tipo Doc");
         colTipoDoc.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue()[0]));
-        colTipoDoc.prefWidthProperty().bind(tablaClientes.widthProperty().multiply(0.12));
+        colTipoDoc.setPrefWidth(100);
 
         TableColumn<String[], String> colDocumento = new TableColumn<>("Documento");
         colDocumento.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue()[1]));
-        colDocumento.prefWidthProperty().bind(tablaClientes.widthProperty().multiply(0.15));
+        colDocumento.setPrefWidth(150);
 
         TableColumn<String[], String> colNombre = new TableColumn<>("Nombre completo");
         colNombre.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue()[2]));
-        colNombre.prefWidthProperty().bind(tablaClientes.widthProperty().multiply(0.30));
+        colNombre.setPrefWidth(300);
 
         TableColumn<String[], String> colTelefono = new TableColumn<>("Teléfono");
         colTelefono.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue()[3]));
-        colTelefono.prefWidthProperty().bind(tablaClientes.widthProperty().multiply(0.18));
+        colTelefono.setPrefWidth(150);
 
         TableColumn<String[], String> colCorreo = new TableColumn<>("Correo");
         colCorreo.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue()[4]));
-        colCorreo.prefWidthProperty().bind(tablaClientes.widthProperty().multiply(0.25));
+        colCorreo.setPrefWidth(250);
 
         tablaClientes.getColumns().addAll(colTipoDoc, colDocumento, colNombre, colTelefono, colCorreo);
-        tablaClientes.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        tablaClientes.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_ALL_COLUMNS);
 
         VBox box = new VBox(10);
-        Label titulo = new Label("Lista de Clientes");
+        Label titulo = new Label("Registro de Clientes");
+        titulo.getStyleClass().add("titulo-tabla");
         box.getChildren().addAll(titulo, tablaClientes);
         VBox.setVgrow(tablaClientes, Priority.ALWAYS);
         return box;
@@ -211,12 +242,15 @@ public class frmCliente extends Stage {
         box.getStyleClass().add("botones-container");
 
         // Aplicar clases de estilo a los botones
-        btnSalir.getStyleClass().add("btn-salir");
         btnGuardar.getStyleClass().add("btn-guardar");
+        btnModificar.getStyleClass().add("btn-modificar");
+        btnEliminar.getStyleClass().add("btn-eliminar");
+        btnSalir.getStyleClass().add("btn-salir");
 
         btnSalir.setOnAction(e -> close());
 
-        box.getChildren().addAll(btnSalir);
+        // Solo agregamos Modificar, Eliminar y Salir (Guardar está en el formulario flotante)
+        box.getChildren().addAll(btnModificar, btnEliminar, btnSalir);
         return box;
     }
 
@@ -228,6 +262,26 @@ public class frmCliente extends Stage {
     public TextField getTxtCorreo() { return txtCorreo; }
     public TableView<String[]> getTablaClientes() { return tablaClientes; }
     public Button getBtnGuardar() { return btnGuardar; }
+    public Button getBtnModificar() { return btnModificar; }
+    public Button getBtnEliminar() { return btnEliminar; }
     public TextField getTxtBuscar() { return txtBuscar; }
+
+    // Metodo para limpiar el formulario
+    public void limpiarFormulario() {
+        cboTipoDocumento.getSelectionModel().clearSelection();
+        txtDocumento.clear();
+        txtNombreCompleto.clear();
+        txtTelefono.clear();
+        txtCorreo.clear();
+    }
+
+    // Metodo para cerrar el panel flotante desde el controlador
+    public void cerrarPanelFormulario() {
+        ocultarPanelFormulario();
+    }
+
+    // Getters para control del modo del formulario
+    public boolean isModoEdicion() { return modoEdicion; }
+    public String getDocumentoOriginal() { return documentoOriginal; }
 }
 

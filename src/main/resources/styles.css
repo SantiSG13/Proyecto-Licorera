@@ -24,7 +24,8 @@
    9. PANTALLA DE REGISTRO ............. Estilos específicos para frmRegistro
    10. PANTALLA PRINCIPAL .............. Estilos específicos para frmPrincipal
    11. PANTALLA DE CLIENTES ............ Estilos específicos para frmCliente
-   12. PANTALLA DE PRODUCTOS ........... Estilos específicos para frmProductos
+   12. PANTALLA DE ADMINISTRACIÓN ...... Estilos específicos para frmAdmin
+   13. PANTALLA DE PRODUCTOS ........... Estilos específicos para frmProductos
 */
 
 /* ════════════════════════════════════════════════════════════════════════════
@@ -73,6 +74,13 @@
 .tabla-container {
     -fx-background-color: #0d0d0d;
     -fx-padding: 20px 24px;
+}
+
+.titulo-tabla {
+    -fx-font-size: 20px;
+    -fx-font-weight: 600;
+    -fx-text-fill: #d4af37;
+    -fx-effect: dropshadow(gaussian, rgba(212,175,55,0.2), 4, 0, 0, 1);
 }
 
 .botones-container {
@@ -286,26 +294,28 @@
 }
 
 .btn-salir {
-    -fx-background-color: linear-gradient(to bottom, #8b0000, #660000);
+    -fx-background-color: linear-gradient(to bottom, #3a3a3a, #2a2a2a);
     -fx-text-fill: #ffffff;
+    -fx-font-weight: 600;
+    -fx-font-size: 12px;
     -fx-padding: 10 24;
     -fx-background-radius: 12;
     -fx-border-radius: 12;
-    -fx-border-color: #aa0000;
     -fx-border-width: 1;
     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.5), 3, 0, 0, 2);
     -fx-cursor: hand;
+    -fx-background-insets: 0;
 }
 
 .btn-salir:hover {
-    -fx-background-color: linear-gradient(to bottom, #aa0000, #8b0000);
-    -fx-effect: dropshadow(gaussian, rgba(170,0,0,0.6), 8, 0, 0, 0);
-    -fx-scale-y: 1.05;
-    -fx-scale-x: 1.05;
+    -fx-background-color: linear-gradient(to bottom, #4a4a4a, #3a3a3a);
+    -fx-border-color: #ff4444;
+    -fx-effect: dropshadow(gaussian, rgba(255,68,68,0.5), 8, 0, 0, 0);
+    -fx-translate-y: -1;
 }
 
 .btn-salir:pressed {
-    -fx-background-color: #660000;
+    -fx-background-color: linear-gradient(to bottom, #2a2a2a, #1a1a1a);
     -fx-translate-y: 2;
 }
 
@@ -461,9 +471,8 @@
 }
 
 .nav-button-exit {
-    -fx-background-color: linear-gradient(to bottom, #8b0000, #660000);
+    -fx-background-color: linear-gradient(to bottom, #2a2a2a, #1a1a1a);
     -fx-text-fill: #ffffff;
-    -fx-border-color: #aa0000;
     -fx-border-width: 1;
     -fx-border-radius: 8;
     -fx-background-radius: 8;
@@ -475,13 +484,14 @@
 }
 
 .nav-button-exit:hover {
-    -fx-background-color: linear-gradient(to bottom, #aa0000, #8b0000);
+    -fx-background-color: linear-gradient(to bottom, #3a3a3a, #2a2a2a);
+    -fx-border-color: #ff4444;
     -fx-scale-x: 1.05;
     -fx-scale-y: 1.05;
 }
 
 .nav-button-exit:pressed {
-    -fx-background-color: #660000;
+    -fx-background-color: linear-gradient(to bottom, #1a1a1a, #0d0d0d);
 }
 
 .menu-bar {
@@ -829,7 +839,133 @@
 }
 
 /* ════════════════════════════════════════════════════════════════════════════
-   12. PANTALLA DE PRODUCTOS (frmProductos)
+   12. PANTALLA DE ADMINISTRACIÓN (frmAdmin)
+   ════════════════════════════════════════════════════════════════════════════ */
+
+.admin-header {
+    -fx-background-color: #1a1a1a;
+    -fx-border-color: #2a2a2a;
+    -fx-border-width: 0 0 1px 0;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 6, 0, 0, 2);
+}
+
+.admin-titulo {
+    -fx-font-size: 32px;
+    -fx-font-weight: 600;
+    -fx-text-fill: #d4af37;
+    -fx-effect: dropshadow(gaussian, rgba(212,175,55,0.3), 6, 0, 0, 2);
+}
+
+.admin-subtitulo {
+    -fx-font-size: 14px;
+    -fx-font-weight: 400;
+    -fx-text-fill: #b0b0b0;
+}
+
+.admin-centro-container {
+    -fx-background-color: #0d0d0d;
+}
+
+.admin-buscador-wrapper {
+    -fx-padding: 0;
+}
+
+.admin-buscador {
+    -fx-background-color: #1a1a1a;
+    -fx-text-fill: #ffffff;
+    -fx-border-color: #3a3a3a;
+    -fx-border-width: 1px;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+    -fx-padding: 14px 20px;
+    -fx-font-size: 14px;
+    -fx-prompt-text-fill: #808080;
+    -fx-pref-width: 100%;
+    -fx-max-width: Infinity;
+}
+
+.admin-buscador:focused {
+    -fx-border-color: #d4af37;
+    -fx-border-width: 2px;
+    -fx-effect: dropshadow(gaussian, rgba(212,175,55,0.4), 8, 0, 0, 2);
+}
+
+.admin-overlay {
+    -fx-background-color: rgba(13, 13, 13, 0.85);
+    -fx-alignment: center;
+}
+
+.admin-form-overlay {
+    -fx-background-color: #1a1a1a;
+    -fx-border-color: #d4af37;
+    -fx-border-width: 2px;
+    -fx-border-radius: 16px;
+    -fx-background-radius: 16px;
+    -fx-padding: 40px;
+    -fx-spacing: 24px;
+    -fx-max-width: 650px;
+    -fx-min-width: 650px;
+    -fx-max-height: 700px;
+    -fx-pref-height: auto;
+    -fx-effect: dropshadow(gaussian, rgba(212,175,55,0.3), 20, 0, 0, 8);
+}
+
+.admin-form-overlay .label {
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 14px;
+    -fx-font-weight: 500;
+}
+
+.admin-form-overlay .text-field,
+.admin-form-overlay .password-field,
+.admin-form-overlay .combo-box {
+    -fx-pref-width: 350px;
+    -fx-background-color: #2a2a2a;
+    -fx-text-fill: #ffffff;
+    -fx-border-color: #3a3a3a;
+    -fx-border-width: 1px;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+    -fx-padding: 12px 16px;
+    -fx-font-size: 14px;
+    -fx-prompt-text-fill: #808080;
+}
+
+.admin-form-overlay .text-field:focused,
+.admin-form-overlay .password-field:focused,
+.admin-form-overlay .combo-box:focused {
+    -fx-border-color: #d4af37;
+    -fx-border-width: 2px;
+    -fx-effect: dropshadow(gaussian, rgba(212,175,55,0.4), 6, 0, 0, 2);
+}
+
+.admin-form-overlay .combo-box .list-cell {
+    -fx-background-color: #2a2a2a;
+    -fx-text-fill: #ffffff;
+}
+
+.admin-form-overlay .separator .line {
+    -fx-border-color: #3a3a3a;
+    -fx-background-color: #3a3a3a;
+}
+
+.admin-form-overlay .button {
+    -fx-min-width: 200px;
+    -fx-pref-width: 200px;
+    -fx-padding: 14px 28px;
+    -fx-font-size: 15px;
+    -fx-font-weight: 600;
+}
+
+.admin-form-overlay .titulo-formulario {
+    -fx-font-size: 28px;
+    -fx-font-weight: 700;
+    -fx-text-fill: #d4af37;
+    -fx-effect: dropshadow(gaussian, rgba(212,175,55,0.5), 8, 0, 0, 2);
+}
+
+/* ════════════════════════════════════════════════════════════════════════════
+   13. PANTALLA DE PRODUCTOS (frmProductos)
    ════════════════════════════════════════════════════════════════════════════ */
 
 .productos-header {

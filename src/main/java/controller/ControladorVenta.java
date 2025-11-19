@@ -8,7 +8,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import model.ModeloCliente;
-import model.ModeloProducto;
+import model.ModeloInventario;
 import model.ModeloVenta;
 import model.ModeloVenta.ItemVenta;
 import view.frmVenta;
@@ -17,20 +17,19 @@ import files.ManejoJson;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
 public class ControladorVenta {
     private final frmVenta vista;
     private List<ModeloCliente> clientes;
-    private List<ModeloProducto> productos;
+    private List<ModeloInventario> productos;
     private ObservableList<ItemVenta> itemsCarrito;
     private SimpleDoubleProperty totalParcial;
     private SimpleDoubleProperty descuento;
     private SimpleDoubleProperty total;
 
     private static final String RUTA_CLIENTES = "src/main/java/model/tbCliente.json";
-    private static final String RUTA_PRODUCTOS = "src/main/java/model/tbProducto.json";
+    private static final String RUTA_PRODUCTOS = "src/main/java/model/tbInventario.json";
     private static final String RUTA_VENTAS = "src/main/java/model/tbVenta.json";
 
     public ControladorVenta(frmVenta vista) {
@@ -95,7 +94,7 @@ public class ControladorVenta {
 
     private void cargarProductos() {
         try {
-            Type tipoLista = new TypeToken<List<ModeloProducto>>(){}.getType();
+            Type tipoLista = new TypeToken<List<ModeloInventario>>(){}.getType();
             productos = ManejoJson.leerJson(RUTA_PRODUCTOS, tipoLista);
 
             if (productos == null) {
@@ -105,7 +104,7 @@ public class ControladorVenta {
             // Poblar el ComboBox con los nombres de los productos
             ObservableList<String> nombresProductos = FXCollections.observableArrayList(
                 productos.stream()
-                    .map(ModeloProducto::getNombre)
+                    .map(ModeloInventario::getNombre)
                     .collect(Collectors.toList())
             );
 
@@ -161,7 +160,7 @@ public class ControladorVenta {
         vista.getCmbProductos().valueProperty().addListener((obs, oldVal, newVal) -> {
             if (newVal != null && !newVal.isEmpty()) {
                 // Buscar el producto seleccionado
-                ModeloProducto productoSeleccionado = productos.stream()
+                ModeloInventario productoSeleccionado = productos.stream()
                     .filter(p -> p.getNombre().equals(newVal))
                     .findFirst()
                     .orElse(null);
@@ -186,7 +185,7 @@ public class ControladorVenta {
     }
 
 
-    private void agregarProductoAlCarrito(ModeloProducto producto) {
+    private void agregarProductoAlCarrito(ModeloInventario producto) {
         // Verificar stock disponible
         if (producto.getStock() <= 0) {
             mostrarAlerta(Alert.AlertType.WARNING, "Stock insuficiente",
@@ -302,8 +301,10 @@ public class ControladorVenta {
                 return;
             }
 
-            // Crear la venta
-            String idVenta = UUID.randomUUID().toString();
+            // Crear la venta con ID formato VTA-001, VTA-002, etc.
+            Type tipoListaVentas = ManejoJson.obtenerTipoLista(ModeloVenta.class);
+            List<ModeloVenta> ventasExistentes = ManejoJson.leerJson(RUTA_VENTAS, tipoListaVentas);
+            String idVenta = generarIdVenta(ventasExistentes.size());
             List<ItemVenta> items = new ArrayList<>(itemsCarrito);
 
             ModeloVenta nuevaVenta = new ModeloVenta(
@@ -316,7 +317,7 @@ public class ControladorVenta {
 
             // Actualizar stock de productos
             for (ItemVenta item : items) {
-                ModeloProducto producto = productos.stream()
+                ModeloInventario producto = productos.stream()
                     .filter(p -> p.getNombre().equals(item.getIdProducto()))
                     .findFirst()
                     .orElse(null);
@@ -363,6 +364,12 @@ public class ControladorVenta {
         vista.getTxtDescuento().setText("0");
         itemsCarrito.clear();
         actualizarTotales();
+    }
+
+    // Genera un ID de venta con formato VTA-001, VTA-002, etc.
+    private String generarIdVenta(int cantidadActual) {
+        int nuevoNumero = cantidadActual + 1;
+        return String.format("VTA-%03d", nuevoNumero);
     }
 
     private void mostrarAlerta(Alert.AlertType tipo, String titulo, String mensaje) {

@@ -3,6 +3,8 @@ package controller;
 import files.ManejoJson;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import model.ModeloCliente;
 import view.frmCliente;
 
@@ -31,10 +33,20 @@ public class ControladorCliente {
 
     private void wireActions() {
         vista.getBtnGuardar().setOnAction(e -> guardarCliente());
-        // El botón Salir ya cierra la ventana desde la vista
+        vista.getBtnModificar().setOnAction(e -> abrirFormularioParaModificar());
+        vista.getBtnEliminar().setOnAction(e -> eliminarCliente());
     }
 
     private void guardarCliente() {
+        // Detectar si estamos en modo edición o agregar
+        if (vista.isModoEdicion()) {
+            ejecutarModificacion();
+        } else {
+            ejecutarGuardado();
+        }
+    }
+
+    private void ejecutarGuardado() {
         String tipoDoc = vista.getCboTipoDocumento().getValue();
         String documento = vista.getTxtDocumento().getText().trim();
         String nombre = vista.getTxtNombreCompleto().getText().trim();
@@ -43,32 +55,32 @@ public class ControladorCliente {
 
         // Validaciones
         if (tipoDoc == null || tipoDoc.isEmpty()) {
-            mostrarAlerta("Validación", "Debe seleccionar un tipo de documento.");
+            mostrarAdvertencia("Validación", "Debe seleccionar un tipo de documento.");
             return;
         }
 
         if (documento.isEmpty()) {
-            mostrarAlerta("Validación", "El documento es obligatorio.");
+            mostrarAdvertencia("Validación", "El documento es obligatorio.");
             return;
         }
 
         if (!documento.matches("\\d+")) {
-            mostrarAlerta("Validación", "El documento solo debe contener números.");
+            mostrarAdvertencia("Validación", "El documento solo debe contener números.");
             return;
         }
 
         if (nombre.isEmpty()) {
-            mostrarAlerta("Validación", "El nombre completo es obligatorio.");
+            mostrarAdvertencia("Validación", "El nombre completo es obligatorio.");
             return;
         }
 
         if (!telefono.isEmpty() && !telefono.matches("\\d+")) {
-            mostrarAlerta("Validación", "El teléfono solo debe contener números.");
+            mostrarAdvertencia("Validación", "El teléfono solo debe contener números.");
             return;
         }
 
         if (!correo.isEmpty() && !correo.matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$")) {
-            mostrarAlerta("Validación", "El correo electrónico no tiene un formato válido.");
+            mostrarAdvertencia("Validación", "El correo electrónico no tiene un formato válido.");
             return;
         }
 
@@ -80,7 +92,7 @@ public class ControladorCliente {
         boolean existe = listaClientes.stream()
                 .anyMatch(c -> c.getDocumento().equals(documento));
         if (existe) {
-            mostrarAlerta("Validación", "Ya existe un cliente con ese número de documento.");
+            mostrarAdvertencia("Validación", "Ya existe un cliente con ese número de documento.");
             return;
         }
 
@@ -89,11 +101,145 @@ public class ControladorCliente {
         listaClientes.add(cliente);
         ManejoJson.escribirJson(RUTA_ARCHIVO, listaClientes);
 
-        // Actualizar tabla
-        datosTabla.add(new String[]{tipoDoc, documento, nombre, telefono, correo});
+        // Recargar tabla completa
+        cargarClientesDesdeArchivo();
+        vista.limpiarFormulario();
+        vista.cerrarPanelFormulario();
+        mostrarExito("Cliente guardado correctamente.");
+    }
 
-        limpiarFormulario();
-        mostrarAlerta("Éxito", "Cliente guardado correctamente.");
+    // Abre el formulario flotante en modo edición con los datos del cliente seleccionado
+    private void abrirFormularioParaModificar() {
+        String[] seleccionado = vista.getTablaClientes().getSelectionModel().getSelectedItem();
+
+        if (seleccionado == null) {
+            mostrarAdvertencia("Seleccione un cliente", "Debe seleccionar un cliente de la tabla para modificar.");
+            return;
+        }
+
+        // Abrir el formulario con los datos pre-cargados
+        vista.mostrarPanelParaEditar(
+            seleccionado[0], // Tipo Doc
+            seleccionado[1], // Documento
+            seleccionado[2], // Nombre
+            seleccionado[3], // Teléfono
+            seleccionado[4]  // Correo
+        );
+    }
+
+    // Ejecuta la modificación del cliente desde el formulario flotante
+    private void ejecutarModificacion() {
+        String tipoDoc = vista.getCboTipoDocumento().getValue();
+        String documento = vista.getTxtDocumento().getText().trim();
+        String nombre = vista.getTxtNombreCompleto().getText().trim();
+        String telefono = vista.getTxtTelefono().getText().trim();
+        String correo = vista.getTxtCorreo().getText().trim();
+
+        // Validaciones
+        if (tipoDoc == null || tipoDoc.isEmpty()) {
+            mostrarAdvertencia("Validación", "Debe seleccionar un tipo de documento.");
+            return;
+        }
+
+        if (documento.isEmpty()) {
+            mostrarAdvertencia("Validación", "El documento es obligatorio.");
+            return;
+        }
+
+        if (!documento.matches("\\d+")) {
+            mostrarAdvertencia("Validación", "El documento solo debe contener números.");
+            return;
+        }
+
+        if (nombre.isEmpty()) {
+            mostrarAdvertencia("Validación", "El nombre completo es obligatorio.");
+            return;
+        }
+
+        if (!telefono.isEmpty() && !telefono.matches("\\d+")) {
+            mostrarAdvertencia("Validación", "El teléfono solo debe contener números.");
+            return;
+        }
+
+        if (!correo.isEmpty() && !correo.matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$")) {
+            mostrarAdvertencia("Validación", "El correo electrónico no tiene un formato válido.");
+            return;
+        }
+
+        try {
+            Type tipoLista = ManejoJson.obtenerTipoLista(ModeloCliente.class);
+            List<ModeloCliente> listaClientes = ManejoJson.leerJson(RUTA_ARCHIVO, tipoLista);
+
+            String documentoOriginal = vista.getDocumentoOriginal();
+
+            // Si cambió el documento, verificar que no exista
+            if (!documento.equals(documentoOriginal)) {
+                boolean existe = listaClientes.stream()
+                        .anyMatch(c -> c.getDocumento().equals(documento));
+                if (existe) {
+                    mostrarAdvertencia("Validación", "Ya existe un cliente con ese número de documento.");
+                    return;
+                }
+            }
+
+            // Buscar y actualizar el cliente
+            for (ModeloCliente cliente : listaClientes) {
+                if (cliente.getDocumento().equals(documentoOriginal)) {
+                    cliente.setTipoDocumento(tipoDoc);
+                    cliente.setDocumento(documento);
+                    cliente.setNombreCompleto(nombre);
+                    cliente.setTelefono(telefono);
+                    cliente.setCorreo(correo);
+                    break;
+                }
+            }
+
+            ManejoJson.escribirJson(RUTA_ARCHIVO, listaClientes);
+            cargarClientesDesdeArchivo();
+            vista.limpiarFormulario();
+            vista.cerrarPanelFormulario(); // Cerrar el panel flotante
+            mostrarExito("Cliente modificado correctamente.");
+
+        } catch (Exception e) {
+            mostrarError("Error al modificar", "No se pudo modificar el cliente: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    private void eliminarCliente() {
+        String[] seleccionado = vista.getTablaClientes().getSelectionModel().getSelectedItem();
+
+        if (seleccionado == null) {
+            mostrarAdvertencia("Seleccione un cliente", "Debe seleccionar un cliente de la tabla para eliminar.");
+            return;
+        }
+
+        // Confirmar eliminación
+        Alert confirmacion = new Alert(Alert.AlertType.CONFIRMATION);
+        confirmacion.setTitle("Confirmar eliminación");
+        confirmacion.setHeaderText("¿Está seguro de eliminar este cliente?");
+        confirmacion.setContentText("Cliente: " + seleccionado[2] + "\nDocumento: " + seleccionado[1]);
+
+        confirmacion.showAndWait().ifPresent(response -> {
+            if (response == ButtonType.OK) {
+                try {
+                    Type tipoLista = ManejoJson.obtenerTipoLista(ModeloCliente.class);
+                    List<ModeloCliente> listaClientes = ManejoJson.leerJson(RUTA_ARCHIVO, tipoLista);
+
+                    String documentoBuscado = seleccionado[1];
+                    listaClientes.removeIf(cliente -> cliente.getDocumento().equals(documentoBuscado));
+
+                    ManejoJson.escribirJson(RUTA_ARCHIVO, listaClientes);
+                    cargarClientesDesdeArchivo();
+                    vista.limpiarFormulario();
+                    mostrarExito("Cliente eliminado correctamente.");
+
+                } catch (Exception e) {
+                    mostrarError("Error al eliminar", "No se pudo eliminar el cliente: " + e.getMessage());
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 
     private void cargarClientesDesdeArchivo() {
@@ -112,16 +258,24 @@ public class ControladorCliente {
         }
     }
 
-    private void limpiarFormulario() {
-        vista.getCboTipoDocumento().setValue(null);
-        vista.getTxtDocumento().clear();
-        vista.getTxtNombreCompleto().clear();
-        vista.getTxtTelefono().clear();
-        vista.getTxtCorreo().clear();
+    private void mostrarExito(String mensaje) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Éxito");
+        alert.setHeaderText(null);
+        alert.setContentText(mensaje);
+        alert.showAndWait();
     }
 
-    private void mostrarAlerta(String titulo, String mensaje) {
-        javafx.scene.control.Alert alert = new javafx.scene.control.Alert(javafx.scene.control.Alert.AlertType.INFORMATION);
+    private void mostrarError(String titulo, String mensaje) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(titulo);
+        alert.setHeaderText(null);
+        alert.setContentText(mensaje);
+        alert.showAndWait();
+    }
+
+    private void mostrarAdvertencia(String titulo, String mensaje) {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setTitle(titulo);
         alert.setHeaderText(null);
         alert.setContentText(mensaje);

@@ -4,9 +4,9 @@ import javafx.application.Platform; // Proporciona métodos para interactuar con
 import javafx.stage.Stage; // Representa una ventana
 import view.frmPrincipal; // Vista principal que este controlador gestiona
 import view.frmCliente; // Vista de gestión de clientes
-import view.frmProductos; // Vista de gestión de productos
+import view.frmInventario; // Vista de gestión de productos
 import view.frmVenta; // Vista de gestión de ventas
-import view.frmAdmin; // Vista de gestión de usuarios
+import view.frmUsuarios; // Vista de gestión de usuarios
 
 
 // Controlador de la vista principal.
@@ -47,10 +47,10 @@ public class ControladorPrincipal {
             vista.setNavBarEnabled(false);
 
             // Crear la ventana de usuarios pasándole el Stage principal como padre
-            frmAdmin ventanaUsuarios = new frmAdmin(stagePrincipal);
+            frmUsuarios ventanaUsuarios = new frmUsuarios(stagePrincipal);
 
             // Crear el controlador y pasarle la ventana
-            new ControladorAdmin(ventanaUsuarios);
+            new ControladorUsuarios(ventanaUsuarios);
 
             // Mostrar la ventana como modal (bloquea la ventana principal hasta que se cierre)
             ventanaUsuarios.showAndWait();
@@ -101,10 +101,10 @@ public class ControladorPrincipal {
             vista.setNavBarEnabled(false);
 
             // Crear la ventana de productos pasándole el Stage principal como padre
-            frmProductos ventanaProductos = new frmProductos(stagePrincipal);
+            frmInventario ventanaProductos = new frmInventario(stagePrincipal);
 
             // Crear el controlador y pasarle la ventana
-            new ControladorProducto(ventanaProductos);
+            new ControladorInventario(ventanaProductos);
 
             // Mostrar la ventana como modal (bloquea la ventana principal hasta que se cierre)
             ventanaProductos.showAndWait();

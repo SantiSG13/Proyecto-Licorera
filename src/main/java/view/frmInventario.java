@@ -13,7 +13,7 @@ import javafx.stage.StageStyle;
 
 // Vista para la gestión de productos.
 // Permite registrar nuevos productos y ver la lista de productos registrados.
-public class frmProductos extends Stage {
+public class frmInventario extends Stage {
     private final BorderPane contenedorProductos = new BorderPane();
 
     // Campos del formulario
@@ -37,7 +37,7 @@ public class frmProductos extends Stage {
     private final StackPane panelEmergenteNuevoProducto = new StackPane();
     private final VBox panelFormulario = new VBox(12);
 
-    public frmProductos(Stage ventanaPadre) {
+    public frmInventario(Stage ventanaPadre) {
         setTitle("Gestión de Productos");
         initOwner(ventanaPadre);
         initModality(Modality.APPLICATION_MODAL);

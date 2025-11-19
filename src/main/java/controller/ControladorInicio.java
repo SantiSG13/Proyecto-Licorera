@@ -11,6 +11,7 @@ import view.frmInicio;
 import view.frmPrincipal;
 import view.frmRegistro;
 import model.ModeloAdmin;
+import model.ModeloTienda;
 import files.ManejoJson;
 
 // Importaciones de Java estándar
@@ -20,10 +21,11 @@ import java.util.List;
 // Clase controladora que maneja la lógica de autenticación.
 // Responsabilidad: validar credenciales, registrar usuarios y gestionar transición a la pantalla principal.
 public class ControladorInicio {
-    // Referencias a la vista, stage y ruta del archivo de usuarios
+    // Referencias a la vista, stage y rutas de los archivos de usuarios
     private frmInicio vista;
     private Stage stage;
-    private static final String RUTA_JSON = "src/main/java/model/tbAdmin.json";
+    private static final String RUTA_JSON_ADMIN = "src/main/java/model/tbAdmin.json";
+    private static final String RUTA_JSON_TIENDA = "src/main/java/model/tbTienda.json";
 
     // Constructor: enlaza la vista con los manejadores de eventos
     public ControladorInicio(frmInicio vista, Stage stage) {
@@ -62,22 +64,43 @@ public class ControladorInicio {
             return; // Termina el metodo sin continuar
         }
 
-        // 3) Leer la lista de usuarios desde el archivo JSON
-        Type tipoLista = ManejoJson.obtenerTipoLista(ModeloAdmin.class);
-        List<ModeloAdmin> usuarios = ManejoJson.leerJson(RUTA_JSON, tipoLista);
+        // 3) Buscar el usuario en ambas tablas (tbAdmin y tbTienda)
+        String nombreUsuario = null;
+        boolean autenticado = false;
 
-        // 4) Buscar coincidencia de usuario y contraseña
-        // Stream API: forma funcional de iterar y buscar en colecciones
-        ModeloAdmin usuarioEncontrado = usuarios.stream()
-                .filter(u -> u.getUsuario().equals(usuario) && u.getContrasena().equals(password)) // Filtra por usuario y contraseña
-                .findFirst() // Obtiene el primer elemento que coincida
-                .orElse(null); // Si no encuentra, retorna null
+        // Buscar primero en tbAdmin.json
+        Type tipoListaAdmin = ManejoJson.obtenerTipoLista(ModeloAdmin.class);
+        List<ModeloAdmin> usuariosAdmin = ManejoJson.leerJson(RUTA_JSON_ADMIN, tipoListaAdmin);
 
-        // 5) Verificar si se encontró el usuario
-        if (usuarioEncontrado != null) {
+        ModeloAdmin adminEncontrado = usuariosAdmin.stream()
+                .filter(u -> u.getUsuario().equals(usuario) && u.getContrasena().equals(password))
+                .findFirst()
+                .orElse(null);
+
+        if (adminEncontrado != null) {
+            nombreUsuario = adminEncontrado.getNombre();
+            autenticado = true;
+        } else {
+            // Si no se encuentra en Admin, buscar en tbTienda.json
+            Type tipoListaTienda = ManejoJson.obtenerTipoLista(ModeloTienda.class);
+            List<ModeloTienda> usuariosTienda = ManejoJson.leerJson(RUTA_JSON_TIENDA, tipoListaTienda);
+
+            ModeloTienda tiendaEncontrado = usuariosTienda.stream()
+                    .filter(u -> u.getUsuario().equals(usuario) && u.getContrasena().equals(password))
+                    .findFirst()
+                    .orElse(null);
+
+            if (tiendaEncontrado != null) {
+                nombreUsuario = tiendaEncontrado.getNombre();
+                autenticado = true;
+            }
+        }
+
+        // 4) Verificar si se encontró el usuario
+        if (autenticado) {
             // Login exitoso: mostrar mensaje y abrir ventana principal
             mostrarAlerta(Alert.AlertType.INFORMATION, "Inicio de sesión exitoso",
-                    "Bienvenido, " + usuarioEncontrado.getNombre());
+                    "Bienvenido, " + nombreUsuario);
             abrirVentanaPrincipal();
         } else {
             // Credenciales incorrectas

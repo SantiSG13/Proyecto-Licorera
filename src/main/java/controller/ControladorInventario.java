@@ -3,21 +3,21 @@ package controller;
 import files.ManejoJson;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import model.ModeloProducto;
-import view.frmProductos;
+import model.ModeloInventario;
+import view.frmInventario;
 
 import java.lang.reflect.Type;
 import java.util.List;
 
 // Controlador para la vista de gestión de productos (frmProductos).
-// Se encarga de manejar eventos, validaciones y persistencia de datos en tbProducto.json
-public class ControladorProducto {
+// Se encarga de manejar eventos, validaciones y persistencia de datos en tbInventario.json
+public class ControladorInventario {
 
-    private final frmProductos vista;
+    private final frmInventario vista;
     private final ObservableList<String[]> datosTabla = FXCollections.observableArrayList();
-    private final String RUTA_ARCHIVO = "src/main/java/model/tbProducto.json";
+    private final String RUTA_ARCHIVO = "src/main/java/model/tbInventario.json";
 
-    public ControladorProducto(frmProductos vista) {
+    public ControladorInventario(frmInventario vista) {
         this.vista = vista;
         configurarTabla();
         cargarProductosDesdeArchivo();
@@ -86,8 +86,8 @@ public class ControladorProducto {
         }
 
         // Leer lista actual del archivo
-        Type tipoLista = ManejoJson.obtenerTipoLista(ModeloProducto.class);
-        List<ModeloProducto> listaProductos = ManejoJson.leerJson(RUTA_ARCHIVO, tipoLista);
+        Type tipoLista = ManejoJson.obtenerTipoLista(ModeloInventario.class);
+        List<ModeloInventario> listaProductos = ManejoJson.leerJson(RUTA_ARCHIVO, tipoLista);
 
         // Verificar nombre único
         boolean existe = listaProductos.stream()
@@ -98,7 +98,7 @@ public class ControladorProducto {
         }
 
         // Crear y agregar nuevo producto
-        ModeloProducto producto = new ModeloProducto(nombre, categoria, precio, stock);
+        ModeloInventario producto = new ModeloInventario(nombre, categoria, precio, stock);
         listaProductos.add(producto);
         ManejoJson.escribirJson(RUTA_ARCHIVO, listaProductos);
 
@@ -115,11 +115,11 @@ public class ControladorProducto {
     }
 
     private void cargarProductosDesdeArchivo() {
-        Type tipoLista = ManejoJson.obtenerTipoLista(ModeloProducto.class);
-        List<ModeloProducto> listaProductos = ManejoJson.leerJson(RUTA_ARCHIVO, tipoLista);
+        Type tipoLista = ManejoJson.obtenerTipoLista(ModeloInventario.class);
+        List<ModeloInventario> listaProductos = ManejoJson.leerJson(RUTA_ARCHIVO, tipoLista);
 
         datosTabla.clear();
-        for (ModeloProducto p : listaProductos) {
+        for (ModeloInventario p : listaProductos) {
             datosTabla.add(new String[]{
                     p.getNombre(),
                     p.getCategoria(),

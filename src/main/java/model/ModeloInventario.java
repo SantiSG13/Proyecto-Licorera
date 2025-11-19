@@ -1,17 +1,17 @@
 package model;
 
 // Modelo que representa a un Producto del sistema.
-// Contiene los datos que se almacenarán en tbProducto.json
-public class ModeloProducto {
+// Contiene los datos que se almacenarán en tbInventario.json
+public class ModeloInventario {
     private String nombre;      // Nombre del producto
     private String categoria;   // Categoría del producto (Licores, Vinos, Cervezas, etc.)
     private double precio;      // Precio del producto
     private int stock;          // Cantidad en inventario
 
-    public ModeloProducto() {
+    public ModeloInventario() {
     }
 
-    public ModeloProducto(String nombre, String categoria, double precio, int stock) {
+    public ModeloInventario(String nombre, String categoria, double precio, int stock) {
         this.nombre = nombre;
         this.categoria = categoria;
         this.precio = precio;
