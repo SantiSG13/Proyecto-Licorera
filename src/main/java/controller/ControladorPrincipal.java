@@ -4,6 +4,7 @@ import javafx.application.Platform; // Proporciona métodos para interactuar con
 import javafx.stage.Stage; // Representa una ventana
 import view.frmPrincipal; // Vista principal que este controlador gestiona
 import view.frmCliente; // Vista de gestión de clientes
+import view.frmProveedor; // Vista de gestión de proveedores
 import view.frmInventario; // Vista de gestión de productos
 import view.frmVenta; // Vista de gestión de ventas
 import view.frmUsuarios; // Vista de gestión de usuarios
@@ -29,6 +30,9 @@ public class ControladorPrincipal {
 
         // Acción: Nuevo Cliente - abre la ventana de gestión de clientes
         vista.getBtnNuevoCliente().setOnAction(e -> abrirVentanaClientes());
+
+        // Acción: Proveedores - abre la ventana de gestión de proveedores
+        vista.getBtnProveedores().setOnAction(e -> abrirVentanaProveedores());
 
         // Acción: Productos - abre la ventana de gestión de productos
         vista.getBtnInventario().setOnAction(e -> abrirVentanaProductos());
@@ -87,6 +91,33 @@ public class ControladorPrincipal {
         } catch (Exception e) {
             // Manejo de errores en caso de que falle la carga
             vista.setStatus("Error al abrir ventana de Clientes: " + e.getMessage());
+            e.printStackTrace();
+        } finally {
+            // Habilitar el navbar nuevamente cuando se cierra la ventana
+            vista.setNavBarEnabled(true);
+        }
+    }
+
+    // Abre la ventana emergente (modal) de gestión de proveedores
+    private void abrirVentanaProveedores() {
+        try {
+            // Deshabilitar el navbar mientras la ventana modal está abierta
+            vista.setNavBarEnabled(false);
+
+            // Crear la ventana de proveedores pasándole el Stage principal como padre
+            frmProveedor ventanaProveedores = new frmProveedor(stagePrincipal);
+
+            // Crear el controlador y pasarle la ventana
+            new ControladorProveedor(ventanaProveedores);
+
+            // Mostrar la ventana como modal (bloquea la ventana principal hasta que se cierre)
+            ventanaProveedores.showAndWait();
+
+            // Actualizar estado cuando se cierra la ventana
+            vista.setStatus("Ventana de Proveedores cerrada.");
+        } catch (Exception e) {
+            // Manejo de errores en caso de que falle la carga
+            vista.setStatus("Error al abrir ventana de Proveedores: " + e.getMessage());
             e.printStackTrace();
         } finally {
             // Habilitar el navbar nuevamente cuando se cierra la ventana

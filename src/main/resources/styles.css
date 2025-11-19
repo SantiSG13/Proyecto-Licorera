@@ -26,6 +26,7 @@
    11. PANTALLA DE CLIENTES ............ Estilos específicos para frmCliente
    12. PANTALLA DE ADMINISTRACIÓN ...... Estilos específicos para frmAdmin
    13. PANTALLA DE PRODUCTOS ........... Estilos específicos para frmProductos
+   14. PANTALLA DE PROVEEDORES ......... Estilos específicos para frmProveedor
 */
 
 /* ════════════════════════════════════════════════════════════════════════════
@@ -254,6 +255,15 @@
 
 .table-view .placeholder .label {
     -fx-text-fill: #808080;
+}
+
+/* Centrar contenido de las celdas de la tabla */
+.table-view .table-cell {
+    -fx-alignment: LEFT;
+}
+
+.table-view .table-column {
+    -fx-alignment: LEFT;
 }
 
 /* ════════════════════════════════════════════════════════════════════════════
@@ -1082,6 +1092,125 @@
 }
 
 .productos-form-overlay .titulo-formulario {
+    -fx-font-size: 28px;
+    -fx-font-weight: 700;
+    -fx-text-fill: #d4af37;
+    -fx-effect: dropshadow(gaussian, rgba(212,175,55,0.5), 8, 0, 0, 2);
+}
+
+/* ════════════════════════════════════════════════════════════════════════════
+   14. PANTALLA DE PROVEEDORES (frmProveedor)
+   ════════════════════════════════════════════════════════════════════════════ */
+
+.proveedores-header {
+    -fx-background-color: #1a1a1a;
+    -fx-border-color: #2a2a2a;
+    -fx-border-width: 0 0 1px 0;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 6, 0, 0, 2);
+}
+
+.proveedores-titulo {
+    -fx-font-size: 32px;
+    -fx-font-weight: 600;
+    -fx-text-fill: #d4af37;
+    -fx-effect: dropshadow(gaussian, rgba(212,175,55,0.3), 6, 0, 0, 2);
+}
+
+.proveedores-subtitulo {
+    -fx-font-size: 14px;
+    -fx-font-weight: 400;
+    -fx-text-fill: #b0b0b0;
+}
+
+.proveedores-centro-container {
+    -fx-background-color: #0d0d0d;
+}
+
+.proveedores-buscador-wrapper {
+    -fx-padding: 0;
+}
+
+.proveedores-buscador {
+    -fx-background-color: #1a1a1a;
+    -fx-text-fill: #ffffff;
+    -fx-border-color: #3a3a3a;
+    -fx-border-width: 1px;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+    -fx-padding: 14px 20px;
+    -fx-font-size: 14px;
+    -fx-prompt-text-fill: #808080;
+    -fx-pref-width: 100%;
+    -fx-max-width: Infinity;
+}
+
+.proveedores-buscador:focused {
+    -fx-border-color: #d4af37;
+    -fx-border-width: 2px;
+    -fx-effect: dropshadow(gaussian, rgba(212,175,55,0.4), 8, 0, 0, 2);
+}
+
+.proveedores-overlay {
+    -fx-background-color: rgba(13, 13, 13, 0.85);
+    -fx-alignment: center;
+}
+
+.proveedores-form-overlay {
+    -fx-background-color: #1a1a1a;
+    -fx-border-color: #d4af37;
+    -fx-border-width: 2px;
+    -fx-border-radius: 16px;
+    -fx-background-radius: 16px;
+    -fx-padding: 40px;
+    -fx-spacing: 24px;
+    -fx-max-width: 800px;
+    -fx-min-width: 800px;
+    -fx-max-height: 700px;
+    -fx-pref-height: auto;
+    -fx-effect: dropshadow(gaussian, rgba(212,175,55,0.3), 20, 0, 0, 8);
+}
+
+.proveedores-form-overlay .label {
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 14px;
+    -fx-font-weight: 500;
+}
+
+.proveedores-form-overlay .text-field,
+.proveedores-form-overlay .combo-box {
+    -fx-pref-width: 350px;
+    -fx-background-color: #2a2a2a;
+    -fx-text-fill: #ffffff;
+    -fx-border-color: #3a3a3a;
+    -fx-border-width: 1px;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+    -fx-padding: 12px 16px;
+    -fx-font-size: 14px;
+    -fx-prompt-text-fill: #808080;
+}
+
+.proveedores-form-overlay .text-field:focused,
+.proveedores-form-overlay .combo-box:focused {
+    -fx-border-color: #d4af37;
+    -fx-border-width: 2px;
+    -fx-effect: dropshadow(gaussian, rgba(212,175,55,0.4), 6, 0, 0, 2);
+}
+
+.proveedores-form-overlay .separator .line {
+    -fx-border-color: #3a3a3a;
+    -fx-background-color: #3a3a3a;
+}
+
+.proveedores-form-overlay .button {
+    -fx-min-width: 150px;
+    -fx-pref-width: 150px;
+    -fx-padding: 12px 24px;
+    -fx-font-size: 14px;
+    -fx-font-weight: 600;
+}
+
+.proveedores-form-overlay .titulo-formulario {
     -fx-font-size: 28px;
     -fx-font-weight: 700;
     -fx-text-fill: #d4af37;

@@ -17,6 +17,7 @@ public class frmPrincipal {
     // Botones de navegación principal
     private final Button btnAdministarUsuarios = new Button("Usuarios");
     private final Button btnNuevoCliente = new Button("Clientes");
+    private final Button btnProveedores = new Button("Proveedores");
     private final Button btnInventario = new Button("Inventario");
     private final Button btnVentas = new Button("Ventas");
     private final Button btnSalir = new Button("Salir");
@@ -43,12 +44,13 @@ public class frmPrincipal {
         // Aplicar clases CSS a los botones
         btnAdministarUsuarios.getStyleClass().add("nav-button");
         btnNuevoCliente.getStyleClass().add("nav-button");
+        btnProveedores.getStyleClass().add("nav-button");
         btnInventario.getStyleClass().add("nav-button");
         btnVentas.getStyleClass().add("nav-button-highlight");
         btnSalir.getStyleClass().add("nav-button-exit");
 
         // Agregar todos los botones a la barra de navegación
-        navBar.getChildren().addAll(btnAdministarUsuarios, btnNuevoCliente, btnInventario, btnVentas, btnSalir);
+        navBar.getChildren().addAll(btnAdministarUsuarios, btnNuevoCliente, btnProveedores, btnInventario, btnVentas, btnSalir);
 
         return navBar;
     }
@@ -76,6 +78,7 @@ public class frmPrincipal {
     // Getters de botones para que el controlador registre manejadores de eventos.
     public Button getBtnAdministarUsuarios() { return btnAdministarUsuarios; }
     public Button getBtnNuevoCliente() { return btnNuevoCliente; }
+    public Button getBtnProveedores() { return btnProveedores; }
     public Button getBtnInventario() { return btnInventario; }
     public Button getBtnVentas() { return btnVentas; }
     public Button getBtnSalir() { return btnSalir; }
@@ -84,6 +87,7 @@ public class frmPrincipal {
     public void setNavBarEnabled(boolean enabled) {
         btnAdministarUsuarios.setDisable(!enabled);
         btnNuevoCliente.setDisable(!enabled);
+        btnProveedores.setDisable(!enabled);
         btnInventario.setDisable(!enabled);
         btnVentas.setDisable(!enabled);
         btnSalir.setDisable(!enabled);

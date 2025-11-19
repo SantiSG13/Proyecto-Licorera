@@ -1,0 +1,26 @@
+[
+  {
+    "id": "PRV-001",
+    "nombre": "Fabrica de Licores de Antioquia",
+    "productos": [
+      {
+        "id": "PROD-001",
+        "nombre": "Aguardiente tapa roja 750ml",
+        "tipo": "Aguardiente",
+        "precio": 30000.0
+      },
+      {
+        "id": "PROD-002",
+        "nombre": "Aguardiente tapa azul 750ml",
+        "tipo": "Aguardiente",
+        "precio": 35000.0
+      },
+      {
+        "id": "PROD-003",
+        "nombre": "Aguardiente tapa verde 1000ml",
+        "tipo": "Aguardiente",
+        "precio": 40000.0
+      }
+    ]
+  }
+]
