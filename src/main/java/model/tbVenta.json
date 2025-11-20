@@ -1,2 +1,16 @@
-[]
-
+[
+  {
+    "id": "VEN-001",
+    "documentoCliente": "1011512285",
+    "nombreCliente": "Santiago Galeano",
+    "fecha": "2025-11-19 22:43:13",
+    "items": [
+      {
+        "nombreProducto": "Tapa Roja Premium 1000ml",
+        "cantidad": 2,
+        "precioUnitario": 57000.0
+      }
+    ],
+    "total": 114000.0
+  }
+]

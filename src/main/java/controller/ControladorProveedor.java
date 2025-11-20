@@ -315,7 +315,9 @@ public class ControladorProveedor {
                         return;
                     }
 
-                    String idProducto = generarIdProducto(proveedorActual.getProductos().size());
+                    // Generar ID único global contando todos los productos de todos los proveedores
+                    int totalProductosGlobal = contarTodosLosProductos(listaProveedores);
+                    String idProducto = generarIdProducto(totalProductosGlobal);
                     ProductoProveedor producto = new ProductoProveedor(idProducto, nombre, tipo, precio);
                     proveedorActual.agregarProducto(producto);
 
@@ -411,6 +413,17 @@ public class ControladorProveedor {
     private String generarIdProveedor(int cantidadActual) {
         int nuevoNumero = cantidadActual + 1;
         return String.format("PRV-%03d", nuevoNumero);
+    }
+
+    // Cuenta todos los productos de todos los proveedores para generar IDs únicos globales
+    private int contarTodosLosProductos(List<ModeloProveedor> proveedores) {
+        int total = 0;
+        for (ModeloProveedor proveedor : proveedores) {
+            if (proveedor.getProductos() != null) {
+                total += proveedor.getProductos().size();
+            }
+        }
+        return total;
     }
 
     private String generarIdProducto(int cantidadActual) {

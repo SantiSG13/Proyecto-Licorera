@@ -106,7 +106,8 @@ public class ControladorInventario {
         datosTabla.add(new String[]{
                 nombre,
                 categoria,
-                String.format("$%.2f", precio),
+                String.format("$%.2f", precio),  // Costo
+                String.format("$%.2f", precio * 1.5),  // Precio de venta (50% más)
                 String.valueOf(stock)
         });
 
@@ -123,7 +124,8 @@ public class ControladorInventario {
             datosTabla.add(new String[]{
                     p.getNombre(),
                     p.getCategoria(),
-                    String.format("$%.2f", p.getPrecio()),
+                    String.format("$%.2f", p.getCosto()),  // Costo de compra
+                    String.format("$%.2f", p.getPrecioVenta()),  // Precio de venta (50% más)
                     String.valueOf(p.getStock())
             });
         }

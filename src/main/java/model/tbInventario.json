@@ -1,20 +1,30 @@
 [
   {
-    "nombre": "Cerveza Corona",
-    "categoria": "Cervezas",
-    "precio": 5000.0,
-    "stock": 96
+    "nombre": "Aguardiente Antioqueño Sin Azúcar 750ml",
+    "categoria": "Aguardiente",
+    "costo": 28000.0,
+    "precioVenta": 42000.0,
+    "stock": 9
   },
   {
-    "nombre": "Cerveza Pilsen",
-    "categoria": "Cervezas",
-    "precio": 2000.0,
-    "stock": 47
+    "nombre": "Aguardiente Antioqueño Azul 750ml",
+    "categoria": "Aguardiente",
+    "costo": 32000.0,
+    "precioVenta": 48000.0,
+    "stock": 8
   },
   {
-    "nombre": "Ron Medellín 750ml",
+    "nombre": "Ron Viejo de Caldas 8 Años 750ml",
     "categoria": "Ron",
-    "precio": 84000.0,
-    "stock": 36
+    "costo": 45000.0,
+    "precioVenta": 67500.0,
+    "stock": 5
+  },
+  {
+    "nombre": "Tapa Roja Premium 1000ml",
+    "categoria": "Aguardiente",
+    "costo": 38000.0,
+    "precioVenta": 57000.0,
+    "stock": 2
   }
 ]

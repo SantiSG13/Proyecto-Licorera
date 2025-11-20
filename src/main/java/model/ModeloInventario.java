@@ -5,16 +5,18 @@ package model;
 public class ModeloInventario {
     private String nombre;      // Nombre del producto
     private String categoria;   // Categoría del producto (Licores, Vinos, Cervezas, etc.)
-    private double precio;      // Precio del producto
+    private double costo;       // Costo de compra del producto
+    private double precioVenta; // Precio de venta (50% más que el costo)
     private int stock;          // Cantidad en inventario
 
     public ModeloInventario() {
     }
 
-    public ModeloInventario(String nombre, String categoria, double precio, int stock) {
+    public ModeloInventario(String nombre, String categoria, double costo, int stock) {
         this.nombre = nombre;
         this.categoria = categoria;
-        this.precio = precio;
+        this.costo = costo;
+        this.precioVenta = costo * 1.5; // 50% de ganancia
         this.stock = stock;
     }
 
@@ -34,12 +36,30 @@ public class ModeloInventario {
         this.categoria = categoria;
     }
 
+    public double getCosto() {
+        return costo;
+    }
+
+    public void setCosto(double costo) {
+        this.costo = costo;
+        this.precioVenta = costo * 1.5; // Actualizar precio de venta automáticamente
+    }
+
+    public double getPrecioVenta() {
+        return precioVenta;
+    }
+
+    public void setPrecioVenta(double precioVenta) {
+        this.precioVenta = precioVenta;
+    }
+
+    // Método legacy para compatibilidad (retorna precio de venta)
     public double getPrecio() {
-        return precio;
+        return precioVenta;
     }
 
     public void setPrecio(double precio) {
-        this.precio = precio;
+        this.precioVenta = precio;
     }
 
     public int getStock() {

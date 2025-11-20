@@ -20,6 +20,7 @@ public class frmPrincipal {
     private final Button btnProveedores = new Button("Proveedores");
     private final Button btnInventario = new Button("Inventario");
     private final Button btnVentas = new Button("Ventas");
+    private final Button btnCompras = new Button("Compras");
     private final Button btnSalir = new Button("Salir");
 
     // Constructor: arma la estructura visual inicial de la ventana principal.
@@ -47,10 +48,11 @@ public class frmPrincipal {
         btnProveedores.getStyleClass().add("nav-button");
         btnInventario.getStyleClass().add("nav-button");
         btnVentas.getStyleClass().add("nav-button-highlight");
+        btnCompras.getStyleClass().add("nav-button-highlight");
         btnSalir.getStyleClass().add("nav-button-exit");
 
         // Agregar todos los botones a la barra de navegación
-        navBar.getChildren().addAll(btnAdministarUsuarios, btnNuevoCliente, btnProveedores, btnInventario, btnVentas, btnSalir);
+        navBar.getChildren().addAll(btnAdministarUsuarios, btnNuevoCliente, btnProveedores, btnInventario, btnVentas, btnCompras, btnSalir);
 
         return navBar;
     }
@@ -81,6 +83,7 @@ public class frmPrincipal {
     public Button getBtnProveedores() { return btnProveedores; }
     public Button getBtnInventario() { return btnInventario; }
     public Button getBtnVentas() { return btnVentas; }
+    public Button getBtnCompras() { return btnCompras; }
     public Button getBtnSalir() { return btnSalir; }
 
     // Habilitar o deshabilitar todos los botones del navbar
@@ -90,6 +93,7 @@ public class frmPrincipal {
         btnProveedores.setDisable(!enabled);
         btnInventario.setDisable(!enabled);
         btnVentas.setDisable(!enabled);
+        btnCompras.setDisable(!enabled);
         btnSalir.setDisable(!enabled);
     }
 }

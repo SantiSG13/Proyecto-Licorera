@@ -19,7 +19,7 @@ public class frmInventario extends Stage {
     // Campos del formulario
     private final TextField txtNombre = new TextField();
     private final ComboBox<String> cboCategoria = new ComboBox<>();
-    private final TextField txtPrecio = new TextField();
+    private final TextField txtCosto = new TextField();
     private final TextField txtStock = new TextField();
 
     // Tabla para mostrar productos
@@ -136,7 +136,7 @@ public class frmInventario extends Stage {
         cboCategoria.setPromptText("Seleccione categoría");
 
         txtNombre.setPromptText("Nombre del producto");
-        txtPrecio.setPromptText("Precio");
+        txtCosto.setPromptText("Costo de compra");
         txtStock.setPromptText("Cantidad en stock");
 
         // Agregar al grid
@@ -144,8 +144,8 @@ public class frmInventario extends Stage {
         gridNuevoProducto.add(txtNombre, 1, 0);
         gridNuevoProducto.add(new Label("Categoría:"), 0, 1);
         gridNuevoProducto.add(cboCategoria, 1, 1);
-        gridNuevoProducto.add(new Label("Precio:"), 0, 2);
-        gridNuevoProducto.add(txtPrecio, 1, 2);
+        gridNuevoProducto.add(new Label("Costo:"), 0, 2);
+        gridNuevoProducto.add(txtCosto, 1, 2);
         gridNuevoProducto.add(new Label("Stock:"), 0, 3);
         gridNuevoProducto.add(txtStock, 1, 3);
 
@@ -166,7 +166,7 @@ public class frmInventario extends Stage {
         // Limpiar campos para un nuevo producto
         txtNombre.clear();
         cboCategoria.getSelectionModel().clearSelection();
-        txtPrecio.clear();
+        txtCosto.clear();
         txtStock.clear();
         panelEmergenteNuevoProducto.setVisible(true);
     }
@@ -182,13 +182,16 @@ public class frmInventario extends Stage {
         TableColumn<String[], String> colCategoria = new TableColumn<>("Categoría");
         colCategoria.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue()[1]));
 
-        TableColumn<String[], String> colPrecio = new TableColumn<>("Precio");
-        colPrecio.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue()[2]));
+        TableColumn<String[], String> colCosto = new TableColumn<>("Costo");
+        colCosto.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue()[2]));
+
+        TableColumn<String[], String> colPrecioVenta = new TableColumn<>("Precio Venta");
+        colPrecioVenta.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue()[3]));
 
         TableColumn<String[], String> colStock = new TableColumn<>("Stock");
-        colStock.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue()[3]));
+        colStock.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue()[4]));
 
-        tablaProductos.getColumns().addAll(colNombre, colCategoria, colPrecio, colStock);
+        tablaProductos.getColumns().addAll(colNombre, colCategoria, colCosto, colPrecioVenta, colStock);
         tablaProductos.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_FLEX_LAST_COLUMN);
 
         VBox box = new VBox(10);
@@ -217,7 +220,8 @@ public class frmInventario extends Stage {
     // Getters para el controlador
     public TextField getTxtNombre() { return txtNombre; }
     public ComboBox<String> getCboCategoria() { return cboCategoria; }
-    public TextField getTxtPrecio() { return txtPrecio; }
+    public TextField getTxtCosto() { return txtCosto; }
+    public TextField getTxtPrecio() { return txtCosto; } // Compatibilidad legacy
     public TextField getTxtStock() { return txtStock; }
     public TableView<String[]> getTablaProductos() { return tablaProductos; }
     public Button getBtnGuardar() { return btnGuardar; }
