@@ -1,0 +1,111 @@
+### Maven (artifacts y cache) ###
+# Directorios de compilación y empaquetado
+/target/
+# Wrapper jar permitido (ya lo tenemos explícito abajo)
+!.mvn/wrapper/maven-wrapper.jar
+# Archivos temporales generados por versiones y releases
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+# POM reducido que crea el plugin shade
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+.mvn/wrapper/maven-wrapper.jar
+
+### Java (compilados y empaquetados binarios) ###
+*.class         # Clases compiladas
+*.log           # Logs generales
+*.ctxt
+.mtj.tmp/
+*.jar           # JARs generados (no subir a git; se reconstruyen)
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+hs_err_pid*     # Volcados de error de la JVM
+replay_pid*     # Volcados de grabación
+
+### JavaFX (empaquetado jlink / instaladores opcionales) ###
+# Si generas una imagen modular con jlink
+/generated-jlink-image/
+# Posibles directorios de salida del javafx-maven-plugin o scripts personalizados
+/app/
+/installer/
+/mods/
+
+### IDE IntelliJ IDEA ###
+.idea/          # Configuración del proyecto (se puede versionar parcialmente, aquí se excluye completa)
+*.iws
+*.iml
+*.ipr
+out/            # Carpeta de salida adicional
+.kotlin         # Cache de Kotlin si se mezclara
+
+### Eclipse ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+
+### VS Code ###
+.vscode/
+
+### Mac OS ###
+.DS_Store
+
+### Windows ###
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+*.stackdump
+[Dd]esktop.ini
+$RECYCLE.BIN/
+*.lnk
+
+### Logs (duplicado consolidado) ###
+*.log
+logs/
+*.log.*
+
+### Temporary / swap ###
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+.~lock.*
+
+### Tests y Cobertura ###
+# Reportes de Surefire/Failsafe y cobertura
+surefire-reports/
+failsafe-reports/
+jacoco.exec
+/jacoco-report/
+
+### Configuración local / credenciales (si se usan) ###
+.env            # Variables de entorno locales
+*.env.local
+
+### Datos persistentes generados en runtime (si decides separar) ###
+# Si en el futuro mueves los JSON que son "datos" a data/ para no versionarlos, descomenta:
+# /data/*.json
+# Por ahora NO ignoramos .json porque tbCliente.json, tbVenta.json y tbAdmin.json son parte del modelo inicial.
+
+# NOTA: Se eliminaron las excepciones !**/src/main/**/target/ y !**/src/test/**/target/ porque no se crean subcarpetas target dentro de src; eran redundantes.

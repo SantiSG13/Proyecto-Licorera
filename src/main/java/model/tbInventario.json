@@ -1,0 +1,50 @@
+[
+  {
+    "id": "PROD-001",
+    "nombre": "Aguardiente Antioqueño Sin Azúcar 750ml",
+    "categoria": "Aguardiente",
+    "costo": 28000.0,
+    "precioVenta": 42000.0,
+    "stock": 13
+  },
+  {
+    "id": "PROD-002",
+    "nombre": "Aguardiente Antioqueño Azul 750ml",
+    "categoria": "Aguardiente",
+    "costo": 32000.0,
+    "precioVenta": 48000.0,
+    "stock": 0
+  },
+  {
+    "id": "PROD-003",
+    "nombre": "Ron Viejo de Caldas 8 Años 750ml",
+    "categoria": "Ron",
+    "costo": 45000.0,
+    "precioVenta": 67500.0,
+    "stock": 9
+  },
+  {
+    "id": "PROD-004",
+    "nombre": "Tapa Roja Premium 1000ml",
+    "categoria": "Aguardiente",
+    "costo": 38000.0,
+    "precioVenta": 57000.0,
+    "stock": 5
+  },
+  {
+    "id": "PROD-005",
+    "nombre": "Whisky Buchanans Deluxe 12 Años 750ml",
+    "categoria": "Whisky",
+    "costo": 120000.0,
+    "precioVenta": 180000.0,
+    "stock": 11
+  },
+  {
+    "id": "PROD-008",
+    "nombre": "Tequila José Cuervo Especial 750ml",
+    "categoria": "Tequila",
+    "costo": 65000.0,
+    "precioVenta": 97500.0,
+    "stock": 4
+  }
+]

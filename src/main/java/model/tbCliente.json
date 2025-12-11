@@ -1,0 +1,23 @@
+[
+  {
+    "tipoDocumento": "CC",
+    "documento": "1011512285",
+    "nombreCompleto": "Santiago Galeano",
+    "telefono": "3126361815",
+    "correo": "santigale27@gmail.com"
+  },
+  {
+    "tipoDocumento": "CC",
+    "documento": "39213967",
+    "nombreCompleto": "Diana Rivera",
+    "telefono": "3233652161",
+    "correo": "diafresa@gmail.com"
+  },
+  {
+    "tipoDocumento": "CC",
+    "documento": "79569927",
+    "nombreCompleto": "Freddy Galeano",
+    "telefono": "3135082517",
+    "correo": "jfgaleano@gmail.com"
+  }
+]

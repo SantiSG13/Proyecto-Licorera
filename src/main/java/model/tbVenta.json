@@ -1,0 +1,104 @@
+[
+  {
+    "id": "VEN-001",
+    "documentoCliente": "1011512285",
+    "nombreCliente": "Santiago Galeano",
+    "fecha": "2025-11-19 22:43:13",
+    "items": [
+      {
+        "idProducto": "PROD-004",
+        "nombreProducto": "Tapa Roja Premium 1000ml",
+        "cantidad": 2,
+        "precioUnitario": 57000.0
+      }
+    ],
+    "total": 114000.0
+  },
+  {
+    "id": "VEN-002",
+    "documentoCliente": "1011512285",
+    "nombreCliente": "Santiago Galeano",
+    "fecha": "2025-11-20 14:58:48",
+    "items": [
+      {
+        "idProducto": "PROD-001",
+        "nombreProducto": "Aguardiente Antioqueño Sin Azúcar 750ml",
+        "cantidad": 5,
+        "precioUnitario": 42000.0
+      },
+      {
+        "idProducto": "PROD-003",
+        "nombreProducto": "Ron Viejo de Caldas 8 Años 750ml",
+        "cantidad": 4,
+        "precioUnitario": 67500.0
+      }
+    ],
+    "total": 480000.0
+  },
+  {
+    "id": "VEN-003",
+    "documentoCliente": "1011512285",
+    "nombreCliente": "Santiago Galeano",
+    "fecha": "2025-11-23 12:36:37",
+    "items": [
+      {
+        "idProducto": "PROD-001",
+        "nombreProducto": "Aguardiente Antioqueño Sin Azúcar 750ml",
+        "cantidad": 4,
+        "precioUnitario": 42000.0
+      }
+    ],
+    "total": 168000.0
+  },
+  {
+    "id": "VEN-004",
+    "documentoCliente": "1011512285",
+    "nombreCliente": "Santiago Galeano",
+    "fecha": "2025-12-07 01:46:05",
+    "items": [
+      {
+        "idProducto": "PROD-003",
+        "nombreProducto": "Ron Viejo de Caldas 8 Años 750ml",
+        "cantidad": 1,
+        "precioUnitario": 67500.0
+      },
+      {
+        "idProducto": "PROD-004",
+        "nombreProducto": "Tapa Roja Premium 1000ml",
+        "cantidad": 5,
+        "precioUnitario": 57000.0
+      }
+    ],
+    "total": 352500.0
+  },
+  {
+    "id": "VEN-005",
+    "documentoCliente": "39213967",
+    "nombreCliente": "Diana Rivera",
+    "fecha": "2025-12-07 02:43:56",
+    "items": [
+      {
+        "idProducto": "PROD-002",
+        "nombreProducto": "Aguardiente Antioqueño Azul 750ml",
+        "cantidad": 4,
+        "precioUnitario": 48000.0
+      }
+    ],
+    "total": 192000.0
+  },
+  {
+    "id": "VEN-006",
+    "documentoCliente": "39213967",
+    "nombreCliente": "Diana Rivera",
+    "fecha": "2025-12-10 19:48:21",
+    "items": [
+      {
+        "idProducto": "PROD-002",
+        "nombreProducto": "Aguardiente Antioqueño Azul 750ml",
+        "cantidad": 4,
+        "precioUnitario": 48000.0
+      }
+    ],
+    "total": 192000.0
+  }
+]

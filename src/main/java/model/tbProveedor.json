@@ -1,0 +1,92 @@
+[
+  {
+    "id": "PRV-001",
+    "nombre": "Fábrica de Licores de Antioquia",
+    "productos": [
+      {
+        "id": "PROD-001",
+        "nombre": "Aguardiente Antioqueño Sin Azúcar 750ml",
+        "tipo": "Aguardiente",
+        "precio": 28000.0
+      },
+      {
+        "id": "PROD-002",
+        "nombre": "Aguardiente Antioqueño Azul 750ml",
+        "tipo": "Aguardiente",
+        "precio": 32000.0
+      },
+      {
+        "id": "PROD-003",
+        "nombre": "Ron Viejo de Caldas 8 Años 750ml",
+        "tipo": "Ron",
+        "precio": 45000.0
+      },
+      {
+        "id": "PROD-004",
+        "nombre": "Tapa Roja Premium 1000ml",
+        "tipo": "Aguardiente",
+        "precio": 38000.0
+      }
+    ]
+  },
+  {
+    "id": "PRV-002",
+    "nombre": "Distribuidora Licores Internacionales",
+    "productos": [
+      {
+        "id": "PROD-005",
+        "nombre": "Whisky Buchanans Deluxe 12 Años 750ml",
+        "tipo": "Whisky",
+        "precio": 120000.0
+      },
+      {
+        "id": "PROD-006",
+        "nombre": "Vodka Smirnoff Red 750ml",
+        "tipo": "Vodka",
+        "precio": 35000.0
+      },
+      {
+        "id": "PROD-007",
+        "nombre": "Ron Bacardi Carta Blanca 750ml",
+        "tipo": "Ron",
+        "precio": 42000.0
+      },
+      {
+        "id": "PROD-008",
+        "nombre": "Tequila José Cuervo Especial 750ml",
+        "tipo": "Tequila",
+        "precio": 65000.0
+      }
+    ]
+  },
+  {
+    "id": "PRV-003",
+    "nombre": "Comercializadora Vinos y Licores Premium",
+    "productos": [
+      {
+        "id": "PROD-009",
+        "nombre": "Vino Tinto Casillero del Diablo Reserva 750ml",
+        "tipo": "Vino",
+        "precio": 32000.0
+      },
+      {
+        "id": "PROD-010",
+        "nombre": "Champagne Moet & Chandon Imperial 750ml",
+        "tipo": "Champagne",
+        "precio": 180000.0
+      },
+      {
+        "id": "PROD-011",
+        "nombre": "Gin Bombay Sapphire 750ml",
+        "tipo": "Gin",
+        "precio": 85000.0
+      },
+      {
+        "id": "PROD-012",
+        "nombre": "Cerveza Corona Extra 355ml (Caja x24)",
+        "tipo": "Cerveza",
+        "precio": 48000.0
+      }
+    ]
+  }
+]

@@ -1,0 +1,163 @@
+[
+  {
+    "id": "CMP-001",
+    "fecha": "2025-11-19 18:55:38",
+    "items": [
+      {
+        "idProducto": "PROD-001",
+        "nombreProducto": "Aguardiente tapa roja 750ml",
+        "idProveedor": "PRV-001",
+        "cantidad": 1,
+        "precioUnitario": 30000.0
+      },
+      {
+        "idProducto": "PROD-002",
+        "nombreProducto": "Aguardiente tapa azul 750ml",
+        "idProveedor": "PRV-001",
+        "cantidad": 1,
+        "precioUnitario": 35000.0
+      },
+      {
+        "idProducto": "PROD-006",
+        "nombreProducto": "Buchanans Special Reserve 750ml",
+        "idProveedor": "PRV-002",
+        "cantidad": 1,
+        "precioUnitario": 390000.0
+      }
+    ],
+    "total": 455000.0
+  },
+  {
+    "id": "CMP-002",
+    "fecha": "2025-11-19 22:04:39",
+    "items": [
+      {
+        "idProducto": "PROD-001",
+        "nombreProducto": "Aguardiente tapa roja 750ml",
+        "idProveedor": "PRV-001",
+        "cantidad": 9,
+        "precioUnitario": 30000.0
+      },
+      {
+        "idProducto": "PROD-002",
+        "nombreProducto": "Aguardiente tapa azul 750ml",
+        "idProveedor": "PRV-001",
+        "cantidad": 9,
+        "precioUnitario": 35000.0
+      },
+      {
+        "idProducto": "PROD-003",
+        "nombreProducto": "Aguardiente tapa verde 1000ml",
+        "idProveedor": "PRV-001",
+        "cantidad": 9,
+        "precioUnitario": 40000.0
+      }
+    ],
+    "total": 945000.0
+  },
+  {
+    "id": "CMP-003",
+    "fecha": "2025-11-19 22:23:26",
+    "items": [
+      {
+        "idProducto": "PROD-001",
+        "nombreProducto": "Aguardiente Antioqueño Sin Azúcar 750ml",
+        "idProveedor": "PRV-001",
+        "cantidad": 9,
+        "precioUnitario": 28000.0
+      },
+      {
+        "idProducto": "PROD-002",
+        "nombreProducto": "Aguardiente Antioqueño Azul 750ml",
+        "idProveedor": "PRV-001",
+        "cantidad": 8,
+        "precioUnitario": 32000.0
+      },
+      {
+        "idProducto": "PROD-003",
+        "nombreProducto": "Ron Viejo de Caldas 8 Años 750ml",
+        "idProveedor": "PRV-001",
+        "cantidad": 5,
+        "precioUnitario": 45000.0
+      },
+      {
+        "idProducto": "PROD-004",
+        "nombreProducto": "Tapa Roja Premium 1000ml",
+        "idProveedor": "PRV-001",
+        "cantidad": 4,
+        "precioUnitario": 38000.0
+      }
+    ],
+    "total": 885000.0
+  },
+  {
+    "id": "CMP-004",
+    "fecha": "2025-11-20 14:59:01",
+    "items": [
+      {
+        "idProducto": "PROD-004",
+        "nombreProducto": "Tapa Roja Premium 1000ml",
+        "idProveedor": "PRV-001",
+        "cantidad": 6,
+        "precioUnitario": 38000.0
+      }
+    ],
+    "total": 228000.0
+  },
+  {
+    "id": "CMP-005",
+    "fecha": "2025-12-07 02:01:25",
+    "items": [
+      {
+        "idProducto": "PROD-001",
+        "nombreProducto": "Aguardiente Antioqueño Sin Azúcar 750ml",
+        "idProveedor": "PRV-001",
+        "cantidad": 11,
+        "precioUnitario": 28000.0
+      },
+      {
+        "idProducto": "PROD-003",
+        "nombreProducto": "Ron Viejo de Caldas 8 Años 750ml",
+        "idProveedor": "PRV-001",
+        "cantidad": 9,
+        "precioUnitario": 45000.0
+      }
+    ],
+    "total": 713000.0
+  },
+  {
+    "id": "CMP-006",
+    "fecha": "2025-12-10 19:46:35",
+    "items": [
+      {
+        "idProducto": "PROD-001",
+        "nombreProducto": "Aguardiente Antioqueño Sin Azúcar 750ml",
+        "idProveedor": "PRV-001",
+        "cantidad": 2,
+        "precioUnitario": 28000.0
+      },
+      {
+        "idProducto": "PROD-004",
+        "nombreProducto": "Tapa Roja Premium 1000ml",
+        "idProveedor": "PRV-001",
+        "cantidad": 2,
+        "precioUnitario": 38000.0
+      },
+      {
+        "idProducto": "PROD-005",
+        "nombreProducto": "Whisky Buchanans Deluxe 12 Años 750ml",
+        "idProveedor": "PRV-002",
+        "cantidad": 11,
+        "precioUnitario": 120000.0
+      },
+      {
+        "idProducto": "PROD-008",
+        "nombreProducto": "Tequila José Cuervo Especial 750ml",
+        "idProveedor": "PRV-002",
+        "cantidad": 4,
+        "precioUnitario": 65000.0
+      }
+    ],
+    "total": 1712000.0
+  }
+]
