@@ -10,12 +10,12 @@ import files.ManejoJson;
 import java.lang.reflect.Type;
 import java.util.List;
 
+import files.ConfigRutas;
+
 // Controlador de la vista de usuarios.
 // Responsabilidad: gestionar las acciones de los botones y coordinar la lógica de negocio con la vista.
 public class ControladorUsuarios {
     private final frmUsuarios vista; // Referencia a la vista que se controla
-    private static final String RUTA_JSON_ADMIN = "src/main/java/model/tbAdmin.json"; // Ruta del archivo de administradores
-    private static final String RUTA_JSON_TIENDA = "src/main/java/model/tbTienda.json"; // Ruta del archivo de usuarios de tienda
 
     // Constructor: recibe la vista y configura los eventos de los botones
     public ControladorUsuarios(frmUsuarios vista) {
@@ -29,10 +29,12 @@ public class ControladorUsuarios {
         // Acción del botón Guardar: valida y guarda un nuevo usuario
         vista.getBtnGuardar().setOnAction(e -> guardarUsuario());
 
-        // Acción del botón Modificar: abre el formulario con los datos del usuario seleccionado
+        // Acción del botón Modificar: abre el formulario con los datos del usuario
+        // seleccionado
         vista.getBtnModificar().setOnAction(e -> abrirFormularioParaModificar());
 
-        // Acción del botón Eliminar: elimina el usuario seleccionado previa confirmación
+        // Acción del botón Eliminar: elimina el usuario seleccionado previa
+        // confirmación
         vista.getBtnEliminar().setOnAction(e -> eliminarUsuario());
 
         // Acción del botón Salir: cierra la vista actual o vuelve al menú principal
@@ -46,7 +48,7 @@ public class ControladorUsuarios {
 
             // Leer usuarios administradores
             Type tipoListaAdmin = ManejoJson.obtenerTipoLista(ModeloAdmin.class);
-            List<ModeloAdmin> usuariosAdmin = ManejoJson.leerJson(RUTA_JSON_ADMIN, tipoListaAdmin);
+            List<ModeloAdmin> usuariosAdmin = ManejoJson.leerJson(ConfigRutas.ADMIN, tipoListaAdmin);
 
             // Agregar administradores a la tabla
             for (ModeloAdmin usuario : usuariosAdmin) {
@@ -62,7 +64,7 @@ public class ControladorUsuarios {
 
             // Leer usuarios de tienda
             Type tipoListaTienda = ManejoJson.obtenerTipoLista(ModeloTienda.class);
-            List<ModeloTienda> usuariosTienda = ManejoJson.leerJson(RUTA_JSON_TIENDA, tipoListaTienda);
+            List<ModeloTienda> usuariosTienda = ManejoJson.leerJson(ConfigRutas.TIENDA, tipoListaTienda);
 
             // Agregar usuarios de tienda a la tabla
             for (ModeloTienda usuario : usuariosTienda) {
@@ -112,7 +114,7 @@ public class ControladorUsuarios {
             if (rolSeleccionado.equals("Administrador")) {
                 // Guardar en tbAdmin.json
                 Type tipoListaAdmin = ManejoJson.obtenerTipoLista(ModeloAdmin.class);
-                List<ModeloAdmin> usuariosAdmin = ManejoJson.leerJson(RUTA_JSON_ADMIN, tipoListaAdmin);
+                List<ModeloAdmin> usuariosAdmin = ManejoJson.leerJson(ConfigRutas.ADMIN, tipoListaAdmin);
 
                 // Generar ID con formato ADM-001, ADM-002, etc.
                 String idUnico = generarIdPorRol("ADM", usuariosAdmin.size());
@@ -123,16 +125,15 @@ public class ControladorUsuarios {
                         vista.getTxtPassword().getText(),
                         vista.getTxtNombre().getText().trim(),
                         rolSeleccionado,
-                        vista.getTxtEmail().getText().trim()
-                );
+                        vista.getTxtEmail().getText().trim());
 
                 usuariosAdmin.add(usuario);
-                ManejoJson.escribirJson(RUTA_JSON_ADMIN, usuariosAdmin);
+                ManejoJson.escribirJson(ConfigRutas.ADMIN, usuariosAdmin);
 
             } else if (rolSeleccionado.equals("Tienda")) {
                 // Guardar en tbTienda.json
                 Type tipoListaTienda = ManejoJson.obtenerTipoLista(ModeloTienda.class);
-                List<ModeloTienda> usuariosTienda = ManejoJson.leerJson(RUTA_JSON_TIENDA, tipoListaTienda);
+                List<ModeloTienda> usuariosTienda = ManejoJson.leerJson(ConfigRutas.TIENDA, tipoListaTienda);
 
                 // Generar ID con formato TDA-001, TDA-002, etc.
                 String idUnico = generarIdPorRol("TDA", usuariosTienda.size());
@@ -143,11 +144,10 @@ public class ControladorUsuarios {
                         vista.getTxtPassword().getText(),
                         vista.getTxtNombre().getText().trim(),
                         rolSeleccionado,
-                        vista.getTxtEmail().getText().trim()
-                );
+                        vista.getTxtEmail().getText().trim());
 
                 usuariosTienda.add(usuario);
-                ManejoJson.escribirJson(RUTA_JSON_TIENDA, usuariosTienda);
+                ManejoJson.escribirJson(ConfigRutas.TIENDA, usuariosTienda);
             }
 
             // Recargar la tabla
@@ -155,7 +155,7 @@ public class ControladorUsuarios {
             vista.limpiarFormulario();
             vista.cerrarPanelFormulario(); // Cerrar el panel flotante
             mostrarExito("Usuario guardado correctamente en " +
-                        (rolSeleccionado.equals("Administrador") ? "tbAdmin.json" : "tbTienda.json"));
+                    (rolSeleccionado.equals("Administrador") ? "tbAdmin.json" : "tbTienda.json"));
 
         } catch (Exception e) {
             mostrarError("Error al guardar", "No se pudo guardar el usuario: " + e.getMessage());
@@ -168,15 +168,16 @@ public class ControladorUsuarios {
         try {
             // Verificar en tbAdmin
             Type tipoListaAdmin = ManejoJson.obtenerTipoLista(ModeloAdmin.class);
-            List<ModeloAdmin> usuariosAdmin = ManejoJson.leerJson(RUTA_JSON_ADMIN, tipoListaAdmin);
+            List<ModeloAdmin> usuariosAdmin = ManejoJson.leerJson(ConfigRutas.ADMIN, tipoListaAdmin);
             boolean existeEnAdmin = usuariosAdmin.stream()
                     .anyMatch(u -> u.getUsuario().equalsIgnoreCase(nombreUsuario));
 
-            if (existeEnAdmin) return true;
+            if (existeEnAdmin)
+                return true;
 
             // Verificar en tbTienda
             Type tipoListaTienda = ManejoJson.obtenerTipoLista(ModeloTienda.class);
-            List<ModeloTienda> usuariosTienda = ManejoJson.leerJson(RUTA_JSON_TIENDA, tipoListaTienda);
+            List<ModeloTienda> usuariosTienda = ManejoJson.leerJson(ConfigRutas.TIENDA, tipoListaTienda);
             boolean existeEnTienda = usuariosTienda.stream()
                     .anyMatch(u -> u.getUsuario().equalsIgnoreCase(nombreUsuario));
 
@@ -187,7 +188,8 @@ public class ControladorUsuarios {
         }
     }
 
-    // Abre el formulario flotante en modo edición con los datos del usuario seleccionado
+    // Abre el formulario flotante en modo edición con los datos del usuario
+    // seleccionado
     private void abrirFormularioParaModificar() {
         String[] seleccionado = vista.getTabla().getSelectionModel().getSelectedItem();
 
@@ -198,11 +200,11 @@ public class ControladorUsuarios {
 
         // Abrir el formulario con los datos pre-cargados
         vista.mostrarPanelParaEditar(
-            seleccionado[0], // ID
-            seleccionado[1], // Nombre
-            seleccionado[2], // Usuario
-            seleccionado[3], // Email
-            seleccionado[4]  // Rol
+                seleccionado[0], // ID
+                seleccionado[1], // Nombre
+                seleccionado[2], // Usuario
+                seleccionado[3], // Email
+                seleccionado[4] // Rol
         );
     }
 
@@ -217,9 +219,9 @@ public class ControladorUsuarios {
 
             // Necesitamos obtener el rol original de la tabla para saber de dónde mover
             String[] seleccionado = vista.getTabla().getItems().stream()
-                .filter(item -> item[0].equals(idBuscado))
-                .findFirst()
-                .orElse(null);
+                    .filter(item -> item[0].equals(idBuscado))
+                    .findFirst()
+                    .orElse(null);
 
             if (seleccionado == null) {
                 mostrarError("Error", "No se encontró el usuario en la tabla.");
@@ -234,20 +236,20 @@ public class ControladorUsuarios {
                 // Eliminar del archivo original
                 if (rolOriginalTabla.equals("Administrador")) {
                     Type tipoListaAdmin = ManejoJson.obtenerTipoLista(ModeloAdmin.class);
-                    List<ModeloAdmin> usuariosAdmin = ManejoJson.leerJson(RUTA_JSON_ADMIN, tipoListaAdmin);
+                    List<ModeloAdmin> usuariosAdmin = ManejoJson.leerJson(ConfigRutas.ADMIN, tipoListaAdmin);
                     usuariosAdmin.removeIf(u -> u.getId().equals(idBuscado));
-                    ManejoJson.escribirJson(RUTA_JSON_ADMIN, usuariosAdmin);
+                    ManejoJson.escribirJson(ConfigRutas.ADMIN, usuariosAdmin);
                 } else {
                     Type tipoListaTienda = ManejoJson.obtenerTipoLista(ModeloTienda.class);
-                    List<ModeloTienda> usuariosTienda = ManejoJson.leerJson(RUTA_JSON_TIENDA, tipoListaTienda);
+                    List<ModeloTienda> usuariosTienda = ManejoJson.leerJson(ConfigRutas.TIENDA, tipoListaTienda);
                     usuariosTienda.removeIf(u -> u.getId().equals(idBuscado));
-                    ManejoJson.escribirJson(RUTA_JSON_TIENDA, usuariosTienda);
+                    ManejoJson.escribirJson(ConfigRutas.TIENDA, usuariosTienda);
                 }
 
                 // Agregar al nuevo archivo
                 if (rolNuevo.equals("Administrador")) {
                     Type tipoListaAdmin = ManejoJson.obtenerTipoLista(ModeloAdmin.class);
-                    List<ModeloAdmin> usuariosAdmin = ManejoJson.leerJson(RUTA_JSON_ADMIN, tipoListaAdmin);
+                    List<ModeloAdmin> usuariosAdmin = ManejoJson.leerJson(ConfigRutas.ADMIN, tipoListaAdmin);
 
                     ModeloAdmin usuario = new ModeloAdmin(
                             idBuscado,
@@ -255,13 +257,12 @@ public class ControladorUsuarios {
                             vista.getTxtPassword().getText().trim().isEmpty() ? "" : vista.getTxtPassword().getText(),
                             vista.getTxtNombre().getText().trim(),
                             rolNuevo,
-                            vista.getTxtEmail().getText().trim()
-                    );
+                            vista.getTxtEmail().getText().trim());
                     usuariosAdmin.add(usuario);
-                    ManejoJson.escribirJson(RUTA_JSON_ADMIN, usuariosAdmin);
+                    ManejoJson.escribirJson(ConfigRutas.ADMIN, usuariosAdmin);
                 } else {
                     Type tipoListaTienda = ManejoJson.obtenerTipoLista(ModeloTienda.class);
-                    List<ModeloTienda> usuariosTienda = ManejoJson.leerJson(RUTA_JSON_TIENDA, tipoListaTienda);
+                    List<ModeloTienda> usuariosTienda = ManejoJson.leerJson(ConfigRutas.TIENDA, tipoListaTienda);
 
                     ModeloTienda usuario = new ModeloTienda(
                             idBuscado,
@@ -269,16 +270,15 @@ public class ControladorUsuarios {
                             vista.getTxtPassword().getText().trim().isEmpty() ? "" : vista.getTxtPassword().getText(),
                             vista.getTxtNombre().getText().trim(),
                             rolNuevo,
-                            vista.getTxtEmail().getText().trim()
-                    );
+                            vista.getTxtEmail().getText().trim());
                     usuariosTienda.add(usuario);
-                    ManejoJson.escribirJson(RUTA_JSON_TIENDA, usuariosTienda);
+                    ManejoJson.escribirJson(ConfigRutas.TIENDA, usuariosTienda);
                 }
             } else {
                 // Si el rol no cambió, solo actualizar en la tabla correspondiente
                 if (rolOriginalTabla.equals("Administrador")) {
                     Type tipoListaAdmin = ManejoJson.obtenerTipoLista(ModeloAdmin.class);
-                    List<ModeloAdmin> usuariosAdmin = ManejoJson.leerJson(RUTA_JSON_ADMIN, tipoListaAdmin);
+                    List<ModeloAdmin> usuariosAdmin = ManejoJson.leerJson(ConfigRutas.ADMIN, tipoListaAdmin);
 
                     for (ModeloAdmin usuario : usuariosAdmin) {
                         if (usuario.getId().equals(idBuscado)) {
@@ -293,10 +293,10 @@ public class ControladorUsuarios {
                             break;
                         }
                     }
-                    ManejoJson.escribirJson(RUTA_JSON_ADMIN, usuariosAdmin);
+                    ManejoJson.escribirJson(ConfigRutas.ADMIN, usuariosAdmin);
                 } else {
                     Type tipoListaTienda = ManejoJson.obtenerTipoLista(ModeloTienda.class);
-                    List<ModeloTienda> usuariosTienda = ManejoJson.leerJson(RUTA_JSON_TIENDA, tipoListaTienda);
+                    List<ModeloTienda> usuariosTienda = ManejoJson.leerJson(ConfigRutas.TIENDA, tipoListaTienda);
 
                     for (ModeloTienda usuario : usuariosTienda) {
                         if (usuario.getId().equals(idBuscado)) {
@@ -311,7 +311,7 @@ public class ControladorUsuarios {
                             break;
                         }
                     }
-                    ManejoJson.escribirJson(RUTA_JSON_TIENDA, usuariosTienda);
+                    ManejoJson.escribirJson(ConfigRutas.TIENDA, usuariosTienda);
                 }
             }
 
@@ -340,7 +340,8 @@ public class ControladorUsuarios {
         Alert confirmacion = new Alert(Alert.AlertType.CONFIRMATION);
         confirmacion.setTitle("Confirmar eliminación");
         confirmacion.setHeaderText("¿Está seguro de eliminar este usuario?");
-        confirmacion.setContentText("Usuario: " + seleccionado[2] + " (" + seleccionado[1] + ")\nRol: " + seleccionado[4]);
+        confirmacion
+                .setContentText("Usuario: " + seleccionado[2] + " (" + seleccionado[1] + ")\nRol: " + seleccionado[4]);
 
         confirmacion.showAndWait().ifPresent(response -> {
             if (response == ButtonType.OK) {
@@ -351,21 +352,21 @@ public class ControladorUsuarios {
                     // Eliminar del archivo correspondiente según el rol
                     if (rol.equals("Administrador")) {
                         Type tipoListaAdmin = ManejoJson.obtenerTipoLista(ModeloAdmin.class);
-                        List<ModeloAdmin> usuariosAdmin = ManejoJson.leerJson(RUTA_JSON_ADMIN, tipoListaAdmin);
+                        List<ModeloAdmin> usuariosAdmin = ManejoJson.leerJson(ConfigRutas.ADMIN, tipoListaAdmin);
                         usuariosAdmin.removeIf(usuario -> usuario.getId().equals(idBuscado));
-                        ManejoJson.escribirJson(RUTA_JSON_ADMIN, usuariosAdmin);
+                        ManejoJson.escribirJson(ConfigRutas.ADMIN, usuariosAdmin);
                     } else if (rol.equals("Tienda")) {
                         Type tipoListaTienda = ManejoJson.obtenerTipoLista(ModeloTienda.class);
-                        List<ModeloTienda> usuariosTienda = ManejoJson.leerJson(RUTA_JSON_TIENDA, tipoListaTienda);
+                        List<ModeloTienda> usuariosTienda = ManejoJson.leerJson(ConfigRutas.TIENDA, tipoListaTienda);
                         usuariosTienda.removeIf(usuario -> usuario.getId().equals(idBuscado));
-                        ManejoJson.escribirJson(RUTA_JSON_TIENDA, usuariosTienda);
+                        ManejoJson.escribirJson(ConfigRutas.TIENDA, usuariosTienda);
                     }
 
                     // Recargar la tabla
                     cargarDatos();
                     vista.limpiarFormulario();
                     mostrarExito("Usuario eliminado correctamente de " +
-                                (rol.equals("Administrador") ? "tbAdmin.json" : "tbTienda.json"));
+                            (rol.equals("Administrador") ? "tbAdmin.json" : "tbTienda.json"));
 
                 } catch (Exception e) {
                     mostrarError("Error al eliminar", "No se pudo eliminar el usuario: " + e.getMessage());
@@ -375,14 +376,12 @@ public class ControladorUsuarios {
         });
     }
 
-
     // Valida que todos los campos obligatorios estén completos
     private boolean validarCampos() {
         if (vista.getTxtNombre().getText().trim().isEmpty()) {
             mostrarAdvertencia("Campo requerido", "El nombre es obligatorio.");
             return false;
         }
-
 
         if (vista.getTxtUsuario().getText().trim().isEmpty()) {
             mostrarAdvertencia("Campo requerido", "El nombre de usuario es obligatorio.");

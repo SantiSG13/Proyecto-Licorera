@@ -10,13 +10,11 @@ import files.ManejoJson;
 import java.lang.reflect.Type;
 import java.util.List;
 
+import files.ConfigRutas;
+
 // Controlador del historial de ventas y compras
 public class ControladorHistorial {
     private final frmHistorial vista;
-
-    // Rutas de los archivos JSON
-    private static final String RUTA_VENTAS = "src/main/java/model/tbVenta.json";
-    private static final String RUTA_COMPRAS = "src/main/java/model/tbCompra.json";
 
     public ControladorHistorial(frmHistorial vista) {
         this.vista = vista;
@@ -40,7 +38,7 @@ public class ControladorHistorial {
     private void cargarVentas() {
         try {
             Type tipoListaVentas = ManejoJson.obtenerTipoLista(ModeloVenta.class);
-            List<ModeloVenta> listaVentas = ManejoJson.leerJson(RUTA_VENTAS, tipoListaVentas);
+            List<ModeloVenta> listaVentas = ManejoJson.leerJson(ConfigRutas.VENTA, tipoListaVentas);
             ObservableList<ModeloVenta> ventasObservable = FXCollections.observableArrayList(listaVentas);
             vista.getTablaVentas().setItems(ventasObservable);
         } catch (Exception e) {
@@ -53,7 +51,7 @@ public class ControladorHistorial {
     private void cargarCompras() {
         try {
             Type tipoListaCompras = ManejoJson.obtenerTipoLista(ModeloCompra.class);
-            List<ModeloCompra> listaCompras = ManejoJson.leerJson(RUTA_COMPRAS, tipoListaCompras);
+            List<ModeloCompra> listaCompras = ManejoJson.leerJson(ConfigRutas.COMPRA, tipoListaCompras);
             ObservableList<ModeloCompra> comprasObservable = FXCollections.observableArrayList(listaCompras);
             vista.getTablaCompras().setItems(comprasObservable);
         } catch (Exception e) {
@@ -62,9 +60,9 @@ public class ControladorHistorial {
         }
     }
 
-    // Método público para actualizar los datos (útil si se llama desde otros controladores)
+    // Método público para actualizar los datos (útil si se llama desde otros
+    // controladores)
     public void actualizarDatos() {
         cargarDatos();
     }
 }
-

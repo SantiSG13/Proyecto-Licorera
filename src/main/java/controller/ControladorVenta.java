@@ -18,16 +18,14 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
+import files.ConfigRutas;
+
 public class ControladorVenta {
     private final frmVenta vista;
     private List<ModeloCliente> clientes;
     private List<ModeloInventario> inventario;
     private ObservableList<ItemVenta> itemsCarrito;
     private SimpleDoubleProperty total;
-
-    private static final String RUTA_CLIENTES = "src/main/java/model/tbCliente.json";
-    private static final String RUTA_INVENTARIO = "src/main/java/model/tbInventario.json";
-    private static final String RUTA_VENTAS = "src/main/java/model/tbVenta.json";
 
     public ControladorVenta(frmVenta vista) {
         this.vista = vista;
@@ -58,7 +56,7 @@ public class ControladorVenta {
         try {
             Type tipoLista = new TypeToken<List<ModeloCliente>>() {
             }.getType();
-            clientes = ManejoJson.leerJson(RUTA_CLIENTES, tipoLista);
+            clientes = ManejoJson.leerJson(ConfigRutas.CLIENTE, tipoLista);
 
             if (clientes == null) {
                 clientes = new ArrayList<>();
@@ -93,7 +91,7 @@ public class ControladorVenta {
         try {
             Type tipoLista = new TypeToken<List<ModeloInventario>>() {
             }.getType();
-            inventario = ManejoJson.leerJson(RUTA_INVENTARIO, tipoLista);
+            inventario = ManejoJson.leerJson(ConfigRutas.INVENTARIO, tipoLista);
 
             if (inventario == null) {
                 inventario = new ArrayList<>();
@@ -310,7 +308,7 @@ public class ControladorVenta {
 
             // Crear la venta con ID formato VEN-001, VEN-002, etc.
             Type tipoListaVentas = ManejoJson.obtenerTipoLista(ModeloVenta.class);
-            List<ModeloVenta> ventasExistentes = ManejoJson.leerJson(RUTA_VENTAS, tipoListaVentas);
+            List<ModeloVenta> ventasExistentes = ManejoJson.leerJson(ConfigRutas.VENTA, tipoListaVentas);
             if (ventasExistentes == null) {
                 ventasExistentes = new ArrayList<>();
             }
@@ -340,17 +338,17 @@ public class ControladorVenta {
             }
 
             // Guardar inventario actualizado
-            ManejoJson.escribirJson(RUTA_INVENTARIO, inventario);
+            ManejoJson.escribirJson(ConfigRutas.INVENTARIO, inventario);
 
             // Guardar la venta
             Type tipoLista = new TypeToken<List<ModeloVenta>>() {
             }.getType();
-            List<ModeloVenta> ventas = ManejoJson.leerJson(RUTA_VENTAS, tipoLista);
+            List<ModeloVenta> ventas = ManejoJson.leerJson(ConfigRutas.VENTA, tipoLista);
             if (ventas == null) {
                 ventas = new ArrayList<>();
             }
             ventas.add(nuevaVenta);
-            ManejoJson.escribirJson(RUTA_VENTAS, ventas);
+            ManejoJson.escribirJson(ConfigRutas.VENTA, ventas);
 
             mostrarAlerta(Alert.AlertType.INFORMATION, "Éxito",
                     "Venta completada exitosamente.\n" +

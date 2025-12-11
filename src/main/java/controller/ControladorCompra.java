@@ -19,6 +19,8 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
+import files.ConfigRutas;
+
 public class ControladorCompra {
     private final frmCompra vista;
     private List<ModeloProveedor> proveedores;
@@ -26,10 +28,6 @@ public class ControladorCompra {
     private List<ModeloInventario> inventario;
     private ObservableList<ItemCompra> itemsCarrito;
     private SimpleDoubleProperty total;
-
-    private static final String RUTA_PROVEEDORES = "src/main/java/model/tbProveedor.json";
-    private static final String RUTA_INVENTARIO = "src/main/java/model/tbInventario.json";
-    private static final String RUTA_COMPRAS = "src/main/java/model/tbCompra.json";
 
     public ControladorCompra(frmCompra vista) {
         this.vista = vista;
@@ -60,7 +58,7 @@ public class ControladorCompra {
         try {
             Type tipoLista = new TypeToken<List<ModeloProveedor>>() {
             }.getType();
-            proveedores = ManejoJson.leerJson(RUTA_PROVEEDORES, tipoLista);
+            proveedores = ManejoJson.leerJson(ConfigRutas.PROVEEDOR, tipoLista);
 
             if (proveedores == null) {
                 proveedores = new ArrayList<>();
@@ -113,7 +111,7 @@ public class ControladorCompra {
         try {
             Type tipoLista = new TypeToken<List<ModeloInventario>>() {
             }.getType();
-            inventario = ManejoJson.leerJson(RUTA_INVENTARIO, tipoLista);
+            inventario = ManejoJson.leerJson(ConfigRutas.INVENTARIO, tipoLista);
 
             if (inventario == null) {
                 inventario = new ArrayList<>();
@@ -287,7 +285,7 @@ public class ControladorCompra {
 
             // Crear la compra con ID formato CMP-001, CMP-002, etc.
             Type tipoListaCompras = ManejoJson.obtenerTipoLista(ModeloCompra.class);
-            List<ModeloCompra> comprasExistentes = ManejoJson.leerJson(RUTA_COMPRAS, tipoListaCompras);
+            List<ModeloCompra> comprasExistentes = ManejoJson.leerJson(ConfigRutas.COMPRA, tipoListaCompras);
             if (comprasExistentes == null) {
                 comprasExistentes = new ArrayList<>();
             }
@@ -356,17 +354,17 @@ public class ControladorCompra {
             }
 
             // Guardar inventario actualizado
-            ManejoJson.escribirJson(RUTA_INVENTARIO, inventario);
+            ManejoJson.escribirJson(ConfigRutas.INVENTARIO, inventario);
 
             // Guardar la compra
             Type tipoLista = new TypeToken<List<ModeloCompra>>() {
             }.getType();
-            List<ModeloCompra> compras = ManejoJson.leerJson(RUTA_COMPRAS, tipoLista);
+            List<ModeloCompra> compras = ManejoJson.leerJson(ConfigRutas.COMPRA, tipoLista);
             if (compras == null) {
                 compras = new ArrayList<>();
             }
             compras.add(nuevaCompra);
-            ManejoJson.escribirJson(RUTA_COMPRAS, compras);
+            ManejoJson.escribirJson(ConfigRutas.COMPRA, compras);
 
             mostrarAlerta(Alert.AlertType.INFORMATION, "Éxito",
                     "Compra completada exitosamente.\nTotal: $" + String.format("%.2f", total.get()) +

@@ -11,13 +11,14 @@ import view.frmCliente;
 import java.lang.reflect.Type;
 import java.util.List;
 
+import files.ConfigRutas;
+
 // Controlador para la vista de gestión de clientes (frmCliente).
 // Se encarga de manejar eventos, validaciones y persistencia de datos en tbCliente.json
 public class ControladorCliente {
 
     private final frmCliente vista;
     private final ObservableList<String[]> datosTabla = FXCollections.observableArrayList();
-    private final String RUTA_ARCHIVO = "src/main/java/model/tbCliente.json";
 
     private final String rolUsuario;
 
@@ -96,7 +97,7 @@ public class ControladorCliente {
 
         // Leer lista actual del archivo
         Type tipoLista = ManejoJson.obtenerTipoLista(ModeloCliente.class);
-        List<ModeloCliente> listaClientes = ManejoJson.leerJson(RUTA_ARCHIVO, tipoLista);
+        List<ModeloCliente> listaClientes = ManejoJson.leerJson(ConfigRutas.CLIENTE, tipoLista);
 
         // Verificar documento único
         boolean existe = listaClientes.stream()
@@ -109,7 +110,7 @@ public class ControladorCliente {
         // Crear y agregar nuevo cliente
         ModeloCliente cliente = new ModeloCliente(tipoDoc, documento, nombre, telefono, correo);
         listaClientes.add(cliente);
-        ManejoJson.escribirJson(RUTA_ARCHIVO, listaClientes);
+        ManejoJson.escribirJson(ConfigRutas.CLIENTE, listaClientes);
 
         // Recargar tabla completa
         cargarClientesDesdeArchivo();
@@ -191,7 +192,7 @@ public class ControladorCliente {
 
         try {
             Type tipoLista = ManejoJson.obtenerTipoLista(ModeloCliente.class);
-            List<ModeloCliente> listaClientes = ManejoJson.leerJson(RUTA_ARCHIVO, tipoLista);
+            List<ModeloCliente> listaClientes = ManejoJson.leerJson(ConfigRutas.CLIENTE, tipoLista);
 
             String documentoOriginal = vista.getDocumentoOriginal();
 
@@ -217,7 +218,7 @@ public class ControladorCliente {
                 }
             }
 
-            ManejoJson.escribirJson(RUTA_ARCHIVO, listaClientes);
+            ManejoJson.escribirJson(ConfigRutas.CLIENTE, listaClientes);
             cargarClientesDesdeArchivo();
             vista.limpiarFormulario();
             vista.cerrarPanelFormulario(); // Cerrar el panel flotante
@@ -247,12 +248,12 @@ public class ControladorCliente {
             if (response == ButtonType.OK) {
                 try {
                     Type tipoLista = ManejoJson.obtenerTipoLista(ModeloCliente.class);
-                    List<ModeloCliente> listaClientes = ManejoJson.leerJson(RUTA_ARCHIVO, tipoLista);
+                    List<ModeloCliente> listaClientes = ManejoJson.leerJson(ConfigRutas.CLIENTE, tipoLista);
 
                     String documentoBuscado = seleccionado[1];
                     listaClientes.removeIf(cliente -> cliente.getDocumento().equals(documentoBuscado));
 
-                    ManejoJson.escribirJson(RUTA_ARCHIVO, listaClientes);
+                    ManejoJson.escribirJson(ConfigRutas.CLIENTE, listaClientes);
                     cargarClientesDesdeArchivo();
                     vista.limpiarFormulario();
                     mostrarExito("Cliente eliminado correctamente.");
@@ -267,7 +268,7 @@ public class ControladorCliente {
 
     private void cargarClientesDesdeArchivo() {
         Type tipoLista = ManejoJson.obtenerTipoLista(ModeloCliente.class);
-        List<ModeloCliente> listaClientes = ManejoJson.leerJson(RUTA_ARCHIVO, tipoLista);
+        List<ModeloCliente> listaClientes = ManejoJson.leerJson(ConfigRutas.CLIENTE, tipoLista);
 
         datosTabla.clear();
         for (ModeloCliente c : listaClientes) {

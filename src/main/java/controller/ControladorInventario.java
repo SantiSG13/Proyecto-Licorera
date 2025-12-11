@@ -9,13 +9,14 @@ import view.frmInventario;
 import java.lang.reflect.Type;
 import java.util.List;
 
+import files.ConfigRutas;
+
 // Controlador para la vista de gestión de productos (frmProductos).
 // Se encarga de manejar eventos, validaciones y persistencia de datos en tbInventario.json
 public class ControladorInventario {
 
     private final frmInventario vista;
     private final ObservableList<String[]> datosTabla = FXCollections.observableArrayList();
-    private final String RUTA_ARCHIVO = "src/main/java/model/tbInventario.json";
 
     public ControladorInventario(frmInventario vista) {
         this.vista = vista;
@@ -87,7 +88,7 @@ public class ControladorInventario {
 
         // Leer lista actual del archivo
         Type tipoLista = ManejoJson.obtenerTipoLista(ModeloInventario.class);
-        List<ModeloInventario> listaProductos = ManejoJson.leerJson(RUTA_ARCHIVO, tipoLista);
+        List<ModeloInventario> listaProductos = ManejoJson.leerJson(ConfigRutas.INVENTARIO, tipoLista);
 
         // Verificar nombre único
         boolean existe = listaProductos.stream()
@@ -101,7 +102,7 @@ public class ControladorInventario {
         String idProducto = generarIdProducto(listaProductos.size());
         ModeloInventario producto = new ModeloInventario(idProducto, nombre, categoria, precio, stock);
         listaProductos.add(producto);
-        ManejoJson.escribirJson(RUTA_ARCHIVO, listaProductos);
+        ManejoJson.escribirJson(ConfigRutas.INVENTARIO, listaProductos);
 
         // Actualizar tabla
         datosTabla.add(new String[] {
@@ -125,7 +126,7 @@ public class ControladorInventario {
 
     private void cargarProductosDesdeArchivo() {
         Type tipoLista = ManejoJson.obtenerTipoLista(ModeloInventario.class);
-        List<ModeloInventario> listaProductos = ManejoJson.leerJson(RUTA_ARCHIVO, tipoLista);
+        List<ModeloInventario> listaProductos = ManejoJson.leerJson(ConfigRutas.INVENTARIO, tipoLista);
 
         datosTabla.clear();
         for (ModeloInventario p : listaProductos) {

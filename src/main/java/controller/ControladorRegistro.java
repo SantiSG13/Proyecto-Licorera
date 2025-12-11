@@ -4,6 +4,7 @@ import javafx.scene.control.Alert;
 import model.ModeloAdmin;
 import files.ManejoJson;
 import view.frmRegistro;
+import files.ConfigRutas;
 
 import java.lang.reflect.Type;
 import java.util.List;
@@ -12,7 +13,6 @@ import java.util.UUID;
 // Controlador para la ventana de registro de usuarios
 public class ControladorRegistro {
     private frmRegistro vista;
-    private static final String RUTA_JSON = "src/main/java/model/tbAdmin.json";
 
     public ControladorRegistro(frmRegistro vista) {
         this.vista = vista;
@@ -39,7 +39,7 @@ public class ControladorRegistro {
 
         // 2) Validación: todos los campos deben estar completos
         if (usuario.isEmpty() || nombre.isEmpty() || email.isEmpty() ||
-            rol == null || password.isEmpty() || confirmarPassword.isEmpty()) {
+                rol == null || password.isEmpty() || confirmarPassword.isEmpty()) {
             mostrarAlerta(Alert.AlertType.WARNING, "Campos vacíos",
                     "Por favor complete todos los campos.");
             return;
@@ -61,7 +61,7 @@ public class ControladorRegistro {
 
         // 5) Leer la lista de usuarios existentes
         Type tipoLista = ManejoJson.obtenerTipoLista(ModeloAdmin.class);
-        List<ModeloAdmin> usuarios = ManejoJson.leerJson(RUTA_JSON, tipoLista);
+        List<ModeloAdmin> usuarios = ManejoJson.leerJson(ConfigRutas.ADMIN, tipoLista);
 
         // 6) Validación: verificar que el nombre de usuario no esté en uso
         boolean usuarioExiste = usuarios.stream()
@@ -75,17 +75,17 @@ public class ControladorRegistro {
 
         // 7) Crear el nuevo usuario
         ModeloAdmin nuevoUsuario = new ModeloAdmin(
-                UUID.randomUUID().toString(),  // ID único generado automáticamente
-                usuario,                        // Nombre de usuario
-                password,                       // Contraseña
-                nombre,                         // Nombre completo
-                rol,                           // Rol del usuario
-                email                          // Email
+                UUID.randomUUID().toString(), // ID único generado automáticamente
+                usuario, // Nombre de usuario
+                password, // Contraseña
+                nombre, // Nombre completo
+                rol, // Rol del usuario
+                email // Email
         );
 
         // 8) Agregar el nuevo usuario a la lista y guardar en el archivo
         usuarios.add(nuevoUsuario);
-        ManejoJson.escribirJson(RUTA_JSON, usuarios);
+        ManejoJson.escribirJson(ConfigRutas.ADMIN, usuarios);
 
         // 9) Mostrar mensaje de éxito y limpiar el formulario
         mostrarAlerta(Alert.AlertType.INFORMATION, "Registro exitoso",
@@ -115,4 +115,3 @@ public class ControladorRegistro {
         alerta.showAndWait();
     }
 }
-

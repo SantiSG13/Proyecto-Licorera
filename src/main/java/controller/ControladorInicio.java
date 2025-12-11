@@ -13,6 +13,7 @@ import view.frmRegistro;
 import model.ModeloAdmin;
 import model.ModeloTienda;
 import files.ManejoJson;
+import files.ConfigRutas;
 
 // Importaciones de Java estándar
 import java.lang.reflect.Type;
@@ -24,8 +25,6 @@ public class ControladorInicio {
     // Referencias a la vista, stage y rutas de los archivos de usuarios
     private frmInicio vista;
     private Stage stage;
-    private static final String RUTA_JSON_ADMIN = "src/main/java/model/tbAdmin.json";
-    private static final String RUTA_JSON_TIENDA = "src/main/java/model/tbTienda.json";
 
     // Constructor: enlaza la vista con los manejadores de eventos
     public ControladorInicio(frmInicio vista, Stage stage) {
@@ -72,7 +71,7 @@ public class ControladorInicio {
 
         // Buscar primero en tbAdmin.json
         Type tipoListaAdmin = ManejoJson.obtenerTipoLista(ModeloAdmin.class);
-        List<ModeloAdmin> usuariosAdmin = ManejoJson.leerJson(RUTA_JSON_ADMIN, tipoListaAdmin);
+        List<ModeloAdmin> usuariosAdmin = ManejoJson.leerJson(ConfigRutas.ADMIN, tipoListaAdmin);
 
         ModeloAdmin adminEncontrado = usuariosAdmin.stream()
                 .filter(u -> u.getUsuario().equals(usuario) && u.getContrasena().equals(password))
@@ -86,7 +85,7 @@ public class ControladorInicio {
         } else {
             // Si no se encuentra en Admin, buscar en tbTienda.json
             Type tipoListaTienda = ManejoJson.obtenerTipoLista(ModeloTienda.class);
-            List<ModeloTienda> usuariosTienda = ManejoJson.leerJson(RUTA_JSON_TIENDA, tipoListaTienda);
+            List<ModeloTienda> usuariosTienda = ManejoJson.leerJson(ConfigRutas.TIENDA, tipoListaTienda);
 
             ModeloTienda tiendaEncontrado = usuariosTienda.stream()
                     .filter(u -> u.getUsuario().equals(usuario) && u.getContrasena().equals(password))

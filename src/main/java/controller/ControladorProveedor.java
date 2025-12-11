@@ -16,14 +16,14 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
+import files.ConfigRutas;
+
 // Controlador para la vista de gestión de proveedores (frmProveedor).
 // Se encarga de manejar eventos, validaciones y persistencia de datos en tbProveedor.json
 public class ControladorProveedor {
 
     private final frmProveedor vista;
     private final ObservableList<String[]> datosTablaProveedores = FXCollections.observableArrayList();
-    private final String RUTA_ARCHIVO = "src/main/java/model/tbProveedor.json";
-
 
     public ControladorProveedor(frmProveedor vista) {
         this.vista = vista;
@@ -64,7 +64,7 @@ public class ControladorProveedor {
 
         try {
             Type tipoLista = ManejoJson.obtenerTipoLista(ModeloProveedor.class);
-            List<ModeloProveedor> listaProveedores = ManejoJson.leerJson(RUTA_ARCHIVO, tipoLista);
+            List<ModeloProveedor> listaProveedores = ManejoJson.leerJson(ConfigRutas.PROVEEDOR, tipoLista);
 
             // Generar ID con formato PRV-001, PRV-002, etc.
             String idNuevo = generarIdProveedor(listaProveedores.size());
@@ -72,7 +72,7 @@ public class ControladorProveedor {
             // Crear nuevo proveedor sin productos (se agregarán después)
             ModeloProveedor proveedor = new ModeloProveedor(idNuevo, nombre);
             listaProveedores.add(proveedor);
-            ManejoJson.escribirJson(RUTA_ARCHIVO, listaProveedores);
+            ManejoJson.escribirJson(ConfigRutas.PROVEEDOR, listaProveedores);
 
             cargarProveedoresDesdeArchivo();
             vista.limpiarFormulario();
@@ -95,8 +95,8 @@ public class ControladorProveedor {
 
         // Abrir formulario solo con los datos del proveedor
         vista.mostrarPanelParaEditar(
-            seleccionado[0], // ID
-            seleccionado[1]  // Nombre
+                seleccionado[0], // ID
+                seleccionado[1] // Nombre
         );
     }
 
@@ -110,7 +110,7 @@ public class ControladorProveedor {
 
         try {
             Type tipoLista = ManejoJson.obtenerTipoLista(ModeloProveedor.class);
-            List<ModeloProveedor> listaProveedores = ManejoJson.leerJson(RUTA_ARCHIVO, tipoLista);
+            List<ModeloProveedor> listaProveedores = ManejoJson.leerJson(ConfigRutas.PROVEEDOR, tipoLista);
 
             String idOriginal = vista.getIdOriginal();
 
@@ -122,7 +122,7 @@ public class ControladorProveedor {
                 }
             }
 
-            ManejoJson.escribirJson(RUTA_ARCHIVO, listaProveedores);
+            ManejoJson.escribirJson(ConfigRutas.PROVEEDOR, listaProveedores);
             cargarProveedoresDesdeArchivo();
             vista.limpiarFormulario();
             vista.cerrarPanelFormulario();
@@ -145,18 +145,19 @@ public class ControladorProveedor {
         Alert confirmacion = new Alert(Alert.AlertType.CONFIRMATION);
         confirmacion.setTitle("Confirmar eliminación");
         confirmacion.setHeaderText("¿Está seguro de eliminar este proveedor?");
-        confirmacion.setContentText("Proveedor: " + seleccionado[1] + "\nID: " + seleccionado[0] + "\nProductos: " + seleccionado[2]);
+        confirmacion.setContentText(
+                "Proveedor: " + seleccionado[1] + "\nID: " + seleccionado[0] + "\nProductos: " + seleccionado[2]);
 
         confirmacion.showAndWait().ifPresent(response -> {
             if (response == ButtonType.OK) {
                 try {
                     Type tipoLista = ManejoJson.obtenerTipoLista(ModeloProveedor.class);
-                    List<ModeloProveedor> listaProveedores = ManejoJson.leerJson(RUTA_ARCHIVO, tipoLista);
+                    List<ModeloProveedor> listaProveedores = ManejoJson.leerJson(ConfigRutas.PROVEEDOR, tipoLista);
 
                     String idBuscado = seleccionado[0];
                     listaProveedores.removeIf(proveedor -> proveedor.getId().equals(idBuscado));
 
-                    ManejoJson.escribirJson(RUTA_ARCHIVO, listaProveedores);
+                    ManejoJson.escribirJson(ConfigRutas.PROVEEDOR, listaProveedores);
                     cargarProveedoresDesdeArchivo();
                     mostrarExito("Proveedor eliminado correctamente.");
 
@@ -173,12 +174,12 @@ public class ControladorProveedor {
         try {
             // Cargar el proveedor actual
             Type tipoLista = ManejoJson.obtenerTipoLista(ModeloProveedor.class);
-            List<ModeloProveedor> listaProveedores = ManejoJson.leerJson(RUTA_ARCHIVO, tipoLista);
+            List<ModeloProveedor> listaProveedores = ManejoJson.leerJson(ConfigRutas.PROVEEDOR, tipoLista);
 
             ModeloProveedor proveedorActual = listaProveedores.stream()
-                .filter(p -> p.getId().equals(idProveedor))
-                .findFirst()
-                .orElse(null);
+                    .filter(p -> p.getId().equals(idProveedor))
+                    .findFirst()
+                    .orElse(null);
 
             if (proveedorActual == null) {
                 mostrarError("Error", "No se encontró el proveedor seleccionado.");
@@ -192,8 +193,7 @@ public class ControladorProveedor {
             // Aplicar estilos CSS
             try {
                 dialog.getDialogPane().getStylesheets().add(
-                    getClass().getResource("/styles.css").toExternalForm()
-                );
+                        getClass().getResource("/styles.css").toExternalForm());
             } catch (Exception ex) {
                 System.out.println("No se pudo cargar CSS para el diálogo");
             }
@@ -206,7 +206,8 @@ public class ControladorProveedor {
 
             // Título del proveedor
             Label lblTituloProveedor = new Label("Productos de: " + nombreProveedor + " (ID: " + idProveedor + ")");
-            lblTituloProveedor.setStyle("-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #d4af37; -fx-padding: 0 0 10 0;");
+            lblTituloProveedor.setStyle(
+                    "-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #d4af37; -fx-padding: 0 0 10 0;");
 
             // Formulario de productos
             GridPane gridProducto = new GridPane();
@@ -221,26 +222,25 @@ public class ControladorProveedor {
 
             // Agregar tipos de licores más famosos
             cboProductoTipo.getItems().addAll(
-                "Whisky",
-                "Ron",
-                "Vodka",
-                "Tequila",
-                "Ginebra",
-                "Aguardiente",
-                "Brandy",
-                "Cerveza",
-                "Vino Tinto",
-                "Vino Blanco",
-                "Champagne",
-                "Licor de Café",
-                "Licor de Crema",
-                "Anís",
-                "Pisco",
-                "Mezcal",
-                "Sake",
-                "Cognac",
-                "Otro"
-            );
+                    "Whisky",
+                    "Ron",
+                    "Vodka",
+                    "Tequila",
+                    "Ginebra",
+                    "Aguardiente",
+                    "Brandy",
+                    "Cerveza",
+                    "Vino Tinto",
+                    "Vino Blanco",
+                    "Champagne",
+                    "Licor de Café",
+                    "Licor de Crema",
+                    "Anís",
+                    "Pisco",
+                    "Mezcal",
+                    "Sake",
+                    "Cognac",
+                    "Otro");
             cboProductoTipo.setPromptText("Seleccione tipo");
             cboProductoTipo.setPrefWidth(350);
 
@@ -285,8 +285,8 @@ public class ControladorProveedor {
 
             // Cargar productos actuales
             for (ProductoProveedor p : proveedorActual.getProductos()) {
-                datosProductos.add(new String[]{
-                    p.getId(), p.getNombre(), p.getTipo(), String.format("$%.2f", p.getPrecio())
+                datosProductos.add(new String[] {
+                        p.getId(), p.getNombre(), p.getTipo(), String.format("$%.2f", p.getPrecio())
                 });
             }
 
@@ -322,12 +322,12 @@ public class ControladorProveedor {
                     proveedorActual.agregarProducto(producto);
 
                     // Actualizar tabla
-                    datosProductos.add(new String[]{
-                        idProducto, nombre, tipo, String.format("$%.2f", precio)
+                    datosProductos.add(new String[] {
+                            idProducto, nombre, tipo, String.format("$%.2f", precio)
                     });
 
                     // Guardar cambios
-                    ManejoJson.escribirJson(RUTA_ARCHIVO, listaProveedores);
+                    ManejoJson.escribirJson(ConfigRutas.PROVEEDOR, listaProveedores);
                     cargarProveedoresDesdeArchivo();
 
                     txtProductoNombre.clear();
@@ -348,7 +348,7 @@ public class ControladorProveedor {
 
                 proveedorActual.eliminarProducto(seleccionado[0]);
                 datosProductos.remove(seleccionado);
-                ManejoJson.escribirJson(RUTA_ARCHIVO, listaProveedores);
+                ManejoJson.escribirJson(ConfigRutas.PROVEEDOR, listaProveedores);
                 cargarProveedoresDesdeArchivo();
                 mostrarExito("Producto eliminado correctamente.");
             });
@@ -362,15 +362,14 @@ public class ControladorProveedor {
             lblActuales.setStyle("-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #d4af37;");
 
             contenedor.getChildren().addAll(
-                lblTituloProveedor,
-                new Separator(),
-                lblAgregar,
-                gridProducto,
-                new Separator(),
-                lblActuales,
-                tablaProductos,
-                botonesProducto
-            );
+                    lblTituloProveedor,
+                    new Separator(),
+                    lblAgregar,
+                    gridProducto,
+                    new Separator(),
+                    lblActuales,
+                    tablaProductos,
+                    botonesProducto);
 
             dialog.getDialogPane().setContent(contenedor);
 
@@ -398,14 +397,14 @@ public class ControladorProveedor {
 
     private void cargarProveedoresDesdeArchivo() {
         Type tipoLista = ManejoJson.obtenerTipoLista(ModeloProveedor.class);
-        List<ModeloProveedor> listaProveedores = ManejoJson.leerJson(RUTA_ARCHIVO, tipoLista);
+        List<ModeloProveedor> listaProveedores = ManejoJson.leerJson(ConfigRutas.PROVEEDOR, tipoLista);
 
         datosTablaProveedores.clear();
         for (ModeloProveedor p : listaProveedores) {
-            datosTablaProveedores.add(new String[]{
-                p.getId(),
-                p.getNombre(),
-                String.valueOf(p.getCantidadProductos())
+            datosTablaProveedores.add(new String[] {
+                    p.getId(),
+                    p.getNombre(),
+                    String.valueOf(p.getCantidadProductos())
             });
         }
     }
@@ -415,7 +414,8 @@ public class ControladorProveedor {
         return String.format("PRV-%03d", nuevoNumero);
     }
 
-    // Cuenta todos los productos de todos los proveedores para generar IDs únicos globales
+    // Cuenta todos los productos de todos los proveedores para generar IDs únicos
+    // globales
     private int contarTodosLosProductos(List<ModeloProveedor> proveedores) {
         int total = 0;
         for (ModeloProveedor proveedor : proveedores) {
@@ -455,4 +455,3 @@ public class ControladorProveedor {
         alert.showAndWait();
     }
 }
-
