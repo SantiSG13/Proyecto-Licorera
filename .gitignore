@@ -1,6 +1,4 @@
 ### Maven (artifacts y cache) ###
-# Directorios de compilación y empaquetado
-/target/
 # Wrapper jar permitido (ya lo tenemos explícito abajo)
 !.mvn/wrapper/maven-wrapper.jar
 # Archivos temporales generados por versiones y releases
